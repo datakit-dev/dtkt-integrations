@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# Allow only what this Dockerfile needs
+!dtkt-integrations/packages/bigquery/go.mod
+!dtkt-integrations/packages/bigquery/go.sum
+!dtkt-integrations/packages/bigquery/package.dtkt.yaml
+!dtkt-integrations/packages/bigquery/main.go
+!dtkt-integrations/packages/bigquery/pkg
+!dtkt-sdk/sdk-go
+
+# Re-ignore Go build/test artifacts in allowed dirs
+**/bin
+**/cover.out
+**/test.log
+**/*_test.go
+**/test
+**/testdata
+**/mocks

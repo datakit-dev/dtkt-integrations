@@ -1,0 +1,7 @@
+{
+  "go.testEnvFile": "${workspaceFolder}/test-data/test.env",
+  "go.toolsEnvVars": {
+    "CGO_ENABLED": "1",
+    "CXX": "clang++"
+  }
+}

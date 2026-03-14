@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# Allow only what this Dockerfile needs
+!dtkt-integrations/packages/localblob/go.mod
+!dtkt-integrations/packages/localblob/go.sum
+!dtkt-integrations/packages/localblob/package.dtkt.yaml
+!dtkt-integrations/packages/localblob/main.go
+!dtkt-integrations/packages/localblob/pkg
+!dtkt-sdk/sdk-go
+
+# Re-ignore Go build/test artifacts in allowed dirs
+**/bin
+**/cover.out
+**/test.log
+**/*_test.go
+**/test
+**/testdata
+**/mocks

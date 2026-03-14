@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# Allow only what this Dockerfile needs
+!dtkt-integrations/packages/mailpit/go.mod
+!dtkt-integrations/packages/mailpit/go.sum
+!dtkt-integrations/packages/mailpit/package.dtkt.yaml
+!dtkt-integrations/packages/mailpit/main.go
+!dtkt-integrations/packages/mailpit/pkg
+!dtkt-sdk/sdk-go
+
+# Re-ignore Go build/test artifacts in allowed dirs
+**/bin
+**/cover.out
+**/test.log
+**/*_test.go
+**/test
+**/testdata
+**/mocks

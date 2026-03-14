@@ -1,0 +1,7 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Summarize Emails
+  description:  This example flow subscribes to an inbox and summarizes the emails received.

@@ -1,0 +1,11 @@
+generator:
+  ignore_not_implemented:
+  - array defaults
+  features:
+    # https://github.com/ogen-go/ogen/blob/main/gen/features.go
+    enable:
+    - paths/client
+    - webhooks/client
+    - client/request/validation
+    - ogen/otel
+    disable_all: true

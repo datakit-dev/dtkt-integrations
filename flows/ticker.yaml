@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+kind: Flow
+apiVersion: v1beta1
+spec:
+  name: Ticker
+  description: |
+    Example Source Ticker emitting a timestamp or expression value
+    every given duration with optional initial delay.
+  inputs:
+    - id: maxIters
+      uint64:
+        default: "10"
+      cache: true
+  outputs:
+    - id: tick
+      value: = streams.tick.getValue()
+    - id: evenOrOdd
+      value: |
+        = int(streams.tick.getCount()) % 2 == 0 ? "even" : "odd"
+    - id: done
+      value: >
+        = streams.tick.getCount() > inputs.maxIters.getValue() ? Done{reason:
+        "Maximum iterations: %d".format([inputs.maxIters.getValue()])} : null
+  streams:
+    - id: tick
+      generate:
+        every: 0.500s
+        initial: 0s

@@ -1,0 +1,22 @@
+{
+  "commands": [
+    {
+      "command": "echo",
+      "args": [
+        "one"
+      ]
+    },
+    {
+      "command": "echo",
+      "args": [
+        "two"
+      ]
+    },
+    {
+      "command": "echo",
+      "args": [
+        "three"
+      ]
+    }
+  ]
+}

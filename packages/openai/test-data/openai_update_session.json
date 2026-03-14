@@ -1,0 +1,16 @@
+{
+  "action": {
+    "name": "SessionUpdate"
+  },
+  "input": {
+    "config": {
+      "id": "foo_bar"
+    },
+    "event": {
+      "type": "session.update",
+      "session": {
+        "instructions": "Your name is Data and you are an assistant at DataKit, an innovative platform for data activation and workflow automation."
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: BigQuery Audit Logs
+  description: >
+    Stream BigQuery audit logs.
+
+  connections:
+    - id: catalog
+      services:
+        - dtkt.catalog.v1beta1.CatalogService
+
+  sources:
+    - id: auditLogs
+      call:
+        connection: catalog
+        method: dtkt.event.v1beta1.EventService.StreamPullEvents
+        request: '= dtkt.event.v1beta1.StreamPullEventsRequest{event_source: dtkt.event.v1beta1.EventSource{name: "AuditLogs"}}'
+
+  outputs:
+    - id: type
+      value: = sources.auditLogs.getValue().event.type
+    - id: payload
+      value: = sources.auditLogs.getValue().event.payload

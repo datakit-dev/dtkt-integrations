@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Write Lines to Blob
+  description: Write a stream of data to a blob line by line
+
+  connections:
+    - id: blob
+      package:
+        name: LocalBlob
+        version: 0.1.0
+      services:
+        - dtkt.blob.v1beta1.BlobService
+
+  inputs:
+    - id: bucket
+      string:
+        default: tmp
+    - id: key
+      string:
+        default: test.text
+
+  vars:
+    - cache: true
+      id: bucket
+      value: = inputs.bucket.getValue()
+    - cache: true
+      id: key
+      value: = inputs.key.getValue()
+
+  streams:
+    - id: tick
+      generate:
+        every: 1s
+        value: '= {"time": now()}'
+    - id: write
+      call:
+        connection: blob
+        method: dtkt.blob.v1beta1.BlobService.WriteBlobLines
+        request: "= dtkt.blob.v1beta1.WriteBlobLinesRequest{
+          bucket: vars.bucket.getValue(),
+          key: vars.key.getValue(),
+          data: bytes('foobar')
+          }"
+
+  outputs:
+    - id: tick
+      value: = streams.tick.getValue()

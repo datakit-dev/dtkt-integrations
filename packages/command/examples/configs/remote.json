@@ -1,0 +1,29 @@
+{
+  "sshConfig": {
+    "address": "ssh.shadiramadan.dev:22"
+  },
+  "allowShell": true,
+  "shellCommand": "bash",
+  "commands": [
+    {
+      "name": "tree",
+      "description": "List directory contents in a tree-like format"
+    },
+    {
+      "name": "cat",
+      "description": "Concatenate and print files"
+    },
+    {
+      "name": "tee",
+      "description": "Duplicate standard input"
+    },
+    {
+      "name": "ls",
+      "description": "List directory contents"
+    },
+    {
+      "name": "jq",
+      "description": "Process JSON data"
+    }
+  ]
+}

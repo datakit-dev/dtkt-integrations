@@ -1,0 +1,30 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: openai
+profiles:
+- name: openai
+  build:
+    local:
+      useBuildkit: true
+    artifacts:
+    - image: openai
+      context: ../../../
+      docker:
+        dockerfile: dtkt-integrations/packages/openai/Dockerfile
+  manifests:
+    kustomize:
+      buildArgs:
+      - --enable-alpha-plugins
+      - --enable-exec
+      paths:
+      - infra/kustomize/overlays/dev
+  deploy:
+    kubeContext: kind-dtkt-local
+    kubectl:
+      defaultNamespace: dtkt-integrations
+  portForward:
+  - resourceType: service
+    resourceName: openai
+    port: 80
+    localPort: 8202

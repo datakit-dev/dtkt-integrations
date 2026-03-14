@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=../../dtkt-sdk/schemas/dtkt.flowsdk.v1beta1.Flow.schema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Push Stream
+  description: >
+    Push stream of events.
+
+  packages:
+    - id: streamer
+      services:
+        - event.v1beta1.EventService
+
+  sources:
+    - id: pushStream
+      call:
+        package: streamer
+        method: event.v1beta1.EventService.StreamPushEvents
+        request:
+          eventSource:
+            name: Test
+
+  outputs:
+    - id: payload
+      value: = sources.pushStream?.Event?.Payload

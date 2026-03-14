@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package integration.command.v1beta;
+
+import "buf/validate/validate.proto";
+import "dtkt/command/v1beta1/messages.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/command/pkg/proto/integration/command/v1beta;commandv1beta";
+
+message Config {
+  // SSH configuration for remote command execution
+  dtkt.command.v1beta1.SSHConfig ssh_config = 1;
+
+  // Allow shell command execution
+  bool allow_shell = 2;
+
+  // Shell command to use for execution 'sh' or 'bash'
+  string shell_command = 3 [(buf.validate.field).string.min_len = 1];
+
+  // List of commands allowed to be executed
+  repeated dtkt.command.v1beta1.Command commands = 4;
+}

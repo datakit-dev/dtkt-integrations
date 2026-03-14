@@ -1,0 +1,1602 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "174.45.72.47",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_edcd6da5_82ba2a5f",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "dataset": {
+            "datasetInfo": {
+              "labels": {
+                "catalog_id": "edcd6da5-e80c-4fb9-9ab8-9406f308bf7d"
+              }
+            },
+            "datasetName": "projects/datakit-dev-f1fd/datasets/schema_edcd6da5_82ba2a5f",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "updateTime": "2024-09-19T02:07:11.545Z",
+            "createTime": "2024-09-19T02:07:11.545Z"
+          },
+          "reason": "CREATE"
+        }
+      }
+    },
+    "insertId": "ezwwsie3i40a",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_edcd6da5_82ba2a5f"
+      }
+    },
+    "timestamp": "2024-09-19T02:07:11.621904Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-19T02:07:11.874801359Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "174.45.72.47",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_edcd6da5_98d0cf7b",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "updateTime": "2024-09-19T01:15:23.147Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "createTime": "2024-09-19T01:15:23.147Z",
+            "datasetInfo": {
+              "description": "Facebook Ads source data replicated by Fivetran.",
+              "labels": {
+                "catalog_id": "edcd6da5-e80c-4fb9-9ab8-9406f308bf7d"
+              }
+            },
+            "datasetName": "projects/datakit-dev-f1fd/datasets/schema_edcd6da5_98d0cf7b"
+          }
+        }
+      }
+    },
+    "insertId": "-du9uwnd8436",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "schema_edcd6da5_98d0cf7b",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-19T01:15:23.286481Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-19T01:15:24.230303909Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "gce-internal-ip",
+        "callerSuppliedUserAgent": "Fivetran/0 (GPN:Fivetran) gcloud-java/ Google-API-Java-Client/2.6.0 Google-HTTP-Java-Client/1.44.1 (gzip),gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/test_2024_09_19_402owinr3py1xyrhpo37rowu",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "createTime": "2024-09-19T01:15:14.947Z",
+            "updateTime": "2024-09-19T01:15:14.947Z",
+            "datasetName": "projects/datakit-dev-f1fd/datasets/test_2024_09_19_402owinr3py1xyrhpo37rowu",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd",
+                      "projectOwner:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "insertId": "-6w0giddgy80",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "test_2024_09_19_402owinr3py1xyrhpo37rowu",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-19T01:15:15.040080Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-19T01:15:15.774609089Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "gce-internal-ip",
+        "callerSuppliedUserAgent": "Fivetran/0 (GPN:Fivetran) gcloud-java/ Google-API-Java-Client/2.6.0 Google-HTTP-Java-Client/1.44.1 (gzip),gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/fivetran_test_dataset_0fc31d37_4b32_4c4a_9971_58f2e5047d3e",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "updateTime": "2024-09-19T01:15:05.849Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "role": "roles/bigquery.dataViewer",
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ]
+                  }
+                ]
+              }
+            },
+            "defaultTableExpireDuration": "86400s",
+            "datasetName": "projects/datakit-dev-f1fd/datasets/fivetran_test_dataset_0fc31d37_4b32_4c4a_9971_58f2e5047d3e",
+            "createTime": "2024-09-19T01:15:05.849Z"
+          }
+        }
+      }
+    },
+    "insertId": "-13vctme22rhw",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "fivetran_test_dataset_0fc31d37_4b32_4c4a_9971_58f2e5047d3e",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-19T01:15:05.956934Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-19T01:15:06.271618419Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "gce-internal-ip",
+        "callerSuppliedUserAgent": "Fivetran/0 (GPN:Fivetran) gcloud-java/ Google-API-Java-Client/2.6.0 Google-HTTP-Java-Client/1.44.1 (gzip),gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/test_2024_09_18_gvcj15gj707j1at2tpg71mmdf",
+      "metadata": {
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "datasetName": "projects/datakit-dev-f1fd/datasets/test_2024_09_18_gvcj15gj707j1at2tpg71mmdf",
+            "createTime": "2024-09-18T20:13:37.442Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "role": "roles/bigquery.dataViewer",
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd",
+                      "projectOwner:datakit-dev-f1fd"
+                    ]
+                  }
+                ]
+              }
+            },
+            "updateTime": "2024-09-18T20:13:37.442Z"
+          }
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-l16b3we2ocd2",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "test_2024_09_18_gvcj15gj707j1at2tpg71mmdf",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T20:13:37.513961Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-18T20:13:38.052613197Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "gce-internal-ip",
+        "callerSuppliedUserAgent": "Fivetran/0 (GPN:Fivetran) gcloud-java/ Google-API-Java-Client/2.6.0 Google-HTTP-Java-Client/1.44.1 (gzip),gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/fivetran_test_dataset_0f93298a_acb7_4a68_a70c_323bf792c18d",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "defaultTableExpireDuration": "86400s",
+            "createTime": "2024-09-18T20:13:28.347Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "updateTime": "2024-09-18T20:13:28.347Z",
+            "datasetName": "projects/datakit-dev-f1fd/datasets/fivetran_test_dataset_0f93298a_acb7_4a68_a70c_323bf792c18d"
+          }
+        }
+      }
+    },
+    "insertId": "6fs0sme3f3e5",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "fivetran_test_dataset_0f93298a_acb7_4a68_a70c_323bf792c18d",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T20:13:28.419189Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-18T20:13:28.821719707Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "174.45.72.47",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_11b9bea4_207c1736",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "createTime": "2024-09-18T19:17:49.750Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "role": "roles/bigquery.dataEditor",
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ]
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "datasetName": "projects/datakit-dev-f1fd/datasets/schema_11b9bea4_207c1736",
+            "datasetInfo": {
+              "labels": {
+                "catalog_id": "11b9bea4-7a75-4065-b57c-2a94a33d1b60"
+              },
+              "description": "Facebook Ads source data replicated by Fivetran."
+            },
+            "updateTime": "2024-09-18T19:17:49.750Z"
+          }
+        }
+      }
+    },
+    "insertId": "4s4u9ae1op50",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "schema_11b9bea4_207c1736",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T19:17:49.824947Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-18T19:17:50.664117449Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "gce-internal-ip",
+        "callerSuppliedUserAgent": "Fivetran/0 (GPN:Fivetran) gcloud-java/ Google-API-Java-Client/2.6.0 Google-HTTP-Java-Client/1.44.1 (gzip),gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/test_2024_09_18_x0pveys2222918fhjee4ybybv",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "dataset": {
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd",
+                      "projectOwner:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "updateTime": "2024-09-18T19:17:45.043Z",
+            "datasetName": "projects/datakit-dev-f1fd/datasets/test_2024_09_18_x0pveys2222918fhjee4ybybv",
+            "createTime": "2024-09-18T19:17:45.043Z"
+          },
+          "reason": "CREATE"
+        }
+      }
+    },
+    "insertId": "1ohrcce3y861",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "test_2024_09_18_x0pveys2222918fhjee4ybybv",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T19:17:45.174188Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-18T19:17:46.167200880Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "gce-internal-ip",
+        "callerSuppliedUserAgent": "Fivetran/0 (GPN:Fivetran) gcloud-java/ Google-API-Java-Client/2.6.0 Google-HTTP-Java-Client/1.44.1 (gzip),gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/fivetran_test_dataset_3de05beb_906d_445e_98b0_7c0f81d3b8eb",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "updateTime": "2024-09-18T19:17:34.656Z",
+            "createTime": "2024-09-18T19:17:34.656Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "defaultTableExpireDuration": "86400s",
+            "datasetName": "projects/datakit-dev-f1fd/datasets/fivetran_test_dataset_3de05beb_906d_445e_98b0_7c0f81d3b8eb"
+          }
+        }
+      }
+    },
+    "insertId": "mr9adye2cbpe",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "fivetran_test_dataset_3de05beb_906d_445e_98b0_7c0f81d3b8eb"
+      }
+    },
+    "timestamp": "2024-09-18T19:17:34.778231Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-18T19:17:35.629574307Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "174.45.72.47",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/test_schema4",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "role": "roles/bigquery.dataViewer",
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ]
+                  }
+                ]
+              }
+            },
+            "datasetName": "projects/datakit-dev-f1fd/datasets/test_schema4",
+            "updateTime": "2024-09-18T10:27:06.851Z",
+            "createTime": "2024-09-18T10:27:06.851Z"
+          }
+        }
+      }
+    },
+    "insertId": "bzsrj5d4v78",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "test_schema4",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T10:27:06.940768Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-18T10:27:07.421133632Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "172.56.202.211",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "datasetName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb",
+            "createTime": "2024-09-17T05:06:08.150Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "datasetInfo": {
+              "labels": {
+                "catalog_id": "b7664cbf-ffe5-4752-8013-1323a2248355"
+              }
+            },
+            "updateTime": "2024-09-17T05:06:08.150Z"
+          }
+        }
+      }
+    },
+    "insertId": "gowsyzd5s9m",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-17T05:06:08.238443Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-17T05:06:08.299106982Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "172.56.202.211",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/test_schema3",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "createTime": "2024-09-17T04:40:49.264Z",
+            "updateTime": "2024-09-17T04:40:49.264Z",
+            "datasetName": "projects/datakit-dev-f1fd/datasets/test_schema3",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "role": "roles/bigquery.dataOwner",
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ]
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "insertId": "6nuxe0e1aemw",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "test_schema3"
+      }
+    },
+    "timestamp": "2024-09-17T04:40:49.389600Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-17T04:40:49.523603320Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "172.56.202.211",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/test_schema2",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "updateTime": "2024-09-17T04:39:39.047Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "createTime": "2024-09-17T04:39:39.047Z",
+            "datasetName": "projects/datakit-dev-f1fd/datasets/test_schema2"
+          }
+        }
+      }
+    },
+    "insertId": "3xou4fd2nx4",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "test_schema2",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-17T04:39:39.146215Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-17T04:39:39.842454622Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "172.56.202.211",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/test_schema",
+      "metadata": {
+        "datasetCreation": {
+          "dataset": {
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "datasetName": "projects/datakit-dev-f1fd/datasets/test_schema",
+            "createTime": "2024-09-17T04:23:10.144Z",
+            "updateTime": "2024-09-17T04:23:10.144Z"
+          },
+          "reason": "CREATE"
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-k75zeudjihn",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "test_schema",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-17T04:23:10.230590Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-17T04:23:10.381082360Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "174.45.72.47",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/test_schema",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "role": "roles/bigquery.dataOwner",
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ]
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "updateTime": "2024-09-17T01:08:46.052Z",
+            "createTime": "2024-09-17T01:08:46.052Z",
+            "datasetName": "projects/datakit-dev-f1fd/datasets/test_schema"
+          }
+        }
+      }
+    },
+    "insertId": "gowqxxe1fzt2",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "test_schema",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-17T01:08:46.132694Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-17T01:08:46.845834399Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "174.45.72.47",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_8c6284cf_1f0ae242",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "datasetName": "projects/datakit-dev-f1fd/datasets/schema_8c6284cf_1f0ae242",
+            "updateTime": "2024-09-16T20:19:43.861Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "role": "roles/bigquery.dataEditor",
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ]
+                  },
+                  {
+                    "role": "roles/bigquery.dataOwner",
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ]
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "createTime": "2024-09-16T20:19:43.861Z",
+            "datasetInfo": {
+              "labels": {
+                "catalog_id": "8c6284cf-6b71-4b28-9778-4b4905769612"
+              }
+            }
+          }
+        }
+      }
+    },
+    "insertId": "g3wk6pe17cln",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "schema_8c6284cf_1f0ae242",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-16T20:19:43.954871Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-16T20:19:44.573664794Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "174.45.72.47",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_8c6284cf_8fb935aa",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "updateTime": "2024-09-16T20:19:42.147Z",
+            "datasetInfo": {
+              "labels": {
+                "catalog_id": "8c6284cf-6b71-4b28-9778-4b4905769612"
+              }
+            },
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "role": "roles/bigquery.dataEditor",
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ]
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "datasetName": "projects/datakit-dev-f1fd/datasets/schema_8c6284cf_8fb935aa",
+            "createTime": "2024-09-16T20:19:42.147Z"
+          }
+        }
+      }
+    },
+    "insertId": "-5i6rgfdumm0",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "schema_8c6284cf_8fb935aa",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-16T20:19:42.262954Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-16T20:19:42.367757806Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "2607:fb90:c9e2:e0a9:ffc8:e2a4:749e:44c2",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_4d50621e_fa832a67",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "createTime": "2024-09-16T10:44:08.852Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "role": "roles/bigquery.dataEditor",
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ]
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "role": "roles/bigquery.dataViewer",
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ]
+                  }
+                ]
+              }
+            },
+            "updateTime": "2024-09-16T10:44:08.852Z",
+            "datasetInfo": {
+              "labels": {
+                "catalog_id": "4d50621e-645c-47c2-b964-20b7ab3549bf"
+              }
+            },
+            "datasetName": "projects/datakit-dev-f1fd/datasets/schema_4d50621e_fa832a67"
+          }
+        }
+      }
+    },
+    "insertId": "c9ag1ddv9q9",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "dataset_id": "schema_4d50621e_fa832a67",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-16T10:44:08.962178Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-16T10:44:09.350546512Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "callerIp": "2607:fb90:c9e2:e0a9:ffc8:e2a4:749e:44c2",
+        "callerSuppliedUserAgent": "google-api-go-client/0.5,gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_4d50621e_16229ec0",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "serviceAccount:cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "datasetInfo": {
+              "labels": {
+                "catalog_id": "4d50621e-645c-47c2-b964-20b7ab3549bf"
+              }
+            },
+            "updateTime": "2024-09-16T10:44:06.044Z",
+            "datasetName": "projects/datakit-dev-f1fd/datasets/schema_4d50621e_16229ec0",
+            "createTime": "2024-09-16T10:44:06.044Z"
+          }
+        }
+      }
+    },
+    "insertId": "96110ke1ccb1",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_4d50621e_16229ec0"
+      }
+    },
+    "timestamp": "2024-09-16T10:44:06.257437Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-16T10:44:06.419707354Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "jordan@withdatakit.com"
+      },
+      "requestMetadata": {
+        "callerIp": "2607:fb90:c9e2:e0a9:ffc8:e2a4:749e:44c2",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/audit_logs_test2",
+      "metadata": {
+        "datasetCreation": {
+          "reason": "CREATE",
+          "dataset": {
+            "updateTime": "2024-09-16T07:22:43.849Z",
+            "createTime": "2024-09-16T07:22:43.849Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "user:jordan@withdatakit.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "role": "roles/bigquery.dataViewer",
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ]
+                  }
+                ]
+              }
+            },
+            "datasetName": "projects/datakit-dev-f1fd/datasets/audit_logs_test2"
+          }
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-l1z9tze20kaf",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "audit_logs_test2"
+      }
+    },
+    "timestamp": "2024-09-16T07:22:43.915011Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-16T07:22:44.033895951Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "jordan@withdatakit.com"
+      },
+      "requestMetadata": {
+        "callerIp": "174.45.72.47",
+        "callerSuppliedUserAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36,gzip(gfe),gzip(gfe)",
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.v2.DatasetService.InsertDataset",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd",
+          "permission": "bigquery.datasets.create",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/audit_logs_test",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "datasetCreation": {
+          "dataset": {
+            "updateTime": "2024-09-15T22:45:37.241Z",
+            "createTime": "2024-09-15T22:45:37.241Z",
+            "acl": {
+              "policy": {
+                "bindings": [
+                  {
+                    "members": [
+                      "projectEditor:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataEditor"
+                  },
+                  {
+                    "members": [
+                      "projectOwner:datakit-dev-f1fd",
+                      "user:jordan@withdatakit.com"
+                    ],
+                    "role": "roles/bigquery.dataOwner"
+                  },
+                  {
+                    "members": [
+                      "projectViewer:datakit-dev-f1fd"
+                    ],
+                    "role": "roles/bigquery.dataViewer"
+                  }
+                ]
+              }
+            },
+            "datasetName": "projects/datakit-dev-f1fd/datasets/audit_logs_test"
+          },
+          "reason": "CREATE"
+        }
+      }
+    },
+    "insertId": "-7gtwive3yvap",
+    "resource": {
+      "type": "bigquery_dataset",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "audit_logs_test"
+      }
+    },
+    "timestamp": "2024-09-15T22:45:37.355408Z",
+    "severity": "NOTICE",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Factivity",
+    "receiveTimestamp": "2024-09-15T22:45:38.110019742Z"
+  }
+]

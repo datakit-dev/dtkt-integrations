@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.integrationsdk.v1beta1.Package.jsonschema.json
+apiVersion: v1beta1
+kind: Package
+spec:
+  description: Run console commands locally or remotely.
+  icon: https://assets.datakit.cloud/icons/command.svg
+  identity:
+    name: Command
+    version: 0.1.0
+  runtimes:
+  - RUNTIME_NATIVE
+  - RUNTIME_DOCKER
+  type: PACKAGE_TYPE_GO
+  build: {}

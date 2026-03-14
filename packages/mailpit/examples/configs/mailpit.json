@@ -1,0 +1,11 @@
+{
+  "templates": [
+    {
+      "id": "example-template",
+      "language": 1,
+      "subject": "[Test] Hello {{.NAME}} from the DataKit Mailpit integration",
+      "text_body": "Hello {{.NAME}},\n\nThis is a test email using a template.",
+      "html_body": "<p>Hello {{.NAME}},</p><p>This is a test email using a template.</p>"
+    }
+  ]
+}

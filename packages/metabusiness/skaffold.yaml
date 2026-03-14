@@ -1,0 +1,30 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: metabusiness
+profiles:
+- name: metabusiness
+  build:
+    local:
+      useBuildkit: true
+    artifacts:
+    - image: metabusiness
+      context: ../../../
+      docker:
+        dockerfile: dtkt-integrations/packages/metabusiness/Dockerfile
+  manifests:
+    kustomize:
+      buildArgs:
+      - --enable-alpha-plugins
+      - --enable-exec
+      paths:
+      - infra/kustomize/overlays/dev
+  deploy:
+    kubeContext: kind-dtkt-local
+    kubectl:
+      defaultNamespace: dtkt-integrations
+  portForward:
+  - resourceType: service
+    resourceName: metabusiness
+    port: 80
+    localPort: 8201

@@ -1,0 +1,14 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: infra
+profiles:
+- name: infra
+  manifests:
+    kustomize:
+      paths:
+      - kustomize/overlays/dev
+  deploy:
+    kubeContext: kind-dtkt-local
+    kubectl:
+      defaultNamespace: dtkt-integrations

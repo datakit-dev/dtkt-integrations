@@ -1,0 +1,137 @@
+version: "3"
+
+vars:
+  DATAKIT_KIND_CLUSTER: dtkt-local
+  LOCAL_CONTEXT: kind-dtkt-local
+
+  NAMESPACE: dtkt-integrations
+
+  KUBECTL_DEFAULT_ARGS: --context {{.LOCAL_CONTEXT}} --namespace {{.NAMESPACE}}
+
+  # Set WORKSPACE to operate on a specific workspace
+  # Some commands like console require it.
+  ALL_WORKSPACES: dev prd
+
+  GO_INTEGRATIONS:
+    - bigquery
+    - command
+    - email
+    - localblob
+    - mailpit
+    - metabusiness
+    - openai
+    - postmark
+
+includes:
+  sops:
+    taskfile: ${TASK_PATH}/Taskfile.sops.yaml
+
+  tf:
+    taskfile: ${TASK_PATH}/Taskfile.tofu-workspace.yaml
+    dir: infra/terraform
+    vars:
+      WORKSPACE: "{{.WORKSPACE}}"
+      WORKSPACES: "{{default .ALL_WORKSPACES .WORKSPACE}}"
+
+tasks:
+  setup:
+    preconditions:
+      - sh: sops --version
+        msg: sops is not installed. {{.SETUP_MESSAGE}}
+      - sh: terraform version
+        msg: terraform is not installed. {{.SETUP_MESSAGE}}
+      - sh: kustomize version
+        msg: kustomize is not installed. {{.SETUP_MESSAGE}}
+      - sh: go version
+        msg: go is not installed. {{.SETUP_MESSAGE}}
+      - sh: kind get clusters | grep -q {{.DATAKIT_KIND_CLUSTER}}
+        msg: The kind cluster {{.DATAKIT_KIND_CLUSTER}} does not exist. Please create it with 'kind create cluster --name {{.DATAKIT_KIND_CLUSTER}}'
+      - sh: kubectl --context {{.LOCAL_CONTEXT}} version
+        msg: Can't reach the {{.LOCAL_CONTEXT}} kubernetes context. Is docker running?
+    cmds:
+      # Configure git diffs to use decrypted sops files
+      - git config diff.sopsdiffer.textconv "sops -d"
+      - task: tf:init
+      - for: { var: GO_INTEGRATIONS, as: INTGR }
+        cmd: (cd packages/{{.INTGR}} && task setup)
+    vars:
+      SETUP_MESSAGE: Have you followed the dev setup instructions? https://github.com/datakit-dev/dtkt-dev
+
+  generate:
+    desc: Code generation for all packages
+    cmds:
+      - for: { var: GO_INTEGRATIONS, as: INTGR }
+        cmd: (cd packages/{{.INTGR}} && task generate)
+
+  tidy:
+    desc: Tidy all packages
+    cmds:
+      - for: { var: GO_INTEGRATIONS, as: INTGR }
+        cmd: (cd packages/{{.INTGR}} && go mod tidy)
+
+  lint:
+    desc: Lint all packages
+    cmds:
+      - for: { var: GO_INTEGRATIONS, as: INTGR }
+        cmd: (cd packages/{{.INTGR}} && task lint)
+
+  build:
+    desc: Build all packages
+    cmds:
+      - for: { var: GO_INTEGRATIONS, as: INTGR }
+        cmd: (cd packages/{{.INTGR}} && task build)
+
+  test:
+    desc: Test all packages
+    cmds:
+      - for: { var: GO_INTEGRATIONS, as: INTGR }
+        cmd: (cd packages/{{.INTGR}} && task test)
+
+  dev:
+    desc: Launch the dev environment
+    preconditions: &preconditions
+      - sh: kubectl --context {{.LOCAL_CONTEXT}} version
+        msg: Can't reach the {{.LOCAL_CONTEXT}} kubernetes context. Is docker running?
+    cmds:
+      # Run common infra outside of the dev loop to retain persistent volumes (if any)
+      - skaffold run -p infra
+      # Run the dev loop
+      - skaffold dev --keep-running-on-failure {{.CLI_ARGS}}
+    vars:
+      CLI_ARGS: '{{.CLI_ARGS | default "--profile all"}}'
+
+  run:
+    desc: Run the dev environment in the background
+    preconditions: *preconditions
+    cmds:
+      - skaffold run -p infra
+      - skaffold run {{.CLI_ARGS}}
+    vars:
+      CLI_ARGS: '{{.CLI_ARGS | default "--profile all"}}'
+
+  delete:
+    desc: Reset the dev environment (excluding the deletion of persistent volumes & other data)
+    preconditions: *preconditions
+    cmds:
+      - skaffold delete {{.CLI_ARGS}}
+    vars:
+      CLI_ARGS: '{{.CLI_ARGS | default "--profile all"}}'
+
+  delete-all:
+    desc: Reset the dev environment (including deletion of persistent volumes & other data)
+    preconditions: *preconditions
+    cmds:
+      - task: delete
+      - skaffold delete -p infra
+
+  git-clean-ignored:
+    desc: Delete all files listed in .gitignore files
+    prompt: Are you sure you want to delete all files and directories listed in .gitignore files?
+    cmds:
+      - rm -rf **/.terraform/modules/**
+      - git clean -Xdf
+
+  watch-pods-local:
+    desc: Watch the pods
+    cmds:
+      - watch -n 2 kubectl {{.KUBECTL_DEFAULT_ARGS}} get pods

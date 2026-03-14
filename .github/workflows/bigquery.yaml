@@ -1,0 +1,61 @@
+name: Build, Lint, & Test BigQuery Integration Package
+
+on:
+  pull_request:
+    branches:
+    - main
+    paths:
+    - packages/bigquery/**
+    - .github/workflows/bigquery.yaml
+
+jobs:
+  build-lint-test:
+    name: Build, Lint, & Test
+    runs-on: ${{ vars.RUNNER }}
+
+    permissions:
+      contents: read
+      pull-requests: read
+      checks: write
+
+    steps:
+    - uses: datakit-dev/dtkt-dev/.github/actions/setup-monorepo@main
+      with:
+        dtkt-sdk-sparse-checkout: sdk-go
+        dtkt-github-actions-app-id: ${{ vars.DTKT_GITHUB_ACTIONS_APP_ID }}
+        dtkt-github-actions-private-key: ${{ secrets.DTKT_GITHUB_ACTIONS_PRIVATE_KEY }}
+
+    - uses: datakit-dev/dtkt-dev/.github/actions/setup@main
+      with:
+        task: true
+        go: true
+        versions: ${{ vars.VERSIONS }}
+        go-cache-dependency-path: |
+          ./dtkt-universe/dtkt-integrations/packages/bigquery/go.sum
+          ./dtkt-universe/dtkt-sdk/sdk-go/go.sum
+
+    - run: task setup-local
+      working-directory: ./dtkt-universe/dtkt-integrations/packages/bigquery
+
+    - name: Build
+      run: task build
+      working-directory: ./dtkt-universe/dtkt-integrations/packages/bigquery
+
+    # - name: Lint
+    #   run: task lint
+    #   working-directory: ./dtkt-universe/dtkt-integrations/packages/bigquery
+    # - name: Lint
+    #   uses: golangci/golangci-lint-action@v7
+    #   with:
+    #     version: ${{ fromJSON(vars.VERSIONS).golangci-lint }}
+    #     working-directory: ./dtkt-universe/dtkt-integrations/packages/bigquery
+    #     args: --timeout=5m
+    #   env:
+    #     # TODO: follow up; this doesn't seem to work; I've opened a discussion
+    #     # https://github.com/golangci/golangci-lint-action/discussions/1195
+    #     CGO_ENABLED: 1
+
+    - name: Test
+      run: task test
+      continue-on-error: true
+      working-directory: ./dtkt-universe/dtkt-integrations/packages/bigquery

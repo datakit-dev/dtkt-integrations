@@ -1,0 +1,3 @@
+{"command": {"command": "cat", "expects_stdin": true}}
+{"input": {"stdin": "SGVsbG8sIFdvcmxkIQo="}}
+{"input": {"eof": true}}

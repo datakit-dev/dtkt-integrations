@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.integrationsdk.v1beta1.Package.jsonschema.json
+kind: Package
+apiVersion: v1beta1
+spec:
+  identity:
+    name: BigQuery
+    version: 0.1.0
+  description: BigQuery is a fully-managed, serverless data warehouse that enables scalable analysis over petabytes of data.
+  icon: https://cdn.icon-icons.com/icons2/2699/PNG/64/google_bigquery_logo_icon_168150.png
+  type: PACKAGE_TYPE_GO
+  build: {}

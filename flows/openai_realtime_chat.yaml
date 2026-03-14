@@ -1,0 +1,122 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: OpenAI Realtime Chat
+  description: >
+    Chat with an AI assistant in real-time using OpenAI's RealtimeAPI.
+
+  connections:
+    - id: openai
+      package:
+        name: OpenAI
+        version: 0.1.0
+
+  inputs:
+    - id: realtimeConfig
+      message:
+        type: google.protobuf.Struct
+        default:
+          id: foobar
+    - id: sessionConfig
+      message:
+        type: google.protobuf.Struct
+        default:
+          instructions: Your name is Data and you are an assistant at DataKit, an innovative platform for data activation and workflow automation.
+          modalities:
+            - text
+          voice: coral
+
+  streams:
+    - id: realtimeEvents
+      call:
+        connection: openai
+        method: dtkt.event.v1beta1.EventService.StreamPullEvents
+        request:
+          eventSource:
+            name: RealtimeEvents
+            config: = inputs.realtimeConfig.getValue()
+
+  vars:
+    - id: event
+      value: = streams.realtimeEvents.getValue().event
+    - id: eventType
+      value: = vars.event.getValue().type
+    - id: eventPayload
+      value: = vars.event.getValue().payload
+    - id: assistantMessage
+      switch:
+        value: = vars.eventType.getValue()
+        case:
+          - value: = "response.text.done"
+            return: = vars.eventPayload.getValue().text
+        default: = null
+    - id: userMessage
+      switch:
+        value: = vars.eventType.getValue()
+        case:
+          - value: = "conversation.item.created"
+            return: = vars.eventPayload.getValue().item
+        default: = null
+
+  actions:
+    - id: updateSession
+      runIf: = vars.eventType.getValue() == "session.created"
+      call:
+        connection: openai
+        method: dtkt.action.v1beta1.ActionService.ExecuteAction
+        request:
+          action:
+            name: SessionUpdate
+          input:
+            config: = inputs.realtimeConfig.getValue()
+            event:
+              type: session.update
+              session: = inputs.sessionConfig.getValue()
+
+    - id: userMessage
+      user:
+        inputs:
+          - id: text
+            title: Enter a message
+            input:
+              multilineText: true
+
+    - id: sendMessage
+      runIf: = vars.eventType.getValue() == "response.done"
+      call:
+        connection: openai
+        method: dtkt.action.v1beta1.ActionService.ExecuteAction
+        request:
+          action:
+            name: ConversationItemCreate
+          input:
+            config: = inputs.realtimeConfig.getValue()
+            event:
+              type: conversation.item.create
+              item:
+                type: message
+                role: user
+                content:
+                  - type: input_text
+                    text: = actions.userMessage.getValue().text
+
+    - id: createResponse
+      runIf: = vars.eventType.getValue() == "session.updated" || actions.sendMessage.getValue() != null
+      call:
+        connection: openai
+        method: dtkt.action.v1beta1.ActionService.ExecuteAction
+        request:
+          action:
+            name: ResponseCreate
+          input:
+            config: = inputs.realtimeConfig.getValue()
+            event:
+              type: response.create
+
+  outputs:
+    - id: assistant
+      value: = vars.assistantMessage.getValue()
+    - id: user
+      value: = vars.userMessage.getValue()

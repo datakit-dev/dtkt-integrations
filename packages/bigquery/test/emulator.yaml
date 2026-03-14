@@ -1,0 +1,138 @@
+projects:
+  - id: bigquery-public-data
+    datasets:
+      - id: covid19_ecdc
+        tables:
+          - id: daily_reports
+            columns:
+              - name: date
+                type: DATE
+                mode: REQUIRED
+              - name: cases
+                type: INTEGER
+                mode: REQUIRED
+              - name: deaths
+                type: INTEGER
+                mode: REQUIRED
+              - name: countries_and_territories
+                type: STRING
+                mode: REQUIRED
+              - name: geo_id
+                type: STRING
+                mode: REQUIRED
+              - name: country_territory_code
+                type: STRING
+                mode: REQUIRED
+              - name: pop_data_2019
+                type: INTEGER
+                mode: REQUIRED
+              - name: continent_exp
+                type: STRING
+                mode: REQUIRED
+              - name: notification_rate_per_100000_population_14-days
+                type: FLOAT
+                mode: NULLABLE
+              - name: cumulative_number_for_14_days_of_COVID-19_cases_per_100000
+                type: FLOAT
+                mode: NULLABLE
+              - name: source
+                type: STRING
+                mode: NULLABLE
+              - name: testing_rate
+                type: FLOAT
+                mode: NULLABLE
+              - name: testing_data
+                type: STRING
+                mode: NULLABLE
+              - name: country_territory_code_alpha_3
+                type: STRING
+                mode: NULLABLE
+              - name: cumulative_total_cases
+                type: INTEGER
+                mode: NULLABLE
+              - name: cumulative_total_deaths
+                type: INTEGER
+                mode: NULLABLE
+              - name: cumulative_total_cases_per_million
+                type: FLOAT
+                mode: NULLABLE
+              - name: cumulative_total_deaths_per_million
+                type: FLOAT
+                mode: NULLABLE
+              - name: cumulative_total_tests
+                type: INTEGER
+                mode: NULLABLE
+              - name: cumulative_total_tests_per_thousand
+                type: FLOAT
+                mode: NULLABLE
+              - name: cumulative_total_vaccinations
+                type: INTEGER
+                mode: NULLABLE
+              - name: cumulative_total_vaccinations_per_hundred
+                type: FLOAT
+                mode: NULLABLE
+              - name: daily_cases
+                type: INTEGER
+                mode: NULLABLE
+              - name: daily_deaths
+                type: INTEGER
+  - id: datakit-test
+    datasets:
+      - id: test_schema
+        tables:
+          - id: deletable_table
+            columns:
+              - name: id
+                type: INTEGER
+                mode: REQUIRED
+          - id: test_table
+            columns:
+              - name: id
+                type: INTEGER
+                mode: REQUIRED
+              - name: name
+                type: STRING
+                mode: required # lower case
+              - name: structarr
+                type: STRUCT
+                mode: repeated
+                fields:
+                  - name: key
+                    type: STRING
+                  - name: value
+                    type: JSON
+              - name: birthday
+                type: DATE
+              - name: skillNum
+                type: NUMERIC
+              - name: created_at
+                type: TIMESTAMP
+            data:
+              - id: 1
+                name: alice
+                structarr:
+                  - key: profile
+                    value: '{"age": 10}'
+                birthday: "2012-01-01"
+                skillNum: 3
+                created_at: "2022-01-01T12:00:00"
+              - id: 2
+                name: bob
+                structarr:
+                  - key: profile
+                    value: '{"age": 15}'
+                birthday: "2007-02-01"
+                skillNum: 5
+                created_at: "2022-01-02T18:00:00"
+          - id: table_b
+            columns:
+              - name: num
+                type: NUMERIC
+              - name: bignum
+                type: BIGNUMERIC
+              - name: interval
+                type: INTERVAL
+            data:
+              - num: 1.2345
+                bignum: 1.234567891234
+                interval: 1-6 15 0:0:0

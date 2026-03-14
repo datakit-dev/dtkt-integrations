@@ -1,0 +1,51 @@
+{
+  "allowShell": true,
+  "shellCommand": "bash",
+  "commands": [
+    {
+      "name": "tree",
+      "description": "List directory contents in a tree-like format",
+      "commands": [
+        {
+          "usage": "tree [options] [path]",
+          "short": "List directory contents",
+          "long": "List directory contents in a tree-like format",
+          "examples": [
+            "tree /path/to/directory",
+            "tree -L 2 /path/to/directory"
+          ],
+          "flags": [
+            {
+              "name": "-L",
+              "usage": "Max depth"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "echo",
+      "description": "Display a line of text"
+    },
+    {
+      "name": "cat",
+      "description": "Concatenate and print files"
+    },
+    {
+      "name": "tee",
+      "description": "Duplicate standard input"
+    },
+    {
+      "name": "ls",
+      "description": "List directory contents"
+    },
+    {
+      "name": "jq",
+      "description": "Process JSON data"
+    },
+    {
+      "name": "sleep",
+      "description": "Delay for a specified amount of time"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=../../dtkt-sdk/schemas/flowsdk.v1beta.Flow.schema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Streams out received emails
+  description: >
+    This flow streams out received emails from the email service.
+
+  packages:
+    email:
+      services:
+      - EmailService
+
+  sources:
+  - id: emailEvents
+    call:
+      package: email
+      method: base.v1beta.BaseService.StreamPullEvents
+      request:
+        eventSource:
+          name: Emails
+
+  vars:
+    event: = sources.emailEvents
+    eventType: = vars.event?.Event?.Type
+    eventPayload: = fromJSON(toJSON(vars.event?.Payload))
+
+  outputs:
+    event: = vars.eventPayload

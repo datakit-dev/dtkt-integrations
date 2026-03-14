@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bigquery
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels: {}
+  template:
+    spec:
+      serviceAccountName: bigquery
+      containers:
+      - image: bigquery
+        name: bigquery
+        env:
+        - name: DTKT_NETWORK
+          value: tcp
+        - name: DTKT_ADDRESS
+          value: "0.0.0.0:9090"
+        envFrom:
+        - configMapRef:
+            name: bigquery
+        # - secretRef:
+        #     name: bigquery
+        ports:
+        - containerPort: 9090
+          name: http-grpc
+        resources:
+          requests:
+            cpu: 500m
+          limits:
+            memory: 512Mi
+        livenessProbe:
+          grpc:
+            port: 9090
+        readinessProbe:
+          grpc:
+            port: 9090

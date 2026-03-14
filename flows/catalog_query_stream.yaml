@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=../../dtkt-sdk/schemas/dtkt.flowsdk.v1beta1.Flow.schema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Catalog Query Streaming Results
+  description: >
+    Query streaming results from a given CatalogService.
+
+  packages:
+    - id: catalog
+      services:
+        - catalog.v1beta1.CatalogService
+
+  actions:
+    - id: query
+      user:
+        inputs:
+          - name: value
+            type: string
+            description: Enter a query
+
+  sources:
+    - id: queryStream
+      call:
+        package: catalog
+        method: catalog.v1beta1.CatalogService.StreamQueryResults
+        request:
+          query: = actions.query.value
+
+  outputs:
+    - id: row
+      value: = sources.queryStream?.Row

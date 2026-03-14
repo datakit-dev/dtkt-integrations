@@ -1,0 +1,9 @@
+{
+  "name": "actions/get-message",
+  "input": {
+    "@type": "type.googleapis.com/google.protobuf.Struct",
+    "value": {
+      "ID": "latest"
+    }
+  }
+}

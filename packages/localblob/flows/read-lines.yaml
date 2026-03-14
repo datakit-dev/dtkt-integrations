@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Read Lines from Blob
+  description: Read a stream of data from a blob line by line
+
+  connections:
+    - id: blob
+      package:
+        name: LocalBlob
+        version: 0.1.0
+      services:
+        - dtkt.blob.v1beta1.BlobService
+
+  inputs:
+    - id: bucket
+      cache: true
+      string:
+        default: tmp
+    - id: key
+      cache: true
+      string:
+        default: test.text
+
+  streams:
+    - id: read
+      call:
+        connection: blob
+        method: dtkt.blob.v1beta1.BlobService.ReadBlobLines
+        request:
+          bucket: "= inputs.bucket.getValue()"
+          key: "= inputs.key.getValue()"
+          lineFormat: LINE_FORMAT_JSON
+          jsonArrayMode: true
+
+  outputs:
+    - id: line
+      value: "= isEOF(streams.read.getValue()) ? Done{reason: 'Read stream closed.'} : streams.read.getValue()"
+    # - id: json
+    #   value: "= has(vars.line.getValue().json) ? vars.line.getValue().json : null"

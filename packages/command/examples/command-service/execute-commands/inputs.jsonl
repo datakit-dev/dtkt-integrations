@@ -1,0 +1,3 @@
+{"command": {"command": "echo", "args": ["one"]}}
+{"command": {"command": "echo", "args": ["two"]}}
+{"command": {"command": "echo", "args": ["three"]}}

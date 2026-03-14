@@ -1,0 +1,1756 @@
+{
+  "openapi": "3.0.0",
+  "x-origin": [
+    {
+      "url": "https://postmarkapp.com/swagger/account.yml",
+      "format": "swagger",
+      "version": "2.0",
+      "converter": {
+        "url": "https://github.com/mermade/oas-kit",
+        "version": "7.0.8"
+      }
+    }
+  ],
+  "info": {
+    "title": "Postmark Account-level API",
+    "description": "Postmark makes sending and receiving email\nincredibly easy. The Account-level API allows users to\nconfigure all Servers, Domains, and Sender Signatures associated\nwith an Account.\n",
+    "version": "0.9.0"
+  },
+  "paths": {
+    "/servers/{serverid}": {
+      "get": {
+        "operationId": "getServerInformation",
+        "tags": [
+          "Server Management API"
+        ],
+        "summary": "Get a Server",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serverid",
+            "description": "The ID of the Server to get.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendedServerInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "put": {
+        "operationId": "editServerInformation",
+        "tags": [
+          "Server Management API"
+        ],
+        "summary": "Edit a Server",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serverid",
+            "description": "The ID of the Server to update.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EditServerPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendedServerInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteServer",
+        "tags": [
+          "Server Management API"
+        ],
+        "summary": "Delete a Server",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "serverid",
+            "description": "The ID of the Server that should be deleted.",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/servers": {
+      "get": {
+        "operationId": "listServers",
+        "tags": [
+          "Server Management API"
+        ],
+        "summary": "List servers",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "count",
+            "in": "query",
+            "required": true,
+            "description": "Number of servers to return per request.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "required": true,
+            "description": "Number of servers to skip.",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Filter by a specific server name",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ServerListingResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createServer",
+        "tags": [
+          "Server Management API"
+        ],
+        "summary": "Create a Server",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateServerPayload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendedServerInfo"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/senders": {
+      "get": {
+        "operationId": "listSenderSignatures",
+        "summary": "List Sender Signatures",
+        "tags": [
+          "Sender Signatures API"
+        ],
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "count",
+            "required": true,
+            "in": "query",
+            "description": "Number of records to return per request. Max 500.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500
+            }
+          },
+          {
+            "name": "offset",
+            "required": true,
+            "description": "Number of records to skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderListingResults"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createSenderSignature",
+        "summary": "Create a Sender Signature",
+        "tags": [
+          "Sender Signatures API"
+        ],
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SenderSignatureCreationModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderSignatureExtendedInformation"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/senders/{signatureid}": {
+      "get": {
+        "operationId": "getSenderSignature",
+        "tags": [
+          "Sender Signatures API"
+        ],
+        "summary": "Get a Sender Signature",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "signatureid",
+            "in": "path",
+            "description": "The ID for the Sender Signature that should be retrieved.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderSignatureExtendedInformation"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "put": {
+        "operationId": "editSenderSignature",
+        "tags": [
+          "Sender Signatures API"
+        ],
+        "summary": "Update a Sender Signature",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "signatureid",
+            "in": "path",
+            "description": "The ID for the Sender Signature that should be modified by the request.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SenderSignatureEditingModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderSignatureExtendedInformation"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteSenderSignature",
+        "tags": [
+          "Sender Signatures API"
+        ],
+        "summary": "Delete a Sender Signature",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "signatureid",
+            "in": "path",
+            "required": true,
+            "description": "The ID for the Sender Signature that should be deleted by the request.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardPostmarkResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/senders/{signatureid}/resend": {
+      "post": {
+        "operationId": "resendSenderSignatureConfirmationEmail",
+        "tags": [
+          "Sender Signatures API"
+        ],
+        "summary": "Resend Signature Confirmation Email",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "signatureid",
+            "in": "path",
+            "description": "The ID for the Sender Signature that should have its confirmation email resent.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardPostmarkResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/senders/{signatureid}/verifyspf": {
+      "post": {
+        "operationId": "requestSPFVerificationForSenderSignature",
+        "tags": [
+          "Sender Signatures API"
+        ],
+        "summary": "Request DNS Verification for SPF",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "signatureid",
+            "in": "path",
+            "required": true,
+            "description": "The ID for the Sender Signature for which SPF DNS records should be verified.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SenderSignatureExtendedInformation"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/senders/{signatureid}/requestnewdkim": {
+      "post": {
+        "operationId": "requestNewDKIMKeyForSenderSignature",
+        "tags": [
+          "Sender Signatures API"
+        ],
+        "summary": "Request a new DKIM Key",
+        "description": "Requests a new DKIM key to be created. Until the DNS entries are confirmed,\nthe new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields.\nAfter the new DKIM value is verified in DNS, the pending values will migrate to\n`DKIMTextValue` and `DKIMPendingTextValue` and Postmark will begin to sign emails\nwith the new DKIM key.\n",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "signatureid",
+            "in": "path",
+            "description": "The ID for the Sender Signature for which a new DKIM Key should be generated.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardPostmarkResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/domains": {
+      "get": {
+        "operationId": "listDomains",
+        "summary": "List Domains",
+        "tags": [
+          "Domains API"
+        ],
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "count",
+            "required": true,
+            "in": "query",
+            "description": "Number of records to return per request. Max 500.",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500
+            }
+          },
+          {
+            "name": "offset",
+            "required": true,
+            "description": "Number of records to skip",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainListingResults"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createDomain",
+        "summary": "Create a Domain",
+        "tags": [
+          "Domains API"
+        ],
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DomainCreationModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainExtendedInformation"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/domains/{domainid}": {
+      "get": {
+        "operationId": "getDomain",
+        "tags": [
+          "Domains API"
+        ],
+        "summary": "Get a Domain",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domainid",
+            "in": "path",
+            "description": "The ID for the Domain that should be retrieved.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainExtendedInformation"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "put": {
+        "operationId": "editDomain",
+        "tags": [
+          "Domains API"
+        ],
+        "summary": "Update a Domain",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domainid",
+            "in": "path",
+            "description": "The ID for the Domain that should be modified by the request.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DomainEditingModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainExtendedInformation"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteDomain",
+        "tags": [
+          "Domains API"
+        ],
+        "summary": "Delete a Domain",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domainid",
+            "in": "path",
+            "required": true,
+            "description": "The ID for the Domain that should be deleted by the request.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StandardPostmarkResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/domains/{domainid}/verifydkim": {
+      "put": {
+        "operationId": "requestDkimVerificationForDomain",
+        "tags": [
+          "Domains API"
+        ],
+        "summary": "Request DNS Verification for DKIM",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domainid",
+            "in": "path",
+            "required": true,
+            "description": "The ID for the Domain for which DKIM DNS records should be verified.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainExtendedInformation"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/domains/{domainid}/verifyreturnpath": {
+      "put": {
+        "operationId": "requestReturnPathVerificationForDomain",
+        "tags": [
+          "Domains API"
+        ],
+        "summary": "Request DNS Verification for Return-Path",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domainid",
+            "in": "path",
+            "required": true,
+            "description": "The ID for the Domain for which Return-Path DNS records should be verified.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainExtendedInformation"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/domains/{domainid}/verifyspf": {
+      "post": {
+        "operationId": "requestSPFVerificationForDomain",
+        "tags": [
+          "Domains API"
+        ],
+        "summary": "Request DNS Verification for SPF",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domainid",
+            "in": "path",
+            "required": true,
+            "description": "The ID for the Domain for which SPF DNS records should be verified.",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DomainSPFResult"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/domains/{domainid}/rotatedkim": {
+      "post": {
+        "operationId": "rotateDKIMKeyForDomain",
+        "tags": [
+          "Domains API"
+        ],
+        "summary": "Rotate DKIM Key",
+        "description": "Creates a new DKIM key to replace your current key. Until the DNS entries are confirmed,\nthe new values will be in the `DKIMPendingHost` and `DKIMPendingTextValue` fields.\nAfter the new DKIM value is verified in DNS, the pending values will migrate to\n`DKIMTextValue` and `DKIMPendingTextValue` and Postmark will begin to sign emails\nwith the new DKIM key.\n",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "domainid",
+            "in": "path",
+            "description": "The ID for the Sender Signature for which a new DKIM Key should be generated.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DKIMRotationResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/templates/push": {
+      "put": {
+        "operationId": "pushTemplates",
+        "tags": [
+          "Templates API"
+        ],
+        "summary": "Push templates from one server to another",
+        "parameters": [
+          {
+            "name": "X-Postmark-Account-Token",
+            "required": true,
+            "description": "The token associated with the Account on which this request will operate.",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TemplatesPushModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplatesPushResponse"
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#/components/responses/422"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "//api.postmarkapp.com"
+    }
+  ],
+  "components": {
+    "responses": {
+      "422": {
+        "description": "An error was generated due to incorrect use of the API. See the Message associated with this response for more information.",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/StandardPostmarkResponse"
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Indicates an internal server error occurred."
+      }
+    },
+    "schemas": {
+      "StandardPostmarkResponse": {
+        "description": "A Postmark API error.",
+        "properties": {
+          "ErrorCode": {
+            "type": "integer"
+          },
+          "Message": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ExtendedServerInfo": {
+        "description": "",
+        "properties": {
+          "ID": {
+            "type": "integer"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "ApiTokens": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ServerLink": {
+            "type": "string"
+          },
+          "Color": {
+            "type": "string"
+          },
+          "SmtpApiActivated": {
+            "type": "boolean"
+          },
+          "RawEmailEnabled": {
+            "type": "boolean"
+          },
+          "DeliveryHookUrl": {
+            "type": "string"
+          },
+          "InboundAddress": {
+            "type": "string"
+          },
+          "InboundHookUrl": {
+            "type": "string"
+          },
+          "BounceHookUrl": {
+            "type": "string"
+          },
+          "OpenHookUrl": {
+            "type": "string"
+          },
+          "PostFirstOpenOnly": {
+            "type": "boolean"
+          },
+          "TrackOpens": {
+            "type": "boolean"
+          },
+          "TrackLinks": {
+            "type": "string",
+            "enum": [
+              "None",
+              "HtmlAndTextTracking",
+              "HtmlOnlyTracking",
+              "TextOnlyTracking"
+            ]
+          },
+          "ClickHookUrl": {
+            "type": "string"
+          },
+          "InboundDomain": {
+            "type": "string"
+          },
+          "InboundHash": {
+            "type": "string"
+          },
+          "InboundSpamThreshold": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "CreateServerPayload": {
+        "description": "",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Color": {
+            "type": "string"
+          },
+          "RawEmailEnabled": {
+            "type": "boolean"
+          },
+          "DeliveryHookUrl": {
+            "type": "string"
+          },
+          "SmtpApiActivated": {
+            "type": "boolean"
+          },
+          "InboundHookUrl": {
+            "type": "string"
+          },
+          "BounceHookUrl": {
+            "type": "string"
+          },
+          "OpenHookUrl": {
+            "type": "string"
+          },
+          "PostFirstOpenOnly": {
+            "type": "boolean"
+          },
+          "TrackOpens": {
+            "type": "boolean"
+          },
+          "TrackLinks": {
+            "type": "string",
+            "enum": [
+              "None",
+              "HtmlAndTextTracking",
+              "HtmlOnlyTracking",
+              "TextOnlyTracking"
+            ]
+          },
+          "ClickHookUrl": {
+            "type": "string"
+          },
+          "InboundDomain": {
+            "type": "string"
+          },
+          "InboundSpamThreshold": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "EditServerPayload": {
+        "description": "",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Color": {
+            "type": "string"
+          },
+          "RawEmailEnabled": {
+            "type": "boolean"
+          },
+          "DeliveryHookUrl": {
+            "type": "string"
+          },
+          "SmtpApiActivated": {
+            "type": "boolean"
+          },
+          "InboundHookUrl": {
+            "type": "string"
+          },
+          "BounceHookUrl": {
+            "type": "string"
+          },
+          "OpenHookUrl": {
+            "type": "string"
+          },
+          "PostFirstOpenOnly": {
+            "type": "boolean"
+          },
+          "TrackOpens": {
+            "type": "boolean"
+          },
+          "TrackLinks": {
+            "type": "string",
+            "enum": [
+              "None",
+              "HtmlAndTextTracking",
+              "HtmlOnlyTracking",
+              "TextOnlyTracking"
+            ]
+          },
+          "ClickHookUrl": {
+            "type": "string"
+          },
+          "InboundDomain": {
+            "type": "string"
+          },
+          "InboundSpamThreshold": {
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "ServerListingResponse": {
+        "description": "The results of listing servers.",
+        "properties": {
+          "TotalCount": {
+            "type": "integer"
+          },
+          "Servers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExtendedServerInfo"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "SenderSignatureInformation": {
+        "description": "",
+        "properties": {
+          "Domain": {
+            "type": "string"
+          },
+          "EmailAddress": {
+            "type": "string",
+            "format": "email"
+          },
+          "ReplyToEmailAddress": {
+            "type": "string",
+            "format": "email"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Confirmed": {
+            "type": "boolean"
+          },
+          "ID": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "type": "object"
+      },
+      "SenderSignatureExtendedInformation": {
+        "description": "",
+        "properties": {
+          "Domain": {
+            "type": "string"
+          },
+          "EmailAddress": {
+            "type": "string",
+            "format": "email"
+          },
+          "ReplyToEmailAddress": {
+            "type": "string",
+            "format": "email"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "Confirmed": {
+            "type": "boolean"
+          },
+          "SPFVerified": {
+            "type": "boolean"
+          },
+          "SPFHost": {
+            "type": "string"
+          },
+          "SPFTextValue": {
+            "type": "string"
+          },
+          "DKIMVerified": {
+            "type": "boolean"
+          },
+          "WeakDKIM": {
+            "type": "boolean"
+          },
+          "DKIMHost": {
+            "type": "string"
+          },
+          "DKIMTestValue": {
+            "type": "string"
+          },
+          "DKIMPendingHost": {
+            "type": "string"
+          },
+          "DKIMPendingTextValue": {
+            "type": "string"
+          },
+          "DKIMRevokedHost": {
+            "type": "string"
+          },
+          "DKIMRevokedTextValue": {
+            "type": "string"
+          },
+          "SafeToRemoveRevokedKeyFromDNS": {
+            "type": "boolean"
+          },
+          "DKIMUpdateStatus": {
+            "type": "string"
+          },
+          "ReturnPathDomain": {
+            "type": "string"
+          },
+          "ReturnPathDomainVerified": {
+            "type": "boolean"
+          },
+          "ReturnPathDomainCNAMEValue": {
+            "type": "string"
+          },
+          "ID": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "type": "object"
+      },
+      "SenderListingResults": {
+        "description": "",
+        "properties": {
+          "TotalCount": {
+            "type": "integer"
+          },
+          "SenderSignatures": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SenderSignatureInformation"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "SenderSignatureCreationModel": {
+        "description": "",
+        "properties": {
+          "FromEmail": {
+            "type": "string",
+            "format": "email"
+          },
+          "Name": {
+            "type": "string"
+          },
+          "ReplyToEmail": {
+            "type": "string",
+            "format": "email"
+          },
+          "ReturnPathDomain": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "SenderSignatureEditingModel": {
+        "description": "",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "ReplyToEmail": {
+            "type": "string",
+            "format": "email"
+          },
+          "ReturnPathDomain": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DomainInformation": {
+        "description": "",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "SPFVerified": {
+            "type": "boolean"
+          },
+          "DKIMVerified": {
+            "type": "boolean"
+          },
+          "WeakDKIM": {
+            "type": "boolean"
+          },
+          "ReturnPathDomainVerified": {
+            "type": "boolean"
+          },
+          "ID": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "type": "object"
+      },
+      "DomainExtendedInformation": {
+        "description": "",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "SPFVerified": {
+            "type": "boolean"
+          },
+          "SPFHost": {
+            "type": "string"
+          },
+          "SPFTextValue": {
+            "type": "string"
+          },
+          "DKIMVerified": {
+            "type": "boolean"
+          },
+          "WeakDKIM": {
+            "type": "boolean"
+          },
+          "DKIMHost": {
+            "type": "string"
+          },
+          "DKIMTestValue": {
+            "type": "string"
+          },
+          "DKIMPendingHost": {
+            "type": "string"
+          },
+          "DKIMPendingTextValue": {
+            "type": "string"
+          },
+          "DKIMRevokedHost": {
+            "type": "string"
+          },
+          "DKIMRevokedTextValue": {
+            "type": "string"
+          },
+          "SafeToRemoveRevokedKeyFromDNS": {
+            "type": "boolean"
+          },
+          "DKIMUpdateStatus": {
+            "type": "string"
+          },
+          "ReturnPathDomain": {
+            "type": "string"
+          },
+          "ReturnPathDomainVerified": {
+            "type": "boolean"
+          },
+          "ReturnPathDomainCNAMEValue": {
+            "type": "string"
+          },
+          "ID": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "type": "object"
+      },
+      "DomainListingResults": {
+        "description": "",
+        "properties": {
+          "TotalCount": {
+            "type": "integer"
+          },
+          "Domains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DomainInformation"
+            }
+          }
+        },
+        "type": "object"
+      },
+      "DomainSPFResult": {
+        "description": "",
+        "properties": {
+          "SPFHost": {
+            "type": "string"
+          },
+          "SPFVerified": {
+            "type": "boolean"
+          },
+          "SPFTextValue": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DKIMRotationResponse": {
+        "description": "",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "DKIMVerified": {
+            "type": "boolean"
+          },
+          "WeakDKIM": {
+            "type": "boolean"
+          },
+          "DKIMHost": {
+            "type": "string"
+          },
+          "DKIMTestValue": {
+            "type": "string"
+          },
+          "DKIMPendingHost": {
+            "type": "string"
+          },
+          "DKIMPendingTextValue": {
+            "type": "string"
+          },
+          "DKIMRevokedHost": {
+            "type": "string"
+          },
+          "DKIMRevokedTextValue": {
+            "type": "string"
+          },
+          "SafeToRemoveRevokedKeyFromDNS": {
+            "type": "boolean"
+          },
+          "DKIMUpdateStatus": {
+            "type": "string"
+          },
+          "ID": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "type": "object"
+      },
+      "DomainCreationModel": {
+        "description": "",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "ReturnPathDomain": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "DomainEditingModel": {
+        "description": "",
+        "properties": {
+          "ReturnPathDomain": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TemplatesPushModel": {
+        "description": "",
+        "properties": {
+          "SourceServerId": {
+            "type": "integer"
+          },
+          "DestinationServerId": {
+            "type": "integer"
+          },
+          "PerformChanges": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "TemplatesPushResponse": {
+        "description": "",
+        "properties": {
+          "TotalCount": {
+            "type": "integer"
+          },
+          "Templates": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "Action": {
+                  "type": "string"
+                },
+                "TemplateId": {
+                  "type": "integer"
+                },
+                "Alias": {
+                  "type": "string"
+                },
+                "Name": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "type": "object"
+      }
+    }
+  }
+}

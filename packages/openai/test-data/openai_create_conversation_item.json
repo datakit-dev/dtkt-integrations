@@ -1,0 +1,23 @@
+{
+  "action": {
+    "name": "ConversationItemCreate"
+  },
+  "input": {
+    "config": {
+      "id": "foo_bar"
+    },
+    "event": {
+      "type": "conversation.item.create",
+      "item": {
+        "type": "message",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "I would like to be an expert in sales and marketing. I'm a technical person and I want to learn how to sell and market my products."
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,1954 @@
+[
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "reason": "WRITE_API_APPEND_ROWS",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "1"
+        }
+      }
+    },
+    "insertId": "-gd22k2e19e1c",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T10:46:23.478554Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726656383478-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T10:46:23.494236466Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "insertedRowsCount": "12",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "-w63tzre199qs",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T10:03:02.700205Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726653782699-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T10:03:02.932738570Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "rowCount": "121",
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDGdDbXgyaFNpNXgxTxoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "reason": "READ_ROWS"
+        }
+      }
+    },
+    "insertId": "-n8pvsye15ca4",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T09:58:18.124076Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726653498123-projects/datakit-dev-f1fd/locations/us/sessions/CAISDGdDbXgyaFNpNXgxTxoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T09:58:18.977740112Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "tableDataChange": {
+          "insertedRowsCount": "12",
+          "reason": "WRITE_API_APPEND_ROWS",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default"
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-gmus26e1729s",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T09:50:21.577009Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726653021576-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T09:50:22.206620949Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "reason": "WRITE_API_APPEND_ROWS",
+          "insertedRowsCount": "12",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default"
+        }
+      }
+    },
+    "insertId": "csjgwxdv6tk",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T09:40:17.992838Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726652417992-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T09:40:18.844842195Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "insertedRowsCount": "12",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "ilb2ktceuq",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T09:32:16.343474Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726651936343-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T09:32:16.696207233Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "12",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "-t377b7e12r0g",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T09:05:17.083466Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726650317083-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T09:05:17.499010337Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "insertedRowsCount": "12",
+          "reason": "WRITE_API_APPEND_ROWS",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default"
+        }
+      }
+    },
+    "insertId": "k0kfq6de9vy",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T09:00:53.897350Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726650053897-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T09:00:53.977216973Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "12",
+          "reason": "WRITE_API_APPEND_ROWS"
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-l1fc2fe1jjdk",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T08:55:40.590172Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726649740590-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T08:55:40.653050156Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "12",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "-x0mmiddshdy",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T08:50:36.995602Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726649436995-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T08:50:37.409037408Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "tableDataChange": {
+          "insertedRowsCount": "12",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "reason": "WRITE_API_APPEND_ROWS"
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "y5evkzd41ra",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T08:50:21.137828Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726649421137-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T08:50:22.027313930Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "12",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "c9h7l9dddts",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T08:50:05.438799Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726649405438-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T08:50:06.316340303Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "1",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "-c69phte1kxt0",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T08:37:10.051363Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726648630051-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T08:37:10.996798413Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDG9OMm5RbURaVUFlXxoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "reason": "READ_ROWS",
+          "rowCount": "12",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ]
+        }
+      }
+    },
+    "insertId": "x1ffure1k7s8",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T08:33:45.900246Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726648425900-projects/datakit-dev-f1fd/locations/us/sessions/CAISDG9OMm5RbURaVUFlXxoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T08:33:46.160840190Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "tableDataRead": {
+          "reason": "READ_ROWS",
+          "rowCount": "12",
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDGxEa1pUZEQzazdGUxoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ]
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-tdkl8ye1gc1m",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T08:20:22.871385Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726647622871-projects/datakit-dev-f1fd/locations/us/sessions/CAISDGxEa1pUZEQzazdGUxoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T08:20:23.611494533Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "tableDataRead": {
+          "reason": "READ_ROWS",
+          "rowCount": "12",
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDFdxcVVLTWQwNXF5ORoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ]
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "z9mezue1i18q",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T08:02:10.942890Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726646530942-projects/datakit-dev-f1fd/locations/us/sessions/CAISDFdxcVVLTWQwNXF5ORoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T08:02:11.646268606Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDFV0OTVzdmZLOU90NRoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "rowCount": "12",
+          "reason": "READ_ROWS"
+        }
+      }
+    },
+    "insertId": "xw3h6he12zue",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T07:58:16.602358Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726646296601-projects/datakit-dev-f1fd/locations/us/sessions/CAISDFV0OTVzdmZLOU90NRoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T07:58:16.643745568Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "rowCount": "12",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "reason": "READ_ROWS",
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDFJrTVM0Ykk4alFLSxoCanIaAmpj/streams/GgJqchoCamMoAg"
+        }
+      }
+    },
+    "insertId": "-wykn9ve1n0wc",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T07:54:11.459071Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726646051458-projects/datakit-dev-f1fd/locations/us/sessions/CAISDFJrTVM0Ykk4alFLSxoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T07:54:12.044552873Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "tableDataRead": {
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDHEyUU5IZGswc0RCOBoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "reason": "READ_ROWS",
+          "rowCount": "12"
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-vbmtrxe1h4z2",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T07:33:13.810137Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726644793809-projects/datakit-dev-f1fd/locations/us/sessions/CAISDHEyUU5IZGswc0RCOBoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T07:33:13.835651642Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDEZWT3ZmcGhUUmpkahoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "reason": "READ_ROWS",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "rowCount": "12"
+        }
+      }
+    },
+    "insertId": "-su0cbe19l7w",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T07:24:16.818160Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726644256817-projects/datakit-dev-f1fd/locations/us/sessions/CAISDEZWT3ZmcGhUUmpkahoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T07:24:17.321963404Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "rowCount": "12",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "reason": "READ_ROWS",
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDEhxYkVEN05wcDVsUxoCanIaAmpj/streams/GgJqchoCamMoAg"
+        }
+      }
+    },
+    "insertId": "-ex7mv8e1u6hi",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T07:23:54.914578Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726644234914-projects/datakit-dev-f1fd/locations/us/sessions/CAISDEhxYkVEN05wcDVsUxoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T07:23:55.598665278Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "rowCount": "12",
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDGNoaWZmOExEQnRSZhoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "reason": "READ_ROWS"
+        }
+      }
+    },
+    "insertId": "hhxyj7e1mewa",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T07:09:24.450519Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726643364450-projects/datakit-dev-f1fd/locations/us/sessions/CAISDGNoaWZmOExEQnRSZhoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T07:09:25.408223907Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "rowCount": "12",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDE5WQWFMbTZtdGlnWhoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "reason": "READ_ROWS"
+        }
+      }
+    },
+    "insertId": "-jn2jxze1qani",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T07:02:15.215644Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726642935215-projects/datakit-dev-f1fd/locations/us/sessions/CAISDE5WQWFMbTZtdGlnWhoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T07:02:15.724185683Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "tableDataRead": {
+          "rowCount": "12",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDFRaYjVNbURScGZOSxoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "reason": "READ_ROWS"
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-aruwzse1i54s",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T06:56:27.494320Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726642587494-projects/datakit-dev-f1fd/locations/us/sessions/CAISDFRaYjVNbURScGZOSxoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T06:56:27.952524896Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "tableDataRead": {
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "rowCount": "12",
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDEdibnktbTFwb2czVxoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "reason": "READ_ROWS"
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-2614gze1l4b8",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T06:51:54.112703Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726642314112-projects/datakit-dev-f1fd/locations/us/sessions/CAISDEdibnktbTFwb2czVxoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T06:51:54.372558991Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDFh0T21aQnhjdlVXQRoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "rowCount": "12",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "reason": "READ_ROWS"
+        }
+      }
+    },
+    "insertId": "33s0wze1w5rm",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T06:48:36.503855Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726642116503-projects/datakit-dev-f1fd/locations/us/sessions/CAISDFh0T21aQnhjdlVXQRoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T06:48:36.622846725Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "rowCount": "12",
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDDliaGwtTGM3TUhzbBoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "reason": "READ_ROWS"
+        }
+      }
+    },
+    "insertId": "-4oufqce1dkhw",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T06:44:53.240777Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726641893240-projects/datakit-dev-f1fd/locations/us/sessions/CAISDDliaGwtTGM3TUhzbBoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T06:44:53.541958097Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "rowCount": "12",
+          "reason": "READ_ROWS",
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDFEtbnREcmtYUTc2RhoCanIaAmpj/streams/GgJqchoCamMoAg"
+        }
+      }
+    },
+    "insertId": "qopuxee1aiog",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T06:41:53.637499Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726641713637-projects/datakit-dev-f1fd/locations/us/sessions/CAISDFEtbnREcmtYUTc2RhoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T06:41:54.438225317Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "reason": "WRITE_API_APPEND_ROWS",
+          "insertedRowsCount": "1",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default"
+        }
+      }
+    },
+    "insertId": "y6c76ue1ho2i",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T06:34:52.183802Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726641292183-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T06:34:52.946892990Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {},
+      "authenticationInfo": {
+        "principalEmail": "cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com",
+        "serviceAccountKeyName": "//iam.googleapis.com/projects/datakit-dev-f1fd/serviceAccounts/cloud-go@datakit-dev-f1fd.iam.gserviceaccount.com/keys/06e4fdf6252599bd60033a47d5f3b58fcee977fc"
+      },
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryRead.ReadRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.getData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataRead": {
+          "readStream": "projects/datakit-dev-f1fd/locations/us/sessions/CAISDFl1ckRvLUVXVS1jWhoCanIaAmpj/streams/GgJqchoCamMoAg",
+          "fields": [
+            "name",
+            "age",
+            "location"
+          ],
+          "reason": "READ_ROWS",
+          "rowCount": "12"
+        }
+      }
+    },
+    "insertId": "-hgfzpqd8fvq",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T06:32:55.071132Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726641175070-projects/datakit-dev-f1fd/locations/us/sessions/CAISDFl1ckRvLUVXVS1jWhoCanIaAmpj/streams/GgJqchoCamMoAg",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T06:32:55.495266207Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "insertedRowsCount": "1",
+          "reason": "WRITE_API_APPEND_ROWS",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default"
+        }
+      }
+    },
+    "insertId": "gzcbvse1iv8m",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T05:09:44.896388Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726636184896-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T05:09:45.330211806Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "1",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "-psd4rmde5e4",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T05:05:54.137489Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726635954137-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T05:05:54.226602394Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "1",
+          "reason": "WRITE_API_APPEND_ROWS"
+        },
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata"
+      }
+    },
+    "insertId": "-hz91gge19geg",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd"
+      }
+    },
+    "timestamp": "2024-09-18T05:05:38.889175Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726635938888-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T05:05:39.629938858Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "1",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "-qc7t1gd8phm",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "table_id": "test_table",
+        "project_id": "datakit-dev-f1fd",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T05:05:30.730430Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726635930730-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T05:05:31.503344818Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "1",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "-sikkqye16q20",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T05:00:47.475026Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726635647474-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T05:00:47.729029897Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "insertedRowsCount": "1",
+          "reason": "WRITE_API_APPEND_ROWS",
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default"
+        }
+      }
+    },
+    "insertId": "-gltwkye21cu6",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table",
+        "dataset_id": "schema_b7664cbf_37aa41cb"
+      }
+    },
+    "timestamp": "2024-09-18T04:55:02.184246Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726635302184-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T04:55:02.466311615Z"
+  },
+  {
+    "protoPayload": {
+      "@type": "type.googleapis.com/google.cloud.audit.AuditLog",
+      "status": {
+        "message": "OK"
+      },
+      "authenticationInfo": {},
+      "requestMetadata": {
+        "requestAttributes": {},
+        "destinationAttributes": {}
+      },
+      "serviceName": "bigquery.googleapis.com",
+      "methodName": "google.cloud.bigquery.storage.v1.BigQueryWrite.AppendRows",
+      "authorizationInfo": [
+        {
+          "resource": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+          "permission": "bigquery.tables.updateData",
+          "granted": true,
+          "resourceAttributes": {}
+        }
+      ],
+      "resourceName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table",
+      "metadata": {
+        "@type": "type.googleapis.com/google.cloud.audit.BigQueryAuditMetadata",
+        "tableDataChange": {
+          "streamName": "projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+          "insertedRowsCount": "1",
+          "reason": "WRITE_API_APPEND_ROWS"
+        }
+      }
+    },
+    "insertId": "vo2sxiddznc",
+    "resource": {
+      "type": "bigquery_table",
+      "labels": {
+        "dataset_id": "schema_b7664cbf_37aa41cb",
+        "project_id": "datakit-dev-f1fd",
+        "table_id": "test_table"
+      }
+    },
+    "timestamp": "2024-09-18T04:54:26.412307Z",
+    "severity": "INFO",
+    "logName": "projects/datakit-dev-f1fd/logs/cloudaudit.googleapis.com%2Fdata_access",
+    "operation": {
+      "id": "1726635266412-projects/datakit-dev-f1fd/datasets/schema_b7664cbf_37aa41cb/tables/test_table/streams/_default",
+      "producer": "bigquery.googleapis.com",
+      "last": true
+    },
+    "receiveTimestamp": "2024-09-18T04:54:26.522662657Z"
+  }
+]

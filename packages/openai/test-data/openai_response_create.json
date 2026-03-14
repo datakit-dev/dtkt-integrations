@@ -1,0 +1,13 @@
+{
+  "action": {
+    "name": "ResponseCreate"
+  },
+  "input": {
+    "config": {
+      "id": "foo_bar"
+    },
+    "event": {
+      "type": "response.create"
+    }
+  }
+}

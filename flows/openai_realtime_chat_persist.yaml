@@ -1,0 +1,203 @@
+# yaml-language-server: $schema=../../dtkt-sdk/schemas/dtkt.flowsdk.v1beta1.Flow.schema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: OpenAI Realtime Chat w/ Persistence
+  description: >
+    Chat (text and voice) with an AI assistant in real-time using OpenAI's
+    RealtimeAPI and persist chat history to a table with given sinkConfig.
+
+  packages:
+    - id: openai
+      name: OpenAI
+      version: 0.1.0
+    - id: catalog
+      services:
+        - catalog.v1beta1.CatalogService
+
+  inputs:
+    - id: realtimeConfig
+      description: RealtimeAPI connection config.
+      type: object
+      fields:
+        - name: id
+          type: string
+    - id: sessionConfig
+      description: RealtimeAPI session config.
+      type: object
+      default:
+        instructions: Your name is Data and you are an assistant at DataKit, an innovative platform for data activation and workflow automation.
+        modalities:
+          - text
+        voice: coral
+      fields:
+        - name: instructions
+          description: Instructions to use for the session.
+          type: string
+        - name: modalities
+          description: List of modalities to use. Either [text] or [text, voice].
+          type: array
+          items:
+            type: string
+        - name: voice
+          description: Voice to use for the session.
+          type: string
+    - id: sinkConfig
+      description: Sink config for writing events to a table.
+      type: object
+      default:
+        table: openai.realtime_chat.event_history
+      fields:
+        - name: table
+          description: Fully qualified table name (e.g. catalog.schema.table) for writing events.
+          type: string
+
+  sources:
+    - id: realtimeEvents
+      call:
+        package: openai
+        method: event.v1beta1.EventService.StreamPushEvents
+        request:
+          eventSource:
+            name: RealtimeEvents
+
+  vars:
+    - id: catalogName
+      value: = split(inputs.sinkConfig.table, ".") | get(0)
+    - id: schemaName
+      value: = split(inputs.sinkConfig.table, ".") | get(1)
+    - id: tableName
+      value: = split(inputs.sinkConfig.table, ".") | get(2)
+    - id: catalog
+      value: >-
+        = { name: vars.catalogName }
+    - id: schema
+      value: >-
+        = { catalog: vars.catalog, name: vars.schemaName }
+    - id: table
+      value: >-
+        = { schema: vars.schema, name: vars.tableName }
+    - id: event
+      value: = sources.realtimeEvents
+    - id: eventType
+      value: = vars.event?.Event?.Type
+    - id: eventPayload
+      value: = fromJSON(toJSON(vars.event?.Payload))
+
+  actions:
+    - id: createSchema
+      cache: true
+      call:
+        package: catalog
+        method: catalog.v1beta1.CatalogService.CreateSchema
+        request:
+          catalog: = vars.catalog
+          name: = vars.schemaName
+
+    - id: getSchema
+      cache: true
+      onError: = actions.createSchema
+      call:
+        package: catalog
+        method: catalog.v1beta1.CatalogService.GetSchema
+        request:
+          catalog: = vars.catalog
+          name: = vars.schemaName
+
+    - id: createTable
+      cache: true
+      onError: = actions.createSchema
+      call:
+        package: catalog
+        method: catalog.v1beta1.CatalogService.CreateTable
+        request:
+          schema: = vars.schema
+          name: = vars.tableName
+          description: Events table for DataKit Flow SDK v1beta1.
+          fields:
+            - name: event
+              type:
+                nativeType: JSON
+              nullable: false
+              repeated: false
+
+    - id: getTable
+      cache: true
+      onError: = actions.createTable
+      call:
+        package: catalog
+        method: catalog.v1beta1.CatalogService.GetTable
+        request:
+          schema: = vars.schema
+          name: = vars.tableName
+
+    - id: updateSession
+      cache: true
+      runIf: = vars.eventType == "session.created"
+      call:
+        package: openai
+        method: base.v1beta1.BaseService.ExecCustomAction
+        request:
+          action:
+            name: SessionUpdate
+          input:
+            config: = inputs.realtimeConfig
+            event:
+              type: session.update
+              session: = inputs.sessionConfig
+
+    - id: userMessage
+      user:
+        inputs:
+        - name: text
+          description: Enter text (type ctrl-c or 'exit' to quit)
+          type: string
+
+    - id: sendMessage
+      runIf: = vars.eventType in ["session.updated", "response.done"]
+      call:
+        package: openai
+        method: base.v1beta1.BaseService.ExecCustomAction
+        request:
+          action:
+            name: ConversationItemCreate
+          input:
+            config: = inputs.realtimeConfig
+            event:
+              type: conversation.item.create
+              item:
+                type: message
+                role: user
+                content:
+                  - type: input_text
+                    text: = actions.userMessage.text
+
+    - id: createResponse
+      runIf: = vars.eventType == "conversation.item.created"
+      call:
+        package: openai
+        method: base.v1beta1.BaseService.ExecCustomAction
+        request:
+          action:
+            name: ResponseCreate
+          input:
+            config: = inputs.realtimeConfig
+            event:
+              type: response.create
+
+  sinks:
+    - id: writeEvent
+      call:
+        package: catalog
+        method: catalog.v1beta1.CatalogService.WriteTables
+        request:
+          table:
+            schema: = actions.getTable?.table?.schema
+            name: = actions.getTable?.table?.name
+          row: = sources.realtimeEvents?.Payload | toJSON()
+
+  outputs:
+    - id: foo
+      value: >-
+        = vars.eventType == "response.text.done" ? vars.eventPayload?.text : nil

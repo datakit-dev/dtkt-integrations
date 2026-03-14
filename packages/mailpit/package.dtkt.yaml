@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.integrationsdk.v1beta1.Package.jsonschema.json
+kind: Package
+apiVersion: v1beta1
+spec:
+  identity:
+    name: Mailpit
+    version: 0.1.0
+  description: A simple and easy-to-use email testing tool that allows developers to send, receive, and view emails in a development environment.
+  icon: https://assets.datakit.cloud/icons/email.svg
+  type: PACKAGE_TYPE_GO
+  build: {}

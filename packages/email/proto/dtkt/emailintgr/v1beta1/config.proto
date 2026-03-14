@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package dtkt.emailintgr.v1beta1;
+
+import "buf/validate/validate.proto";
+import "dtkt/email/v1beta1/messages.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/email/pkg/proto/dtkt/emailintgr/v1beta1";
+
+message Config {
+  message SmtpConfig {
+    string host = 1 [(buf.validate.field).string.min_len = 1];
+    int32 port = 2 [(buf.validate.field).int32.gt = 0];
+    string username = 3;
+    string password = 4;
+  }
+
+  message Pop3Config {
+    string host = 1 [(buf.validate.field).string.min_len = 1];
+    int32 port = 2 [(buf.validate.field).int32.gt = 0];
+    string username = 3;
+    string password = 4;
+  }
+
+  message ImapConfig {
+    string host = 1 [(buf.validate.field).string.min_len = 1];
+    int32 port = 2 [(buf.validate.field).int32.gt = 0];
+    string username = 3;
+    string password = 4;
+  }
+
+  SmtpConfig smtp = 1;
+  Pop3Config pop3 = 2;
+  ImapConfig imap = 3;
+
+  repeated dtkt.email.v1beta1.EmailTemplate templates = 4;
+}

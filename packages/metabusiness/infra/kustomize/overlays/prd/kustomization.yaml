@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+components:
+- ../../components/resilient
+configMapGenerator:
+- name: metabusiness
+  envs:
+  - configs/intgr.env
+labels:
+- includeSelectors: true
+  pairs:
+    app.kubernetes.io/name: metabusiness
+    app.kubernetes.io/instance: metabusiness
+- includeSelectors: false
+  pairs:
+    app.kubernetes.io/version: v0.1.0
+    app.kubernetes.io/component: metabusiness
+    app.kubernetes.io/part-of: dtkt-integrations-metabusiness
+    app.kubernetes.io/managed-by: kustomize

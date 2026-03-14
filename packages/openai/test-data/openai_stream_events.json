@@ -1,0 +1,8 @@
+{
+  "event_source": {
+    "name": "RealtimeAPI"
+  },
+  "config": {
+    "id": "foo_bar"
+  }
+}

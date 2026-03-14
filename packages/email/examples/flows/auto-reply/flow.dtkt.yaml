@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Auto Replay
+  description: |
+    This example flow automatically writes a reply to emails received in an inbox.
+    It will prompt the user to confirm the reply before sending it.

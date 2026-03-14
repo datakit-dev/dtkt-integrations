@@ -1,0 +1,72 @@
+{
+  "schema": {
+    "catalog": {
+      "name": "datakit-dev-f1fd"
+    },
+    "name": "jordan_testing"
+  },
+  "name": "test_table3",
+  "description": "This is a test table for Jordan to test the BigQuery API",
+  "fields": [
+    {
+      "name": "id",
+      "type": "INT64"
+    },
+    {
+      "name": "name",
+      "type": "STRING"
+    },
+    {
+      "name": "age",
+      "type": "INT64",
+      "repeated": true
+    },
+    {
+      "name": "address",
+      "type": "RECORD",
+      "fields": [
+        {
+          "name": "street",
+          "type": "STRING"
+        },
+        {
+          "name": "city",
+          "type": "STRING"
+        },
+        {
+          "name": "state",
+          "type": "STRING"
+        },
+        {
+          "name": "coordinates",
+          "type": "RECORD",
+          "fields": [
+            {
+              "name": "latitude",
+              "type": "FLOAT64"
+            },
+            {
+              "name": "longitude",
+              "type": "FLOAT64"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "phone",
+      "type": "RECORD",
+      "repeated": true,
+      "fields": [
+        {
+          "name": "type",
+          "type": "STRING"
+        },
+        {
+          "name": "number",
+          "type": "STRING"
+        }
+      ]
+    }
+  ]
+}

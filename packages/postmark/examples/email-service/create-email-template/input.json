@@ -1,0 +1,9 @@
+{
+  "template": {
+    "id": "example-template",
+    "language": "TEMPLATE_LANGUAGE_MUSTACHIO",
+    "subject": "[Test] Hello {{name}} from the DataKit Email integration",
+    "textBody": "Hello {{name}},\\n\\nThis is a test email using a template.",
+    "htmlBody": "<p>Hello {{name}},</p><p>This is a test email using a template.</p>"
+  }
+}

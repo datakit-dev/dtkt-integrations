@@ -1,0 +1,18 @@
+{
+  "email": {
+    "from": {
+      "name": "DataKit",
+      "address": "hello@withdatakit.com"
+    },
+    "to": [
+      {
+        "name": "User",
+        "address": "user@withdatakit.com"
+      }
+    ],
+    "templateId": "example-template",
+    "templateParams": {
+      "NAME": "User"
+    }
+  }
+}

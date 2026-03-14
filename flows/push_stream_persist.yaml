@@ -1,0 +1,71 @@
+# yaml-language-server: $schema=../../dtkt-sdk/schemas/dtkt.flowsdk.v1beta1.Flow.schema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Push Stream w/ Persistence
+  description: >
+    Push stream of events writing each to a given table.
+
+  inputs:
+    - id: sinkConfig
+      description: Sink config for writing events to a table.
+      type: object
+      default:
+        table: streams.push_stream.events
+      fields:
+        - name: table
+          description: Fully qualified table name (e.g. catalog.schema.table) for writing events.
+          type: string
+
+  packages:
+    - id: streamer
+      services:
+        - event.v1beta1.EventService
+    - id: catalog
+      services:
+        - catalog.v1beta1.CatalogService
+
+  vars:
+    - id: catalogName
+      value: = split(inputs.sinkConfig.table, ".") | get(0)
+    - id: schemaName
+      value: = split(inputs.sinkConfig.table, ".") | get(1)
+    - id: tableName
+      value: = split(inputs.sinkConfig.table, ".") | get(2)
+    - id: catalog
+      value: >-
+        = { name: vars.catalogName }
+    - id: schema
+      value: >-
+        = { catalog: vars.catalog, name: vars.schemaName }
+    - id: table
+      value: >-
+        = { schema: vars.schema, name: vars.tableName }
+    - id: event
+      value: = toJSON(sources.pushStream?.Event)
+
+  sources:
+    - id: pushStream
+      call:
+        package: streamer
+        method: event.v1beta1.EventService.StreamPushEvents
+        request:
+          eventSource:
+            name: Test
+
+  sinks:
+    - id: writeEvent
+      call:
+        package: catalog
+        method: catalog.v1beta1.CatalogService.WriteTables
+        request:
+          table:
+            schema: = vars.schema
+            name: = vars.tableName
+          row:
+            event: = vars.event
+
+  outputs:
+    - id: event
+      value: = vars.event

@@ -1,0 +1,51 @@
+
+// addr := network.AddrFromProto(conn.GetAddress())
+// switch addr.Type() {
+// case network.TCP:
+// 	switch {
+// 	case strings.HasSuffix(addr.URI().Hostname(), ".googleapis.com"):
+// 		reqParams := fmt.Sprintf("service=%s", addr.URI().Hostname())
+// 		if params, ok := callHeaders["x-goog-request-params"]; ok {
+// 			reqParams += "&" + params
+// 		}
+// 		ctx = metadata.AppendToOutgoingContext(ctx,
+// 			"x-goog-request-params", reqParams,
+// 		)
+// 	}
+// }
+
+// netAddr := network.AddrFromProto(addr.GetAddress())
+// switch netAddr.Type() {
+// case network.TCP:
+// 	switch {
+// 	case strings.HasSuffix(netAddr.URI().Hostname(), ".googleapis.com"):
+// 		scopes := []string{
+// 			"https://www.googleapis.com/auth/cloud-platform",
+// 		}
+
+// 		tokensource, err := google.DefaultTokenSource(ctx, scopes...)
+// 		if err != nil {
+// 			return nil, fmt.Errorf("google token source: %w", err)
+// 		}
+
+// 		credsPerRPC := oauth.TokenSource{
+// 			TokenSource: tokensource,
+// 		}
+
+// 		credsTransport := credentials.NewTLS(&tls.Config{
+// 			InsecureSkipVerify: true,
+// 		})
+
+// 		r.dialOpts = append(r.dialOpts,
+// 			grpc.WithPerRPCCredentials(credsPerRPC),
+// 			grpc.WithTransportCredentials(credsTransport),
+// 		)
+// 	}
+// }
+
+// client, err := common.DialAddressable(r.addr, r.dialOpts...)
+// if err != nil {
+// 	return nil, fmt.Errorf("dial %s: %w", netAddr, err)
+// }
+
+// r.client = client

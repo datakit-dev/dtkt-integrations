@@ -1,0 +1,115 @@
+version: '3'
+
+env:
+  GOEXPERIMENT: jsonv2
+
+includes:
+  go:
+    taskfile: ${TASK_PATH}/Taskfile.go.yaml
+    vars:
+      GO_BUILD_BINARY: pkg
+
+  sops:
+    taskfile: ${TASK_PATH}/Taskfile.sops.yaml
+
+  k:prd:
+    taskfile: ${TASK_PATH}/Taskfile.kustomize.yaml
+    dir: infra/kustomize/overlays/prd
+
+  k:dev:
+    taskfile: ${TASK_PATH}/Taskfile.kustomize.yaml
+    dir: infra/kustomize/overlays/dev
+
+tasks:
+  setup:
+    desc: Setup the dev environment
+    cmds:
+    - task: go:setup
+    - mkdir -p {{.SERVER_OPENAPI_DIR}} {{.ACCOUNT_OPENAPI_DIR}}
+    - pnpm dlx swagger2openapi --outfile {{.ACCOUNT_OPENAPI_PATH}} https://postmarkapp.com/swagger/account.yml
+    - pnpm dlx swagger2openapi --outfile {{.SERVER_OPENAPI_PATH}} https://postmarkapp.com/swagger/server.yml
+    - |
+      jq 'walk(
+        if type == "object" then
+          # Add "type": "object" if "properties" exists and "type" is missing
+          (if (.properties and .type != "object") then .type = "object" else . end)
+          |
+          # Add "additionalProperties": {"type": "string"} if "type" is "object", has no "properties", and no "additionalProperties"
+          (if (.type == "object" and (.properties | not) and (.additionalProperties | not))
+          then .additionalProperties = { "type": "string" }
+          else . end)
+          |
+          # Convert "type": "number", "format": "int" → "type": "integer", remove "format"
+          (if (.type == "number" and .format == "int")
+          then del(.format) | .type = "integer"
+          else . end)
+        else .
+        end
+      )' {{.ACCOUNT_OPENAPI_PATH}} > tmp.json && mv tmp.json {{.ACCOUNT_OPENAPI_PATH}}
+    - |
+      jq 'walk(
+        if type == "object" then
+          # Add "type": "object" if "properties" exists and "type" is missing
+          (if (.properties and .type != "object") then .type = "object" else . end)
+          |
+          # Add "additionalProperties": {"type": "string"} if "type" is "object", has no "properties", and no "additionalProperties"
+          (if (.type == "object" and (.properties | not) and (.additionalProperties | not))
+          then .additionalProperties = { "type": "string" }
+          else . end)
+          |
+          # Convert "type": "number", "format": "int" → "type": "integer", remove "format"
+          (if (.type == "number" and .format == "int")
+          then del(.format) | .type = "integer"
+          else . end)
+        else .
+        end
+      )' {{.SERVER_OPENAPI_PATH}} > tmp.json && mv tmp.json {{.SERVER_OPENAPI_PATH}}
+    - |
+      jq '
+        .paths["/templates"].post.operationId = "createTemplate" |
+        .paths["/bounces/{bounceid}/dump"].get.operationId = "getBounceDump" |
+        .components.schemas["TemplateListingResponse"].properties |= (
+          .["Templates"] = .["Templates API"] | del(.["Templates API"])
+        ) |
+        .components.schemas["TemplateDetailResponse"].properties.Subject.nullable = true
+      ' {{.SERVER_OPENAPI_PATH}} > tmp.json && mv tmp.json {{.SERVER_OPENAPI_PATH}}
+    vars:
+      SERVER_OPENAPI_DIR: pkg/serveroapi
+      SERVER_OPENAPI_PATH: "{{.SERVER_OPENAPI_DIR}}/openapi.json"
+      ACCOUNT_OPENAPI_DIR: pkg/accountoapi
+      ACCOUNT_OPENAPI_PATH: "{{.ACCOUNT_OPENAPI_DIR}}/openapi.json"
+
+  dev:
+    cmds:
+    - dtkt intgr dev
+
+  generate:
+    desc: Code generation
+    cmds:
+    - task: go:generate
+
+  vhs-tapes:
+    desc: Generate vhs tapes
+    cmds:
+    - for: { var: TAPES, as: TAPE }
+      cmd: vhs {{.TAPE}} -o $(dirname {{.TAPE}})/$(basename {{.TAPE}} .tape).gif
+    vars:
+      TAPES:
+        sh: find ./examples -name '*.tape' {{.CLI_ARGS}}
+
+  docs:
+    desc: Generate documentation
+    cmds:
+    - task: vhs-tapes
+
+  lint:
+    cmds:
+    - task: go:lint
+
+  build:
+    cmds:
+    - task: go:build
+
+  test:
+    cmds:
+    - task: go:test

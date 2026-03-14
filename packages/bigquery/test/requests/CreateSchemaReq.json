@@ -1,0 +1,7 @@
+{
+  "catalog": {
+    "name": "datakit-dev-f1fd"
+  },
+  "name": "jordan_testing",
+  "description": "This is a test schema for Jordan to test the BigQuery API"
+}

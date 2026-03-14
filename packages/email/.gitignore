@@ -1,0 +1,7 @@
+examples/config/postmark.json
+
+# Go / goreleaser
+dist/
+bin/
+cover.out
+test.log

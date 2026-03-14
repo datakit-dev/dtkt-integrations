@@ -1,0 +1,9 @@
+{
+  "schema": {
+    "catalog": {
+      "name": "datakit-dev-f1fd"
+    },
+    "name": "jordan_testing"
+  },
+  "name": "test_table3"
+}

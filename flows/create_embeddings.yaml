@@ -1,0 +1,45 @@
+# yaml-language-server: $schema=../../dtkt-sdk/schemas/dtkt.flowsdk.v1beta1.Flow.schema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Create Embeddings
+  description: Create embeddings for given input text data.
+
+  packages:
+    - id: embedding
+      services:
+        - ai.v1beta1.EmbeddingService
+
+  inputs:
+    - id: embeddingInputs
+      type: array
+      items:
+        type: object
+        fields:
+          - name: id
+            type: string
+            description: Input id.
+          - name: text
+            type: string
+            description: Input text.
+    - id: embeddingModelId
+      type: string
+      description: Embedding model id.
+    - id: embeddingDimensions
+      type: number
+      description: Embedding dimensions.
+
+  actions:
+    - id: createEmbeddings
+      call:
+        package: embedding
+        method: ai.v1beta1.EmbeddingService.CreateEmbeddings
+        request:
+          modelId: = inputs.embeddingModelId
+          dimensions: = inputs.embeddingDimensions
+          inputs: = inputs.embeddingInputs
+
+  outputs:
+    - id: embeddings
+      value: = actions.createEmbeddings

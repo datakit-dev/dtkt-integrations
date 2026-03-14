@@ -1,0 +1,8 @@
+{
+  "schema": {
+    "catalog": {
+      "name": "bigquery-public-data"
+    },
+    "name": "wikipedia"
+  }
+}

@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package localblob.v1beta1;
+
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/localblob/pkg/proto/localblob/v1beta1;localblobv1beta1";
+
+message Config {
+  // Roots are a map of logical bucket name to local directory path (must be absolute)
+  map<string, string> roots = 1 [(buf.validate.field).map.min_pairs = 1];
+  // CreateDir when true will create local directory if it doesn't exist
+  bool create_dir = 2;
+}

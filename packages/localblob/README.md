@@ -1,0 +1,76 @@
+# LocalBlob Integration
+
+The `LocalBlob` integration implements:
+- `BaseService`
+- `BlobService`
+
+LocalBlob is ...
+
+<img alt="example-echo-action demo with VHS" src="./examples/example-echo-action/vhs.gif" width="800" />
+
+## Getting Started
+
+Download or build the [DataKit CLI](https://withdatakit.com/docs/cli/dtkt/overview) and ensure it is accessible to your `$PATH`.
+
+```shell
+dtkt version
+```
+
+### Start the Package
+
+You can start the integration in one of two ways:
+
+#### Option 1: Develop from Source
+
+Clone down this repository and the [DataKit SDK](https://github.com/datakit-dev/dtkt-sdk) side by side.
+
+From the root of the integration package, run:
+
+```shell
+dtkt intgr dev
+```
+
+This launches the integration in a development loop, automatically rebuilding on changes.
+
+<img alt="intgr-dev demo with VHS" src="./examples/intgr-dev/vhs.gif" width="800" />
+
+#### Option 2: Run a prebuilt binary in Docker
+
+Ensure the Docker daemon is running and run the following command:
+
+```shell
+dtkt intgr run LocalBlob@0.1.0
+```
+
+This launches the integration in a Docker container.
+
+### Ensure your integration is registered
+
+In another terminal, run:
+
+```shell
+dtkt intgr list
+```
+
+You should see an entry appear for the `LocalBlob` integration.
+
+### Configure the integration
+
+We've provided a sample configuration file in `examples/config.json`.
+Refer to the top of [pkg/service.go](./pkg/service.go) for the configuration structure if you'd like to define your own.
+
+## Examples
+
+Refer to the [examples](./examples/README.md) for more detailed examples of how to use the `LocalBlob` integration package.
+
+## Limitations
+
+N/A
+
+## Related Packages
+
+N/A
+
+## Legal
+
+Refer to the repository [README's legal documentation](../../README.md).

@@ -1,0 +1,5 @@
+{
+  "command": {
+    "command": "for i in 1 2 3; do echo Step $i; sleep 1; done"
+  }
+}

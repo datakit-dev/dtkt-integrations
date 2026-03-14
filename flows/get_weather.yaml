@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Get Weather
+  description: Ask an agent for the current weather at a user-specified location.
+
+  connections:
+    - id: agent
+      services:
+        - ai.v1beta1.AgentService
+
+  inputs:
+    - id: location
+      string:
+        nullable: false
+
+  actions:
+    - id: currentWeather
+      call:
+        connection: agent
+        method: ai.v1beta1.AgentService.Run
+        request:
+          prompt: >-
+            = "What is the current weather in the following location: ${inputs.location.getValue()}"
+
+  outputs:
+    - id: currentWeather
+      value: = actions.currentWeather.getValue()

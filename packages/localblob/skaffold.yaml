@@ -1,0 +1,28 @@
+apiVersion: skaffold/v4beta12
+kind: Config
+metadata:
+  name: localblob
+build:
+  local:
+    useBuildkit: true
+  artifacts:
+  - image: intgr-localblob
+    context: ../../../
+    docker:
+      dockerfile: dtkt-integrations/packages/localblob/Dockerfile
+manifests:
+  kustomize:
+    buildArgs:
+    - --enable-alpha-plugins
+    - --enable-exec
+    paths:
+    - infra/kustomize/overlays/dev
+deploy:
+  kubeContext: kind-dtkt-local
+  kubectl:
+    defaultNamespace: dtkt-integrations
+# portForward:
+# - resourceType: service
+#   resourceName: localblob
+#   port: 80
+#   localPort: 8200

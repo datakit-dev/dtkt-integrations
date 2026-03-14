@@ -1,0 +1,3 @@
+{"command": {"command": "echo one | tr a-z A-Z"}}
+{"command": {"command": "echo two | tr a-z A-Z"}}
+{"command": {"command": "echo three | tr a-z A-Z"}}

@@ -1,0 +1,70 @@
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: dtkt-integrations
+requires:
+- path: infra
+  activeProfiles:
+  - name: infra
+    activatedBy:
+    - infra
+- path: packages/bigquery
+  activeProfiles:
+  - name: bigquery
+    activatedBy:
+    - bigquery
+    - all
+# - path: packages/command
+#   activeProfiles:
+#   - name: command
+#     activatedBy:
+#     - command
+#     - all
+- path: packages/metabusiness
+  activeProfiles:
+  - name: metabusiness
+    activatedBy:
+    - metabusiness
+    - all
+- path: packages/openai
+  activeProfiles:
+  - name: openai
+    activatedBy:
+    - openai
+    - all
+# - path: packages/email
+#   activeProfiles:
+#   - name: email
+#     activatedBy:
+#     - email
+#     - all
+# - path: packages/postmark
+#   activeProfiles:
+#   - name: postmark
+#     activatedBy:
+#     - postmark
+#     - all
+# - path: packages/mailpit
+#   activeProfiles:
+#   - name: mailpit
+#     activatedBy:
+#     - mailpit
+#     - all
+# - path: packages/localblob
+#   activeProfiles:
+#   - name: localblob
+#     activatedBy:
+#     - localblob
+#     - all
+
+profiles:
+- name: all
+- name: infra
+- name: bigquery
+- name: command
+- name: metabusiness
+- name: openai
+# - name: email
+# - name: postmark
+# - name: mailpit
+# - name: localblob

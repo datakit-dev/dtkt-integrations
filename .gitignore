@@ -1,0 +1,58 @@
+### OS
+.DS_Store
+.watchman*
+
+### Secrets
+**/secrets/confidential/*.*
+!**/secrets/confidential/*.enc.*
+
+**/secrets/restricted/*.*
+!**/secrets/restricted/*.enc.*
+
+### Dynamic
+# These secrets are generated per developer and should not be checked in
+**/secrets/dynamic/*
+
+# These configs are generated per developer and should not be checked in
+**/configs/dynamic/*
+!**/configs/dynamic/*.envsubst.*
+
+### Terraform
+
+# Local .terraform directories
+.terraform
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Crash log files
+crash.log
+crash.*.log
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Include override files you do wish to add to version control using negated pattern
+# !example_override.tf
+
+# Include tfplan files to ignore the plan output of command: terraform plan -out=tfplan
+# example: *tfplan*
+
+# Ignore CLI configuration files
+.terraformrc
+terraform.rc
+
+# Turbo
+.turbo
+
+### Misc.
+build/
+go.work*
+.venv/
+testing/
+packages/litestream/

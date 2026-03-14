@@ -1,0 +1,4 @@
+{
+  "account_api_token": "$ACCOUNT_API_KEY",
+  "server_api_token": "$SERVER_API_KEY"
+}

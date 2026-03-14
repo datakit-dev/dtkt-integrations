@@ -1,0 +1,5 @@
+{
+  "command": {
+    "command": "echo hello world | tr a-z A-Z"
+  }
+}

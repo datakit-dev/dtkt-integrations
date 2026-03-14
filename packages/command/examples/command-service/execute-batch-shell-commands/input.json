@@ -1,0 +1,13 @@
+{
+  "commands": [
+    {
+      "command": "echo one | tr a-z A-Z"
+    },
+    {
+      "command": "echo two | tr a-z A-Z"
+    },
+    {
+      "command": "echo three | tr a-z A-Z"
+    }
+  ]
+}

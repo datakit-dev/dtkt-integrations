@@ -1,0 +1,17 @@
+{
+  "email": {
+    "from": {
+      "name": "DataKit",
+      "address": "hello@withdatakit.com"
+    },
+    "to": [
+      {
+        "name": "User",
+        "address": "user@withdatakit.com"
+      }
+    ],
+    "subject": "[Test] Hello from the DataKit Email integration",
+    "textBody": "This is a test email",
+    "htmlBody": "<p>This is a test email</p>"
+  }
+}
