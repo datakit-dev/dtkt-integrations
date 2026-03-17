@@ -1,0 +1,14 @@
+syntax = "proto3";
+
+package integration.fivetran.v1;
+
+import "buf/validate/validate.proto";
+import "integration/fivetran/v1/destination_config.proto";
+import "integration/fivetran/v1/destination_details.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/fivetran/gen/integration/fivetran/v1;fivetranv1";
+
+message Destination {
+  DestinationDetails details = 1 [(buf.validate.field).required = true];
+  DestinationConfig config = 2 [(buf.validate.field).required = true];
+}

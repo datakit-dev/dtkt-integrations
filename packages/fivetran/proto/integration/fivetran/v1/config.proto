@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package integration.fivetran.v1;
+
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/fivetran/gen/integration/fivetran/v1;fivetranv1";
+
+message Config {
+  string api_key = 1 [(buf.validate.field).required = true];
+  string api_secret = 2 [(buf.validate.field).required = true];
+  string webhook_secret = 3;
+}
