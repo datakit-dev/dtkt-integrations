@@ -1,0 +1,26 @@
+apiVersion: skaffold/v4beta12
+kind: Config
+metadata:
+  name: fivetran
+build:
+  local:
+    useBuildkit: true
+  artifacts:
+  - image: intgr-fivetran
+    context: ../../../
+    docker:
+      dockerfile: dtkt-integrations/packages/fivetran/Dockerfile
+manifests:
+  kustomize:
+    buildArgs:
+    - --enable-alpha-plugins
+    - --enable-exec
+    paths:
+    - infra/kustomize/overlays/dev
+deploy:
+  kubectl: {}
+# portForward:
+# - resourceType: service
+#   resourceName: fivetran
+#   port: 80
+#   localPort: 8200

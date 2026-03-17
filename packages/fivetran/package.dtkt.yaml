@@ -1,0 +1,11 @@
+apiVersion: v1beta1
+kind: Package
+spec:
+  icon: https://address.to/icon.png
+  identity:
+    name: Fivetran
+    version: 1.0.0
+  runtimes:
+  - RUNTIME_NATIVE
+  - RUNTIME_DOCKER
+  type: PACKAGE_TYPE_GO
