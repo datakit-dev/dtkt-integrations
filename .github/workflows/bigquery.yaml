@@ -19,13 +19,16 @@ jobs:
       checks: write
 
     steps:
-    - uses: datakit-dev/dtkt-dev/.github/actions/setup-monorepo@main
+    - uses: datakit-dev/.github/actions/setup-monorepo@main
       with:
+        dtkt-dev-sparse-checkout: |
+          scripts
+          tasks
         dtkt-sdk-sparse-checkout: sdk-go
         dtkt-github-actions-app-id: ${{ vars.DTKT_GITHUB_ACTIONS_APP_ID }}
         dtkt-github-actions-private-key: ${{ secrets.DTKT_GITHUB_ACTIONS_PRIVATE_KEY }}
 
-    - uses: datakit-dev/dtkt-dev/.github/actions/setup@main
+    - uses: datakit-dev/.github/actions/setup@main
       with:
         task: true
         go: true
@@ -34,7 +37,7 @@ jobs:
           ./dtkt-universe/dtkt-integrations/packages/bigquery/go.sum
           ./dtkt-universe/dtkt-sdk/sdk-go/go.sum
 
-    - run: task setup-local
+    - run: task setup
       working-directory: ./dtkt-universe/dtkt-integrations/packages/bigquery
 
     - name: Build
@@ -42,18 +45,11 @@ jobs:
       working-directory: ./dtkt-universe/dtkt-integrations/packages/bigquery
 
     # - name: Lint
-    #   run: task lint
-    #   working-directory: ./dtkt-universe/dtkt-integrations/packages/bigquery
-    # - name: Lint
-    #   uses: golangci/golangci-lint-action@v7
+    #   uses: golangci/golangci-lint-action@v9
     #   with:
     #     version: ${{ fromJSON(vars.VERSIONS).golangci-lint }}
     #     working-directory: ./dtkt-universe/dtkt-integrations/packages/bigquery
     #     args: --timeout=5m
-    #   env:
-    #     # TODO: follow up; this doesn't seem to work; I've opened a discussion
-    #     # https://github.com/golangci/golangci-lint-action/discussions/1195
-    #     CGO_ENABLED: 1
 
     - name: Test
       run: task test

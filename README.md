@@ -91,7 +91,7 @@ We take security seriously! Please review our [SECURITY.md](SECURITY.md) file fo
 
 DataKit Integrations are licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
-Copyright © 2025 DataKit, LLC <legal@withdatakit.com>
+Copyright © 2026 DataKit, LLC <legal@withdatakit.com>
 
 ### Notice
 

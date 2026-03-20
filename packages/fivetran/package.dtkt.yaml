@@ -4,7 +4,7 @@ spec:
   icon: https://address.to/icon.png
   identity:
     name: Fivetran
-    version: 1.0.0
+    version: 0.0.0
   runtimes:
   - RUNTIME_NATIVE
   - RUNTIME_DOCKER

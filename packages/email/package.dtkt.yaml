@@ -4,7 +4,7 @@ apiVersion: v1beta1
 spec:
   identity:
     name: Email
-    version: 0.1.0
+    version: 0.0.0
   description: |
     Send individual, batched, or streamed emails to any compatible SMTP server and subscribe to email events through POP3 and IMAP.
   icon: https://assets.datakit.cloud/icons/email.svg
