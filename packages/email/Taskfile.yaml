@@ -25,7 +25,7 @@ tasks:
     desc: Setup the dev environment
     cmds:
     - task: go:setup
-    - buf dep update
+    - go install github.com/bufbuild/buf/cmd/buf@latest
 
   dev:
     cmds:

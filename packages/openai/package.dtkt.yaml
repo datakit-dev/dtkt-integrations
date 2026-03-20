@@ -4,7 +4,7 @@ apiVersion: v1beta1
 spec:
   identity:
     name: OpenAI
-    version: 0.1.0
+    version: 0.0.0
   description: "OpenAI provides APIs for many AI-related tasks, including: text embeddings, chat, etc."
   icon: https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/OpenAI_Logo.svg/512px-OpenAI_Logo.svg.png
   type: PACKAGE_TYPE_GO

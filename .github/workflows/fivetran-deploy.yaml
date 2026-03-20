@@ -1,25 +1,17 @@
-name: Docker Build, Push, & Deploy LocalBlob Integration Package
+name: Docker Build, Push, & Deploy Fivetran Integration Package
 
 on:
-  push:
-    branches:
-    - main
-    paths:
-    - packages/localblob/**
-    - .github/workflows/localblob-deploy.yaml
+  release:
+    types: [published]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
-env:
-  PKG_NAME: LocalBlob
-  PKG_SLUG: localblob
-  PKG_IMAGE_NAME: intgr-localblob
-
 jobs:
   docker-build-push:
     name: Docker Build & Push
+    if: startsWith(github.event.release.tag_name, 'fivetran-v')
     environment: prd
     runs-on: ${{ vars.RUNNER }}
 
@@ -29,13 +21,16 @@ jobs:
       id-token: write
 
     steps:
-    - uses: datakit-dev/dtkt-dev/.github/actions/setup-monorepo@main
+    - uses: datakit-dev/.github/actions/setup-monorepo@main
       with:
+        dtkt-dev-sparse-checkout: |
+          scripts
+          tasks
         dtkt-sdk-sparse-checkout: sdk-go
         dtkt-github-actions-app-id: ${{ vars.DTKT_GITHUB_ACTIONS_APP_ID }}
         dtkt-github-actions-private-key: ${{ secrets.DTKT_GITHUB_ACTIONS_PRIVATE_KEY }}
 
-    - uses: datakit-dev/dtkt-dev/.github/actions/setup@main
+    - uses: datakit-dev/.github/actions/setup@main
       with:
         task: true
         versions: ${{ vars.VERSIONS }}
@@ -46,23 +41,23 @@ jobs:
         token_format: access_token
         workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
         service_account: ${{ vars.GCP_SERVICE_ACCOUNT_PRD }}
-        request_reason: dtkt-integrations ${{ env.PKG_SLUG }} integration CI/CD
+        request_reason: dtkt-integrations fivetran package CI/CD
 
     - uses: docker/setup-buildx-action@v3
 
-    - name: Configure ${{ env.PKG_NAME }} Docker metadata
+    - name: Configure fivetran Docker metadata
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ${{ vars.GCP_ARTIFACT_PUSH_REGISTRY }}${{ env.PKG_IMAGE_REF }}
+        images: ${{ vars.GCP_ARTIFACT_PUSH_REGISTRY }}fivetran
         tags: type=sha,format=long
         labels: |
-          org.opencontainers.image.title=${{ env.PKG_NAME }} Integration
-          org.opencontainers.image.description=DataKit ${{ env.PKG_NAME }} Integration
+          org.opencontainers.image.title=fivetran
+          org.opencontainers.image.description=DataKit Fivetran Integration Package
           org.opencontainers.image.licenses=UNLICENSED
         annotations: |
-          org.opencontainers.image.title=${{ env.PKG_NAME }} Integration
-          org.opencontainers.image.description=DataKit ${{ env.PKG_NAME }} Integration
+          org.opencontainers.image.title=fivetran
+          org.opencontainers.image.description=DataKit Fivetran Integration Package
           org.opencontainers.image.licenses=UNLICENSED
           org.opencontainers.image.authors=${{ github.repository_owner }}
           org.opencontainers.image.vendor=${{ github.repository_owner }}
@@ -70,15 +65,15 @@ jobs:
     - name: Login to Google Artifact Registry
       uses: docker/login-action@v3
       with:
-        registry: ${{ vars.GCP_ARTIFACT_PUSH_REGISTRY }}${{ env.PKG_IMAGE }}
+        registry: ${{ vars.GCP_ARTIFACT_PUSH_REGISTRY }}fivetran
         username: oauth2accesstoken
         password: ${{ steps.auth.outputs.access_token }}
 
-    - name: Build & Push ${{ env.PKG_NAME }} Integration Docker image
+    - name: Build & Push fivetran Docker image
       uses: docker/build-push-action@v6
       with:
         context: ./dtkt-universe
-        file: ./dtkt-universe/dtkt-integrations/packages/${{ env.PKG_SLUG }}/Dockerfile
+        file: ./dtkt-universe/dtkt-integrations/packages/fivetran/Dockerfile
         platforms: linux/amd64
         target: runner
         push: true
@@ -96,30 +91,32 @@ jobs:
     needs: docker-build-push
 
     steps:
-    - uses: datakit-dev/dtkt-dev/.github/actions/setup@main
+    - uses: datakit-dev/.github/actions/setup-monorepo@main
+      with:
+        dtkt-dev-sparse-checkout: |
+          scripts
+          tasks
+        dtkt-github-actions-app-id: ${{ vars.DTKT_GITHUB_ACTIONS_APP_ID }}
+        dtkt-github-actions-private-key: ${{ secrets.DTKT_GITHUB_ACTIONS_PRIVATE_KEY }}
+
+    - uses: datakit-dev/.github/actions/setup@main
       with:
         argocd: true
         versions: ${{ vars.VERSIONS }}
 
-    - name: Docker tag
+    - name: fivetran tag
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ${{ vars.GCP_ARTIFACT_PULL_REGISTRY }}${{ env.PKG_IMAGE_NAME }}
+        images: ${{ vars.GCP_ARTIFACT_PULL_REGISTRY }}fivetran
         tags: type=sha,format=long
         flavor: latest=false
 
-    # - uses: datakit-dev/dtkt-dev/.github/actions/cloudflare-warp@main
-    #   with:
-    #     organization: ${{ vars.CLOUDFLARE_WARP_ORGANIZATION }}
-    #     auth-client-id: ${{ vars.CLOUDFLARE_WARP_AUTH_CLIENT_ID }}
-    #     auth-client-secret: ${{ secrets.CLOUDFLARE_WARP_AUTH_CLIENT_SECRET }}
-
-    - uses: datakit-dev/dtkt-dev/.github/actions/deploy@main
+    - uses: datakit-dev/.github/actions/deploy@main
       with:
         project-name: dtkt-integrations
-        argocd-app-name: dtkt-integrations-${{ env.PKG_SLUG }}-pkg
-        images: ${{ env.PKG_IMAGE_NAME }}=${{ steps.meta.outputs.tags }}
+        argocd-app-name: dtkt-integrations-fivetran
+        images: fivetran=${{ steps.meta.outputs.tags }}
         argocd-server: ${{ vars.ARGOCD_SERVER }}
         argocd-auth-token: ${{ secrets.ARGOCD_AUTH_TOKEN }}
         dtkt-github-actions-app-id: ${{ vars.DTKT_GITHUB_ACTIONS_APP_ID }}

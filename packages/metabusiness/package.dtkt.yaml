@@ -4,7 +4,7 @@ apiVersion: v1beta1
 spec:
   identity:
     name: MetaBusiness
-    version: 0.1.0
+    version: 0.0.0
   description: MetaBusiness description...
   icon: https://address.to/icon.png
   type: PACKAGE_TYPE_GO
