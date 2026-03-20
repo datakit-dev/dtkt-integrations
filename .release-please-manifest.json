@@ -1,0 +1,11 @@
+{
+  "packages/bigquery": "0.0.0",
+  "packages/command": "0.0.0",
+  "packages/email": "0.0.0",
+  "packages/fivetran": "0.0.0",
+  "packages/localblob": "0.0.0",
+  "packages/mailpit": "0.0.0",
+  "packages/metabusiness": "0.0.0",
+  "packages/openai": "0.0.0",
+  "packages/postmark": "0.0.0"
+}

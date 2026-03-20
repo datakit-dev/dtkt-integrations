@@ -19,13 +19,16 @@ jobs:
       checks: write
 
     steps:
-    - uses: datakit-dev/dtkt-dev/.github/actions/setup-monorepo@main
+    - uses: datakit-dev/.github/actions/setup-monorepo@main
       with:
+        dtkt-dev-sparse-checkout: |
+          scripts
+          tasks
         dtkt-sdk-sparse-checkout: sdk-go
         dtkt-github-actions-app-id: ${{ vars.DTKT_GITHUB_ACTIONS_APP_ID }}
         dtkt-github-actions-private-key: ${{ secrets.DTKT_GITHUB_ACTIONS_PRIVATE_KEY }}
 
-    - uses: datakit-dev/dtkt-dev/.github/actions/setup@main
+    - uses: datakit-dev/.github/actions/setup@main
       with:
         task: true
         go: true
@@ -34,7 +37,7 @@ jobs:
           ./dtkt-universe/dtkt-integrations/packages/openai/go.sum
           ./dtkt-universe/dtkt-sdk/sdk-go/go.sum
 
-    - run: task setup-local
+    - run: task setup
       working-directory: ./dtkt-universe/dtkt-integrations/packages/openai
 
     - name: Install ALSA indirectly used by openai/cmd/audio
@@ -44,11 +47,10 @@ jobs:
       run: task build
       working-directory: ./dtkt-universe/dtkt-integrations/packages/openai
 
-    # - name: Lint
-    #   run: task lint
-    #   working-directory: ./dtkt-universe/dtkt-integrations/packages/openai
     - name: Lint
-      uses: golangci/golangci-lint-action@v7
+      uses: golangci/golangci-lint-action@v9
+      env:
+        GOEXPERIMENT: jsonv2
       with:
         version: ${{ fromJSON(vars.VERSIONS).golangci-lint }}
         working-directory: ./dtkt-universe/dtkt-integrations/packages/openai

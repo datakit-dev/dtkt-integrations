@@ -1,4 +1,4 @@
-name: Build, Lint, & Test Email Integration Package
+name: Build, Lint, & Test Postmark Integration Package
 
 on:
   pull_request:
@@ -22,33 +22,37 @@ jobs:
       checks: write
 
     steps:
-    - uses: datakit-dev/dtkt-dev/.github/actions/setup-monorepo@main
+    - uses: datakit-dev/.github/actions/setup-monorepo@main
       with:
+        dtkt-dev-sparse-checkout: |
+          scripts
+          tasks
         dtkt-sdk-sparse-checkout: sdk-go
         dtkt-github-actions-app-id: ${{ vars.DTKT_GITHUB_ACTIONS_APP_ID }}
         dtkt-github-actions-private-key: ${{ secrets.DTKT_GITHUB_ACTIONS_PRIVATE_KEY }}
 
-    - uses: datakit-dev/dtkt-dev/.github/actions/setup@main
+    - uses: datakit-dev/.github/actions/setup@main
       with:
         task: true
         go: true
+        node: true
         versions: ${{ vars.VERSIONS }}
         go-cache-dependency-path: |
           ./dtkt-universe/dtkt-integrations/packages/${{ env.PKG_IDENT }}/go.sum
           ./dtkt-universe/dtkt-sdk/sdk-go/go.sum
+        pnpm-cache-dependency-path: ""
 
-    - run: task setup-local
+    - run: task setup
       working-directory: ./dtkt-universe/dtkt-integrations/packages/${{ env.PKG_IDENT }}
 
     - name: Build
       run: task build
       working-directory: ./dtkt-universe/dtkt-integrations/packages/${{ env.PKG_IDENT }}
 
-    # - name: Lint
-    #   run: task lint
-    #   working-directory: ./dtkt-universe/dtkt-integrations/packages/${{ env.PKG_IDENT }}
     - name: Lint
-      uses: golangci/golangci-lint-action@v7
+      uses: golangci/golangci-lint-action@v9
+      env:
+        GOEXPERIMENT: jsonv2
       with:
         version: ${{ fromJSON(vars.VERSIONS).golangci-lint }}
         working-directory: ./dtkt-universe/dtkt-integrations/packages/${{ env.PKG_IDENT }}

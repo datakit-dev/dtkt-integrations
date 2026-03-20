@@ -1,0 +1,140 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "packages": {
+    "packages/bigquery": {
+      "release-type": "simple",
+      "package-name": "bigquery",
+      "component": "bigquery",
+      "release-as": "0.1.0",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "package.dtkt.yaml",
+          "jsonpath": "$.spec.identity.version"
+        }
+      ]
+    },
+    "packages/command": {
+      "release-type": "simple",
+      "package-name": "command",
+      "component": "command",
+      "release-as": "0.1.0",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "package.dtkt.yaml",
+          "jsonpath": "$.spec.identity.version"
+        }
+      ]
+    },
+    "packages/email": {
+      "release-type": "simple",
+      "package-name": "email",
+      "component": "email",
+      "release-as": "0.1.0",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "package.dtkt.yaml",
+          "jsonpath": "$.spec.identity.version"
+        }
+      ]
+    },
+    "packages/fivetran": {
+      "release-type": "simple",
+      "package-name": "fivetran",
+      "component": "fivetran",
+      "release-as": "0.1.0",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "package.dtkt.yaml",
+          "jsonpath": "$.spec.identity.version"
+        }
+      ]
+    },
+    "packages/localblob": {
+      "release-type": "simple",
+      "package-name": "localblob",
+      "component": "localblob",
+      "release-as": "0.1.0",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "package.dtkt.yaml",
+          "jsonpath": "$.spec.identity.version"
+        }
+      ]
+    },
+    "packages/mailpit": {
+      "release-type": "simple",
+      "package-name": "mailpit",
+      "component": "mailpit",
+      "release-as": "0.1.0",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "package.dtkt.yaml",
+          "jsonpath": "$.spec.identity.version"
+        }
+      ]
+    },
+    "packages/metabusiness": {
+      "release-type": "simple",
+      "package-name": "metabusiness",
+      "component": "metabusiness",
+      "release-as": "0.1.0",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "package.dtkt.yaml",
+          "jsonpath": "$.spec.identity.version"
+        }
+      ]
+    },
+    "packages/openai": {
+      "release-type": "simple",
+      "package-name": "openai",
+      "component": "openai",
+      "release-as": "0.1.0",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "package.dtkt.yaml",
+          "jsonpath": "$.spec.identity.version"
+        }
+      ]
+    },
+    "packages/postmark": {
+      "release-type": "simple",
+      "package-name": "postmark",
+      "component": "postmark",
+      "release-as": "0.1.0",
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": true,
+      "extra-files": [
+        {
+          "type": "yaml",
+          "path": "package.dtkt.yaml",
+          "jsonpath": "$.spec.identity.version"
+        }
+      ]
+    }
+  }
+}
