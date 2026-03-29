@@ -36,7 +36,7 @@ type (
 	}
 )
 
-func WebhookEventSource[I InstanceWithDestination](mux v1beta1.InstanceMux[I]) v1beta1.RegisterSourceFunc[I] {
+func WebhookEventSource[I InstanceWithDestinations](mux v1beta1.InstanceMux[I]) v1beta1.RegisterSourceFunc[I] {
 	return v1beta1.NewPushSource(
 		WebhookEventSourceName,
 		"Fivetran Webhook delivers replication events for all connections within an account or destination.",
@@ -46,7 +46,7 @@ func WebhookEventSource[I InstanceWithDestination](mux v1beta1.InstanceMux[I]) v
 	)
 }
 
-func NewWebhookHandler[I InstanceWithDestination](ctx context.Context, mux v1beta1.InstanceMux[I], config *WebhookConfig) (*WebhookHandler, error) {
+func NewWebhookHandler[I InstanceWithDestinations](ctx context.Context, mux v1beta1.InstanceMux[I], config *WebhookConfig) (*WebhookHandler, error) {
 	client, err := GetClientFromInstance(ctx, mux)
 	if err != nil {
 		return nil, err

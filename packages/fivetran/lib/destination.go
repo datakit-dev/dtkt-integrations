@@ -2,7 +2,7 @@ package fivetran
 
 import (
 	"context"
-	"log"
+	"fmt"
 
 	fivetranv1 "github.com/datakit-dev/dtkt-integrations/fivetran/gen/integration/fivetran/v1"
 	"github.com/datakit-dev/dtkt-sdk/sdk-go/encoding"
@@ -15,35 +15,42 @@ import (
 )
 
 type (
-	DestinationService[I InstanceWithDestination] struct {
+	DestinationService[I InstanceWithDestinations] struct {
 		replicationv1beta1.UnimplementedDestinationServiceServer
 		mux   v1beta1.InstanceMux[I]
 		types []*replicationv1beta1.DestinationType
 	}
-	InstanceWithDestination interface {
+	InstanceWithDestinations interface {
 		InstanceWithCredentials
-		GetFivetranDestination(ctx context.Context, typeId string) (*fivetranv1.Destination, error)
+		GetFivetranDestinations(ctx context.Context) ([]*fivetranv1.Destination, error)
 	}
 )
 
-func NewDestinationService[I InstanceWithDestination](mux v1beta1.InstanceMux[I], types ...*replicationv1beta1.DestinationType) *DestinationService[I] {
-	if len(types) == 0 {
-		log.Fatal("fivetran destination service: one or more destination types required")
-	}
-
+func NewDestinationService[I InstanceWithDestinations](mux v1beta1.InstanceMux[I], types ...*replicationv1beta1.DestinationType) *DestinationService[I] {
 	return &DestinationService[I]{
 		mux:   mux,
 		types: types,
 	}
 }
 
-func GetDestinationFromInstance[I InstanceWithDestination](ctx context.Context, mux v1beta1.InstanceMux[I], typeId string) (*fivetranv1.Destination, error) {
+func GetDestinationFromInstance[I InstanceWithDestinations](ctx context.Context, mux v1beta1.InstanceMux[I], typeId string) (*fivetranv1.Destination, error) {
 	inst, err := mux.GetInstance(ctx)
 	if err != nil {
 		return nil, err
 	}
 
-	return inst.GetFivetranDestination(ctx, typeId)
+	dests, err := inst.GetFivetranDestinations(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, dest := range dests {
+		if dest.Details.Service == typeId {
+			return dest, nil
+		}
+	}
+
+	return nil, fmt.Errorf("destination not found for type: %s", typeId)
 }
 
 func (s *DestinationService[I]) ListDestinationTypes(ctx context.Context, req *replicationv1beta1.ListDestinationTypesRequest) (*replicationv1beta1.ListDestinationTypesResponse, error) {

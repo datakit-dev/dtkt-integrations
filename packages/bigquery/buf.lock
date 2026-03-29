@@ -4,3 +4,6 @@ deps:
   - name: buf.build/bufbuild/protovalidate
     commit: 80ab13bee0bf4272b6161a72bf7034e0
     digest: b5:1aa6a965be5d02d64e1d81954fa2e78ef9d1e33a0c30f92bc2626039006a94deb3a5b05f14ed8893f5c3ffce444ac008f7e968188ad225c4c29c813aa5f2daa1
+  - name: buf.build/datakit-dev/fivetran
+    commit: 68957d419c834f02ba2179cea3ec7a3c
+    digest: b5:a07f6cdef846f0e2699a89ad75d438030d84b834a3dcbcc3d9af9085e29bd8117111a6eabf484f065d229491eabb8dc0a2dc5ed72e3128b9a318176ac1412e72

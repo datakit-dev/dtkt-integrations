@@ -8,9 +8,9 @@ package bigqueryv1beta
 
 import (
 	_ "buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go/buf/validate"
+	v1 "github.com/datakit-dev/dtkt-integrations/fivetran/gen/integration/fivetran/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	anypb "google.golang.org/protobuf/types/known/anypb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	reflect "reflect"
 	sync "sync"
@@ -38,7 +38,7 @@ type Config struct {
 	AuditLog *AuditLogConfig `protobuf:"bytes,5,opt,name=audit_log,json=auditLog,proto3" json:"audit_log,omitempty"`
 	// Types that are valid to be assigned to Replication:
 	//
-	//	*Config_Fivetran
+	//	*Config_FivetranReplication
 	Replication   isConfig_Replication `protobuf_oneof:"replication"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -109,10 +109,10 @@ func (x *Config) GetReplication() isConfig_Replication {
 	return nil
 }
 
-func (x *Config) GetFivetran() *FivetranConfig {
+func (x *Config) GetFivetranReplication() *FivetranReplication {
 	if x != nil {
-		if x, ok := x.Replication.(*Config_Fivetran); ok {
-			return x.Fivetran
+		if x, ok := x.Replication.(*Config_FivetranReplication); ok {
+			return x.FivetranReplication
 		}
 	}
 	return nil
@@ -122,14 +122,14 @@ type isConfig_Replication interface {
 	isConfig_Replication()
 }
 
-type Config_Fivetran struct {
+type Config_FivetranReplication struct {
 	// Optional configuration for Fivetran replication; if provided, the
 	// integration will support Fivetran as a replication destination using
 	// BigQuery configuration above.
-	Fivetran *FivetranConfig `protobuf:"bytes,6,opt,name=fivetran,proto3,oneof"`
+	FivetranReplication *FivetranReplication `protobuf:"bytes,6,opt,name=fivetran_replication,json=fivetranReplication,proto3,oneof"`
 }
 
-func (*Config_Fivetran) isConfig_Replication() {}
+func (*Config_FivetranReplication) isConfig_Replication() {}
 
 type AuditLogConfig struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
@@ -188,28 +188,28 @@ func (x *AuditLogConfig) GetSubscription() string {
 	return ""
 }
 
-type FivetranConfig struct {
+type FivetranReplication struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Credentials   *anypb.Any             `protobuf:"bytes,1,opt,name=credentials,proto3" json:"credentials,omitempty"`
-	Destination   *anypb.Any             `protobuf:"bytes,2,opt,name=destination,proto3" json:"destination,omitempty"`
+	Config        *v1.Config             `protobuf:"bytes,1,opt,name=config,proto3" json:"config,omitempty"`
+	Destination   *v1.Destination        `protobuf:"bytes,2,opt,name=destination,proto3" json:"destination,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *FivetranConfig) Reset() {
-	*x = FivetranConfig{}
+func (x *FivetranReplication) Reset() {
+	*x = FivetranReplication{}
 	mi := &file_integration_bigquery_v1beta_config_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *FivetranConfig) String() string {
+func (x *FivetranReplication) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*FivetranConfig) ProtoMessage() {}
+func (*FivetranReplication) ProtoMessage() {}
 
-func (x *FivetranConfig) ProtoReflect() protoreflect.Message {
+func (x *FivetranReplication) ProtoReflect() protoreflect.Message {
 	mi := &file_integration_bigquery_v1beta_config_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -221,19 +221,19 @@ func (x *FivetranConfig) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use FivetranConfig.ProtoReflect.Descriptor instead.
-func (*FivetranConfig) Descriptor() ([]byte, []int) {
+// Deprecated: Use FivetranReplication.ProtoReflect.Descriptor instead.
+func (*FivetranReplication) Descriptor() ([]byte, []int) {
 	return file_integration_bigquery_v1beta_config_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *FivetranConfig) GetCredentials() *anypb.Any {
+func (x *FivetranReplication) GetConfig() *v1.Config {
 	if x != nil {
-		return x.Credentials
+		return x.Config
 	}
 	return nil
 }
 
-func (x *FivetranConfig) GetDestination() *anypb.Any {
+func (x *FivetranReplication) GetDestination() *v1.Destination {
 	if x != nil {
 		return x.Destination
 	}
@@ -244,21 +244,21 @@ var File_integration_bigquery_v1beta_config_proto protoreflect.FileDescriptor
 
 const file_integration_bigquery_v1beta_config_proto_rawDesc = "" +
 	"\n" +
-	"(integration/bigquery/v1beta/config.proto\x12\x1bintegration.bigquery.v1beta\x1a\x1bbuf/validate/validate.proto\x1a\x19google/protobuf/any.proto\x1a\x1cgoogle/protobuf/struct.proto\"\xbb\x02\n" +
+	"(integration/bigquery/v1beta/config.proto\x12\x1bintegration.bigquery.v1beta\x1a\x1bbuf/validate/validate.proto\x1a\x1cgoogle/protobuf/struct.proto\x1a$integration/fivetran/v1/config.proto\x1a)integration/fivetran/v1/destination.proto\"\xd7\x02\n" +
 	"\x06Config\x12%\n" +
 	"\n" +
 	"project_id\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\tprojectId\x12\"\n" +
 	"\blocation\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\blocation\x12B\n" +
 	"\x10credentials_json\x18\x04 \x01(\v2\x17.google.protobuf.StructR\x0fcredentialsJson\x12H\n" +
-	"\taudit_log\x18\x05 \x01(\v2+.integration.bigquery.v1beta.AuditLogConfigR\bauditLog\x12I\n" +
-	"\bfivetran\x18\x06 \x01(\v2+.integration.bigquery.v1beta.FivetranConfigH\x00R\bfivetranB\r\n" +
+	"\taudit_log\x18\x05 \x01(\v2+.integration.bigquery.v1beta.AuditLogConfigR\bauditLog\x12e\n" +
+	"\x14fivetran_replication\x18\x06 \x01(\v20.integration.bigquery.v1beta.FivetranReplicationH\x00R\x13fivetranReplicationB\r\n" +
 	"\vreplication\"Z\n" +
 	"\x0eAuditLogConfig\x12\x1c\n" +
 	"\x05topic\x18\x01 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\x05topic\x12*\n" +
-	"\fsubscription\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\fsubscription\"\x82\x02\n" +
-	"\x0eFivetranConfig\x12w\n" +
-	"\vcredentials\x18\x01 \x01(\v2\x14.google.protobuf.AnyB?\xbaH<\xc8\x01\x01\xa2\x016\x124type.googleapis.com/dtkt.lib.fivetran.v1.CredentialsR\vcredentials\x12w\n" +
-	"\vdestination\x18\x02 \x01(\v2\x14.google.protobuf.AnyB?\xbaH<\xc8\x01\x01\xa2\x016\x124type.googleapis.com/dtkt.lib.fivetran.v1.DestinationR\vdestinationBiZggithub.com/datakit-dev/dtkt-integrations/bigquery/pkg/proto/integration/bigquery/v1beta1;bigqueryv1betab\x06proto3"
+	"\fsubscription\x18\x02 \x01(\tB\x06\xbaH\x03\xc8\x01\x01R\fsubscription\"\xa6\x01\n" +
+	"\x13FivetranReplication\x12?\n" +
+	"\x06config\x18\x01 \x01(\v2\x1f.integration.fivetran.v1.ConfigB\x06\xbaH\x03\xc8\x01\x01R\x06config\x12N\n" +
+	"\vdestination\x18\x02 \x01(\v2$.integration.fivetran.v1.DestinationB\x06\xbaH\x03\xc8\x01\x01R\vdestinationBiZggithub.com/datakit-dev/dtkt-integrations/bigquery/pkg/proto/integration/bigquery/v1beta1;bigqueryv1betab\x06proto3"
 
 var (
 	file_integration_bigquery_v1beta_config_proto_rawDescOnce sync.Once
@@ -274,18 +274,19 @@ func file_integration_bigquery_v1beta_config_proto_rawDescGZIP() []byte {
 
 var file_integration_bigquery_v1beta_config_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_integration_bigquery_v1beta_config_proto_goTypes = []any{
-	(*Config)(nil),          // 0: integration.bigquery.v1beta.Config
-	(*AuditLogConfig)(nil),  // 1: integration.bigquery.v1beta.AuditLogConfig
-	(*FivetranConfig)(nil),  // 2: integration.bigquery.v1beta.FivetranConfig
-	(*structpb.Struct)(nil), // 3: google.protobuf.Struct
-	(*anypb.Any)(nil),       // 4: google.protobuf.Any
+	(*Config)(nil),              // 0: integration.bigquery.v1beta.Config
+	(*AuditLogConfig)(nil),      // 1: integration.bigquery.v1beta.AuditLogConfig
+	(*FivetranReplication)(nil), // 2: integration.bigquery.v1beta.FivetranReplication
+	(*structpb.Struct)(nil),     // 3: google.protobuf.Struct
+	(*v1.Config)(nil),           // 4: integration.fivetran.v1.Config
+	(*v1.Destination)(nil),      // 5: integration.fivetran.v1.Destination
 }
 var file_integration_bigquery_v1beta_config_proto_depIdxs = []int32{
 	3, // 0: integration.bigquery.v1beta.Config.credentials_json:type_name -> google.protobuf.Struct
 	1, // 1: integration.bigquery.v1beta.Config.audit_log:type_name -> integration.bigquery.v1beta.AuditLogConfig
-	2, // 2: integration.bigquery.v1beta.Config.fivetran:type_name -> integration.bigquery.v1beta.FivetranConfig
-	4, // 3: integration.bigquery.v1beta.FivetranConfig.credentials:type_name -> google.protobuf.Any
-	4, // 4: integration.bigquery.v1beta.FivetranConfig.destination:type_name -> google.protobuf.Any
+	2, // 2: integration.bigquery.v1beta.Config.fivetran_replication:type_name -> integration.bigquery.v1beta.FivetranReplication
+	4, // 3: integration.bigquery.v1beta.FivetranReplication.config:type_name -> integration.fivetran.v1.Config
+	5, // 4: integration.bigquery.v1beta.FivetranReplication.destination:type_name -> integration.fivetran.v1.Destination
 	5, // [5:5] is the sub-list for method output_type
 	5, // [5:5] is the sub-list for method input_type
 	5, // [5:5] is the sub-list for extension type_name
@@ -299,7 +300,7 @@ func file_integration_bigquery_v1beta_config_proto_init() {
 		return
 	}
 	file_integration_bigquery_v1beta_config_proto_msgTypes[0].OneofWrappers = []any{
-		(*Config_Fivetran)(nil),
+		(*Config_FivetranReplication)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

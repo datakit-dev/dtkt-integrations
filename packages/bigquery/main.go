@@ -6,9 +6,9 @@ import (
 
 	"github.com/datakit-dev/dtkt-integrations/bigquery/pkg/lib"
 	pkgv1beta1 "github.com/datakit-dev/dtkt-integrations/bigquery/pkg/v1beta1"
+	fivetran "github.com/datakit-dev/dtkt-integrations/fivetran/lib"
 	"github.com/datakit-dev/dtkt-sdk/sdk-go/integrationsdk"
 	"github.com/datakit-dev/dtkt-sdk/sdk-go/integrationsdk/v1beta1"
-	"github.com/datakit-dev/dtkt-sdk/sdk-go/lib/fivetran"
 	catalogv1beta1 "github.com/datakit-dev/dtkt-sdk/sdk-go/proto/dtkt/catalog/v1beta1"
 	geov1beta1 "github.com/datakit-dev/dtkt-sdk/sdk-go/proto/dtkt/geo/v1beta1"
 	replicationv1beta1 "github.com/datakit-dev/dtkt-sdk/sdk-go/proto/dtkt/replication/v1beta1"
@@ -40,7 +40,9 @@ func main() {
 	)
 
 	events := lib.AuditLogEvents[*pkgv1beta1.Instance]()
-	events = append(events, fivetran.WebhookEvents[*pkgv1beta1.Instance]()...)
+	events = append(events,
+		fivetran.WebhookEvents[*pkgv1beta1.Instance]()...,
+	)
 
 	integrationsdk.RegisterService(intgr, &replicationv1beta1.DestinationService_ServiceDesc,
 		func(mux v1beta1.InstanceMux[*pkgv1beta1.Instance]) replicationv1beta1.DestinationServiceServer {

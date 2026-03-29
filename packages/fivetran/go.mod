@@ -8,7 +8,7 @@ tool golang.org/x/tools/cmd/goimports
 
 require (
 	buf.build/gen/go/bufbuild/protovalidate/protocolbuffers/go v1.36.11-20260209202127-80ab13bee0bf.1
-	github.com/datakit-dev/dtkt-sdk/sdk-go v0.0.0-20260314233904-30fab0aa2a76
+	github.com/datakit-dev/dtkt-sdk/sdk-go v0.0.0-20260317014614-bc837cf630ba
 	github.com/fivetran/go-fivetran v1.2.9
 	github.com/jhump/protoreflect/v2 v2.0.0-beta.2
 	golang.org/x/oauth2 v0.34.0
@@ -37,6 +37,7 @@ require (
 	github.com/charmbracelet/x/ansi v0.8.0 // indirect
 	github.com/charmbracelet/x/cellbuf v0.0.13-0.20250311204145-2c3ea96c31dd // indirect
 	github.com/charmbracelet/x/term v0.2.1 // indirect
+	github.com/datakit-dev/grpc-proxy v0.0.0-20250812181120-d2a33c10eab0 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fullsailor/pkcs7 v0.0.0-20190404230743-d7302db945fa // indirect
@@ -77,6 +78,8 @@ require (
 	github.com/gorilla/securecookie v1.1.2 // indirect
 	github.com/gorilla/websocket v1.5.4-0.20250319132907-e064f32e3674 // indirect
 	github.com/gowebpki/jcs v1.0.1 // indirect
+	github.com/hashicorp/errwrap v1.1.0 // indirect
+	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/invopop/jsonschema v0.13.0 // indirect
 	github.com/itchyny/gojq v0.12.17 // indirect
 	github.com/itchyny/timefmt-go v0.1.7 // indirect

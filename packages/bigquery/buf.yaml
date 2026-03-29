@@ -5,6 +5,7 @@ modules:
 
 deps:
 - buf.build/bufbuild/protovalidate
+- buf.build/datakit-dev/fivetran
 
 lint:
   use:

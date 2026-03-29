@@ -3,8 +3,8 @@ package v1beta1
 import (
 	"context"
 
+	fivetran "github.com/datakit-dev/dtkt-integrations/fivetran/lib"
 	"github.com/datakit-dev/dtkt-sdk/sdk-go/integrationsdk/v1beta1"
-	"github.com/datakit-dev/dtkt-sdk/sdk-go/lib/fivetran"
 	eventv1beta1 "github.com/datakit-dev/dtkt-sdk/sdk-go/proto/dtkt/event/v1beta1"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/codes"

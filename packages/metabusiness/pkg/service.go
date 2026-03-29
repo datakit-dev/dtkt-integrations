@@ -70,11 +70,9 @@ func (s *Instance) Close() error {
 }
 
 func (s *Instance) CheckAuth(ctx context.Context, req *basev1beta1.CheckAuthRequest) (*basev1beta1.CheckAuthResponse, error) {
-	var (
-		resp = &basev1beta1.CheckAuthResponse{
-			Type: sharedv1beta1.AuthType_AUTH_TYPE_OAUTH,
-		}
-	)
+	resp := &basev1beta1.CheckAuthResponse{
+		Type: sharedv1beta1.AuthType_AUTH_TYPE_OAUTH,
+	}
 
 	switch req.Type {
 	case sharedv1beta1.AuthCheck_AUTH_CHECK_OAUTH_CODE:

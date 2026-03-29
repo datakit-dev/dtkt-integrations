@@ -3,8 +3,9 @@ syntax = "proto3";
 package integration.bigquery.v1beta;
 
 import "buf/validate/validate.proto";
-import "google/protobuf/any.proto";
 import "google/protobuf/struct.proto";
+import "integration/fivetran/v1/config.proto";
+import "integration/fivetran/v1/destination.proto";
 
 option go_package = "github.com/datakit-dev/dtkt-integrations/bigquery/pkg/proto/integration/bigquery/v1beta1;bigqueryv1beta";
 
@@ -26,7 +27,7 @@ message Config {
     // Optional configuration for Fivetran replication; if provided, the
     // integration will support Fivetran as a replication destination using
     // BigQuery configuration above.
-    FivetranConfig fivetran = 6;
+    FivetranReplication fivetran_replication = 6;
   }
 }
 
@@ -41,18 +42,7 @@ message AuditLogConfig {
   string subscription = 2 [(buf.validate.field).required = true];
 }
 
-message FivetranConfig {
-  google.protobuf.Any credentials = 1 [
-    (buf.validate.field).required = true,
-    (buf.validate.field).any = {
-      in: ["type.googleapis.com/dtkt.lib.fivetran.v1.Credentials"]
-    }
-  ];
-
-  google.protobuf.Any destination = 2 [
-    (buf.validate.field).required = true,
-    (buf.validate.field).any = {
-      in: ["type.googleapis.com/dtkt.lib.fivetran.v1.Destination"]
-    }
-  ];
+message FivetranReplication {
+  integration.fivetran.v1.Config config = 1 [(buf.validate.field).required = true];
+  integration.fivetran.v1.Destination destination = 2 [(buf.validate.field).required = true];
 }
