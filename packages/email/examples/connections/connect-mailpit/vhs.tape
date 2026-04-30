@@ -18,7 +18,7 @@ Type `clear` Enter
 Sleep 1s
 Show
 
-Type `dtkt connect create email \` Enter@500ms
+Type `dtkt create connection email \` Enter@500ms
 Type `  --intgr email \` Enter@500ms
 Type `  --edit false \` Enter@500ms
 Type `  -f examples/configs/mailpit.json` Enter@1s

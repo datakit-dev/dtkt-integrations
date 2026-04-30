@@ -8,7 +8,6 @@ import (
 	serveroapigen "github.com/datakit-dev/dtkt-integrations/postmark/pkg/serveroapi/gen"
 
 	basev1beta1 "github.com/datakit-dev/dtkt-sdk/sdk-go/proto/dtkt/base/v1beta1"
-	sharedv1beta1 "github.com/datakit-dev/dtkt-sdk/sdk-go/proto/dtkt/shared/v1beta1"
 )
 
 type Config struct {
@@ -53,7 +52,5 @@ func (s *Instance) Close() error {
 }
 
 func (s *Instance) CheckAuth(context.Context, *basev1beta1.CheckAuthRequest) (*basev1beta1.CheckAuthResponse, error) {
-	return &basev1beta1.CheckAuthResponse{
-		Type: sharedv1beta1.AuthType_AUTH_TYPE_UNSPECIFIED,
-	}, nil
+	return &basev1beta1.CheckAuthResponse{}, nil
 }

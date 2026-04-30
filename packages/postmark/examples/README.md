@@ -15,7 +15,8 @@ Postmark connections for use in examples.
 Connect to the Postmark integration.
 
 ```shell
-dtkt connect create postmark -f examples/configs/postmark.envsubst.json --intgr postmark
+ACCOUNT_API_KEY=replace SERVER_API_KEY=me envsubst '$ACCOUNT_API_KEY,$SERVER_API_KEY' < examples/configs/postmark.envsubst.json > examples/configs/postmark.json
+dtkt create connection postmark -f examples/configs/postmark.json --intgr postmark
 ```
 
 <img alt="connect-postmark demo with VHS" src="./connections/connect-postmark/vhs.gif" width="800" />

@@ -3,10 +3,9 @@ module github.com/datakit-dev/dtkt-integrations/metabusiness
 go 1.26.0
 
 replace github.com/datakit-dev/dtkt-sdk/sdk-go => ../../../dtkt-sdk/sdk-go
+replace github.com/datakit-dev/dtkt-integrations/fivetran => ../fivetran
 
 replace github.com/michaelquigley/pfxlog => github.com/michaelquigley/pfxlog v0.6.10
-
-replace github.com/datakit-dev/dtkt-integrations/fivetran => ../fivetran
 
 // require github.com/datakit-dev/dtkt-sdk/sdk-go v0.0.0-20260314232710-8ee97f8c7b3a
 
@@ -132,8 +131,8 @@ require (
 	github.com/speps/go-hashids v2.0.0+incompatible // indirect
 	github.com/spf13/pflag v1.0.9 // indirect
 	github.com/stoewer/go-strcase v1.3.1 // indirect
-	github.com/tklauser/go-sysconf v0.3.15 // indirect
-	github.com/tklauser/numcpus v0.10.0 // indirect
+	github.com/tklauser/go-sysconf v0.3.16 // indirect
+	github.com/tklauser/numcpus v0.11.0 // indirect
 	github.com/twpayne/go-geom v1.6.1 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
 	github.com/xo/terminfo v0.0.0-20220910002029-abceb7e1c41e // indirect

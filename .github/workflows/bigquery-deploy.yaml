@@ -36,18 +36,18 @@ jobs:
         versions: ${{ vars.VERSIONS }}
 
     - id: auth
-      uses: google-github-actions/auth@v2
+      uses: google-github-actions/auth@v3
       with:
         token_format: access_token
         workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
         service_account: ${{ vars.GCP_SERVICE_ACCOUNT_PRD }}
         request_reason: dtkt-integrations bigquery package CI/CD
 
-    - uses: docker/setup-buildx-action@v3
+    - uses: docker/setup-buildx-action@v4
 
     - name: Configure bigquery Docker metadata
       id: meta
-      uses: docker/metadata-action@v5
+      uses: docker/metadata-action@v6
       with:
         images: ${{ vars.GCP_ARTIFACT_PUSH_REGISTRY }}bigquery
         tags: type=sha,format=long
@@ -63,14 +63,14 @@ jobs:
           org.opencontainers.image.vendor=${{ github.repository_owner }}
 
     - name: Login to Google Artifact Registry
-      uses: docker/login-action@v3
+      uses: docker/login-action@v4
       with:
         registry: ${{ vars.GCP_ARTIFACT_PUSH_REGISTRY }}bigquery-pkg
         username: oauth2accesstoken
         password: ${{ steps.auth.outputs.access_token }}
 
     - name: Build & Push bigquery Docker image
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@v7
       with:
         context: ./dtkt-universe
         file: ./dtkt-universe/dtkt-integrations/packages/bigquery/Dockerfile
@@ -106,7 +106,7 @@ jobs:
 
     - name: bigquery tag
       id: meta
-      uses: docker/metadata-action@v5
+      uses: docker/metadata-action@v6
       with:
         images: ${{ vars.GCP_ARTIFACT_PULL_REGISTRY }}bigquery
         tags: type=sha,format=long

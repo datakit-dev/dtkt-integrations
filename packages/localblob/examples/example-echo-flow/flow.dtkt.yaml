@@ -13,7 +13,7 @@ spec:
       name: LocalBlob
       version: 0.1.0
     services:
-    - action.v1beta1.ActionService
+    - dtkt.action.v1beta1.ActionService
 
   inputs:
   - id: message
@@ -23,7 +23,7 @@ spec:
   - id: echo
     call:
       connection: localblob
-      method: action.v1beta1.ActionService.ExecuteAction
+      method: dtkt.action.v1beta1.ActionService.ExecuteAction
       request:
         name: actions/example-echo
         input:

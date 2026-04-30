@@ -11,7 +11,7 @@ Mailpit connections for use in examples.
 Connect to the Mailpit integration.
 
 ```shell
-dtkt connect create mailpit -f examples/configs/mailpit.json --intgr mailpit
+dtkt create connection mailpit -f examples/configs/mailpit.json --intgr mailpit
 ```
 
 <img alt="connect-mailpit demo with VHS" src="./connections/connect-mailpit/vhs.gif" width="800" />

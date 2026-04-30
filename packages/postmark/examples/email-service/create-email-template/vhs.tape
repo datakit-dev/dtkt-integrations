@@ -14,7 +14,7 @@ Hide
 Type `dtkt intgr start --detach` Enter
 Type `dtkt connect delete postmark` Enter
 Sleep 100ms
-Type `dtkt connect create postmark --intgr postmark -f examples/configs/postmark.json --edit=false` Enter
+Type `dtkt create connection postmark --intgr postmark -f examples/configs/postmark.json --edit=false` Enter
 Sleep 100ms
 Type `clear` Enter
 Sleep 1s

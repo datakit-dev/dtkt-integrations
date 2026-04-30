@@ -19,7 +19,7 @@ Type `clear` Enter
 Sleep 1s
 Show
 
-Type `dtkt connect create command \` Enter@500ms
+Type `dtkt create connection command \` Enter@500ms
 Type `  --intgr command \` Enter@500ms
 Type `  --edit false \` Enter@500ms
 Type `  -f examples/configs/remote.json` Enter@1s

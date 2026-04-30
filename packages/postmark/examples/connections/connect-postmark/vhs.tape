@@ -18,7 +18,7 @@ Type `clear` Enter
 Sleep 1s
 Show
 
-Type `dtkt connect create postmark \` Enter@500ms
+Type `dtkt create connection postmark \` Enter@500ms
 Type `  --intgr postmark \` Enter@500ms
 Type `  --edit false \` Enter@500ms
 Type `  -f examples/configs/postmark.json` Enter@1s

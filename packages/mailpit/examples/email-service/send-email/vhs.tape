@@ -14,7 +14,7 @@ Hide
 Type `dtkt intgr start --detach` Enter
 Type `dtkt connect delete mailpit` Enter
 Sleep 100ms
-Type `dtkt connect create mailpit --intgr mailpit -f examples/configs/mailpit.json --edit=false` Enter
+Type `dtkt create connection mailpit --intgr mailpit -f examples/configs/mailpit.json --edit=false` Enter
 Sleep 100ms
 Type `clear` Enter
 Sleep 1s

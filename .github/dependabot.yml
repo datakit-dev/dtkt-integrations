@@ -1,0 +1,71 @@
+version: 2
+updates:
+- package-ecosystem: gomod
+  directory: /packages/bigquery
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"
+
+- package-ecosystem: gomod
+  directory: /packages/command
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"
+
+- package-ecosystem: gomod
+  directory: /packages/email
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"
+
+- package-ecosystem: gomod
+  directory: /packages/fivetran
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"
+
+- package-ecosystem: gomod
+  directory: /packages/localblob
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"
+
+- package-ecosystem: gomod
+  directory: /packages/mailpit
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"
+
+- package-ecosystem: gomod
+  directory: /packages/metabusiness
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"
+
+- package-ecosystem: gomod
+  directory: /packages/openai
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"
+
+- package-ecosystem: gomod
+  directory: /packages/postmark
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"
+
+- package-ecosystem: github-actions
+  directory: /
+  schedule:
+    interval: weekly
+  commit-message:
+    prefix: "chore(deps)"

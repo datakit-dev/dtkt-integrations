@@ -11,7 +11,7 @@ Email connections for use in examples.
 Connect to the Email integration using Mailpit.
 
 ```shell
-dtkt connect create mailpit -f examples/configs/mailpit.json --intgr email
+dtkt create connection mailpit -f examples/configs/mailpit.json --intgr email
 ```
 
 <img alt="connect-mailpit demo with VHS" src="./connections/connect-mailpit/vhs.gif" width="800" />

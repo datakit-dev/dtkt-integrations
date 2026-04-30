@@ -13,7 +13,7 @@ Connect to the Command integration.
 #### Local command execution (relative to the running integration)
 
 ```shell
-dtkt connect create command -f examples/configs/local.json --intgr command
+dtkt create connection command -f examples/configs/local.json --intgr command
 ```
 
 <img alt="connect-local demo with VHS" src="./connections/connect-local/vhs.gif" width="800" />
@@ -21,7 +21,7 @@ dtkt connect create command -f examples/configs/local.json --intgr command
 #### OR - Remote command execution (SSH)
 
 ```shell
-dtkt connect create command -f examples/configs/remote.json --intgr command
+dtkt create connection command -f examples/configs/remote.json --intgr command
 ```
 
 <img alt="connect-remote demo with VHS" src="./connections/connect-remote/vhs.gif" width="800" />

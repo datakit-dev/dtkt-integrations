@@ -18,7 +18,7 @@ Type `clear` Enter
 Sleep 1s
 Show
 
-Type `dtkt connect create mailpit \` Enter@500ms
+Type `dtkt create connection mailpit \` Enter@500ms
 Type `  --intgr mailpit \` Enter@500ms
 Type `  --edit false \` Enter@500ms
 Type `  --edit false \` Enter@500ms

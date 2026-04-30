@@ -55,7 +55,50 @@ By participating, you agree to follow our [Code of Conduct](https://github.com/d
 
 ## Making Changes
 
-- Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for commit messages.
+### Commit Messages
+
+This repository uses [release-please](https://github.com/googleapis/release-please) to automate releases based on [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+
+**Releasable commit types** - these trigger a release when merged to `main`:
+
+| Type       | Description               | Version Bump |
+| ---------- | ------------------------- | ------------ |
+| `feat:`    | A new feature             | Minor        |
+| `fix:`     | A bug fix                 | Patch        |
+| `perf:`    | Performance improvement   | Patch        |
+| `revert:`  | Reverts a previous commit | Patch        |
+
+**Non-releasable commit types** - these do NOT trigger a release on their own:
+
+| Type        | Description                                              |
+| ----------- | -------------------------------------------------------- |
+| `docs:`     | Documentation only changes                               |
+| `style:`    | Formatting, whitespace, semicolons (no code logic)       |
+| `refactor:` | Code restructuring without changing behavior             |
+| `test:`     | Adding or updating tests                                 |
+| `build:`    | Build system or external dependencies (Dockerfile, etc.) |
+| `ci:`       | CI configuration (GitHub Actions, workflows)             |
+| `chore:`    | Maintenance tasks (configs, non-src/test files)          |
+
+**Breaking changes:** Add `!` after any type to signal a breaking change. This bumps a **Major** version and always triggers a release regardless of type:
+
+```
+feat!: remove support for legacy API
+fix!: change return type of Process()
+chore!: drop support for Go 1.21
+```
+
+**Dependency updates:** Use the commit type that reflects intent - this also determines whether a release is triggered:
+
+- `fix(deps):` - security fix or required update → triggers a **Patch** release
+- `chore(deps):` - routine/dev dependency update → no release
+
+**Monorepo routing:** Release-please routes commits to the correct package based on **which files were modified**, not the commit scope. A `fix:` commit touching `packages/bigquery/go.mod` will only trigger a release for the `bigquery` component. The scope (e.g. `fix(bigquery):`) is optional and appears in the changelog but has no routing effect.
+
+> **Note:** A release PR is only created when at least one releasable commit is present. Non-releasable commits are included in the changelog when bundled with releasable commits, but alone they produce no release.
+
+### Code Changes
+
 - Clearly document new features or changes in your commits and Pull Requests (PR).
 - Follow this branch naming convention:
 
@@ -133,6 +176,7 @@ task test
 ```
 
 - If you add new features or fix bugs, please include or update relevant tests.
+- Test conventions are in [docs/testing.md](docs/testing.md) (project) and [../dtkt-dev/docs/go/testing.md](../dtkt-dev/docs/go/testing.md) (Go-wide).
 
 ## Pull Requests
 
