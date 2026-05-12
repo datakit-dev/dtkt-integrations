@@ -4,10 +4,14 @@ go 1.26.0
 
 replace github.com/michaelquigley/pfxlog => github.com/michaelquigley/pfxlog v0.6.10
 
+replace github.com/datakit-dev/dtkt-sdk/sdk-go => ../../../dtkt-sdk/sdk-go
+
+// require github.com/datakit-dev/dtkt-sdk/sdk-go v0.0.0-20260314232710-8ee97f8c7b3a
+
 tool golang.org/x/tools/cmd/goimports
 
 require (
-	github.com/datakit-dev/dtkt-sdk/sdk-go v0.0.0-20260320021900-8bf344b2f70d
+	github.com/datakit-dev/dtkt-sdk/sdk-go v0.0.0-00010101000000-000000000000
 	github.com/jhump/protoreflect/v2 v2.0.0-beta.2
 	golang.org/x/oauth2 v0.36.0
 	google.golang.org/api v0.275.0
@@ -183,5 +187,3 @@ require (
 	sigs.k8s.io/structured-merge-diff/v6 v6.3.2 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
-
-replace github.com/datakit-dev/dtkt-sdk/sdk-go => ../../../dtkt-sdk/sdk-go
