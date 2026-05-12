@@ -1,0 +1,174 @@
+syntax = "proto3";
+
+package integration.testbin.v1beta;
+
+import "buf/validate/validate.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/rpc/status.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/testbin/pkg/integration/testbin/v1beta";
+
+// EchoService exercises gRPC streaming patterns with controllable
+// payload echoes and error injection. Use it to verify a flow
+// handles unary, server-stream, client-stream, and bidi RPCs - both
+// happy paths and failure paths.
+//
+// Every request carries a payload and an optional google.rpc.Status
+// error. When error.code != 0 the server fails the RPC with that
+// status; no response message is produced. Use error.details to
+// attach rich error metadata (google.rpc.QuotaFailure, BadRequest,
+// RetryInfo, etc.).
+service EchoService {
+  // Echoes the payload as a single response, or fails with `error`.
+  rpc EchoUnary(EchoUnaryRequest) returns (EchoUnaryResponse);
+
+  // Emits `count` copies of the payload at `interval` spacing. Set
+  // `error_on` together with `error` to fail at a specific sequence
+  // index instead of after the last response.
+  rpc EchoServerStream(EchoServerStreamRequest) returns (stream EchoServerStreamResponse);
+
+  // Counts incoming requests; the final response reports the total
+  // count and the last-seen payload. Any incoming request with
+  // `error` set terminates the RPC immediately.
+  rpc EchoClientStream(stream EchoClientStreamRequest) returns (EchoClientStreamResponse);
+
+  // For each incoming request, emits `count` copies of its payload.
+  // Set `error_on` together with `error` to fail at a specific
+  // sequence index for that request, terminating the bidi stream.
+  rpc EchoBidiStream(stream EchoBidiStreamRequest) returns (stream EchoBidiStreamResponse);
+}
+
+// EchoUnaryRequest -- input to EchoUnary.
+message EchoUnaryRequest {
+  // Payload to echo back. Ignored if `error` is set with code != 0.
+  google.protobuf.Value payload = 1;
+
+  // Optional failure status. When code != 0, the RPC fails with
+  // this status; no response is produced.
+  google.rpc.Status error = 2;
+
+  // Server-side delay applied before responding or failing. Honors
+  // context cancellation; a shorter client deadline surfaces as
+  // DeadlineExceeded.
+  google.protobuf.Duration delay = 3;
+}
+
+// EchoUnaryResponse -- result of a successful EchoUnary. Not produced
+// when the request set `error`.
+message EchoUnaryResponse {
+  // Verbatim copy of the request payload.
+  google.protobuf.Value payload = 1;
+
+  // Server wall-clock when the response was constructed.
+  google.protobuf.Timestamp at = 2;
+}
+
+// EchoServerStreamRequest -- input to EchoServerStream.
+message EchoServerStreamRequest {
+  // Payload echoed in every emitted response.
+  google.protobuf.Value payload = 1;
+
+  // Optional failure status. When code != 0, the stream emits the
+  // configured successes (see `count` and `error_on`) then fails
+  // with this status.
+  google.rpc.Status error = 2;
+
+  // Optional zero-based sequence index at which to fail. When set
+  // with `error`, the server emits `error_on` successes (sequence
+  // 0..error_on-1) then fails. Ignored if `error` is unset or
+  // error.code is 0.
+  optional int32 error_on = 3 [(buf.validate.field).int32.gte = 0];
+
+  // Number of successful responses to emit. Ignored when `error_on`
+  // is set. count=0 closes the stream with no responses.
+  int32 count = 4 [(buf.validate.field).int32.gte = 0];
+
+  // Wall-clock gap between successive responses. Honors context
+  // cancellation between sends.
+  google.protobuf.Duration interval = 5;
+
+  // Server-side delay applied before the first response.
+  google.protobuf.Duration delay = 6;
+}
+
+// EchoServerStreamResponse -- one message on EchoServerStream's
+// response stream.
+message EchoServerStreamResponse {
+  // Verbatim copy of the request payload.
+  google.protobuf.Value payload = 1;
+
+  // Zero-based sequence index within the stream.
+  int64 sequence = 2;
+
+  // Server wall-clock when this response was emitted.
+  google.protobuf.Timestamp at = 3;
+}
+
+// EchoClientStreamRequest -- one message on EchoClientStream's
+// request stream.
+message EchoClientStreamRequest {
+  // Payload to count and capture as `last_payload`. Ignored if
+  // `error` is set with code != 0.
+  google.protobuf.Value payload = 1;
+
+  // Optional failure status. When code != 0, the RPC fails
+  // immediately with this status; no response is produced.
+  google.rpc.Status error = 2;
+
+  // Server-side delay applied before processing this request.
+  google.protobuf.Duration delay = 3;
+}
+
+// EchoClientStreamResponse -- single response returned after the
+// client half-closes successfully (no error requests were sent).
+message EchoClientStreamResponse {
+  // Total payload requests received before the client closed.
+  int64 received = 1;
+
+  // Payload from the most recent request.
+  google.protobuf.Value last_payload = 2;
+
+  // Server wall-clock when the response was constructed.
+  google.protobuf.Timestamp at = 3;
+}
+
+// EchoBidiStreamRequest -- one message on EchoBidiStream's request
+// stream.
+message EchoBidiStreamRequest {
+  // Payload echoed in each response triggered by this request.
+  google.protobuf.Value payload = 1;
+
+  // Optional failure status. When code != 0, the server emits the
+  // configured successes for this request (see `count` and
+  // `error_on`) then terminates the bidi stream with this status.
+  google.rpc.Status error = 2;
+
+  // Optional zero-based index within this request's burst at which
+  // to fail. When set with `error`, the server emits `error_on`
+  // responses then terminates the stream. Ignored if `error` is
+  // unset or error.code is 0.
+  optional int32 error_on = 3 [(buf.validate.field).int32.gte = 0];
+
+  // Responses to emit for this request. Ignored when `error_on` is
+  // set. count=0 swallows the request without responding.
+  int32 count = 4 [(buf.validate.field).int32.gte = 0];
+
+  // Delay applied between successive responses for this request.
+  // Honors context cancellation between sends.
+  google.protobuf.Duration delay = 5;
+}
+
+// EchoBidiStreamResponse -- one message on EchoBidiStream's response
+// stream.
+message EchoBidiStreamResponse {
+  // Verbatim copy of the originating request's payload.
+  google.protobuf.Value payload = 1;
+
+  // Zero-based sequence index across the entire response stream.
+  int64 sequence = 2;
+
+  // Server wall-clock when this response was emitted.
+  google.protobuf.Timestamp at = 3;
+}

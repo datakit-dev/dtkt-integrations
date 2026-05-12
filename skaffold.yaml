@@ -56,6 +56,12 @@ requires:
 #     activatedBy:
 #     - localblob
 #     - all
+# - path: packages/testbin
+#   activeProfiles:
+#   - name: testbin
+#     activatedBy:
+#     - testbin
+#     - all
 
 profiles:
 - name: all
@@ -68,3 +74,4 @@ profiles:
 # - name: postmark
 # - name: mailpit
 # - name: localblob
+# - name: testbin

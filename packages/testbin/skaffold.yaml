@@ -1,0 +1,26 @@
+apiVersion: skaffold/v4beta12
+kind: Config
+metadata:
+  name: testbin
+build:
+  local:
+    useBuildkit: true
+  artifacts:
+  - image: intgr-testbin
+    context: ../../../
+    docker:
+      dockerfile: dtkt-integrations/packages/testbin/Dockerfile
+manifests:
+  kustomize:
+    buildArgs:
+    - --enable-alpha-plugins
+    - --enable-exec
+    paths:
+    - infra/kustomize/overlays/dev
+deploy:
+  kubectl: {}
+# portForward:
+# - resourceType: service
+#   resourceName: testbin
+#   port: 80
+#   localPort: 8200

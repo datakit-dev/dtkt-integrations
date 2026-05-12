@@ -1,0 +1,6 @@
+{
+  "payload": {
+    "environment": "test",
+    "tags": ["fixture", "grpc"]
+  }
+}

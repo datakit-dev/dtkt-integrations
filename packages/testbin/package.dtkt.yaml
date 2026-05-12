@@ -1,0 +1,13 @@
+apiVersion: v1beta1
+kind: Package
+spec:
+  description: Test fixture integration - a gRPC bin (echo, streams, error fixtures)
+    for exercising flows end-to-end.
+  icon: https://assets.datakit.cloud/identity/icon-color.png
+  identity:
+    name: testbin
+    version: 0.1.0
+  runtimes:
+  - RUNTIME_NATIVE
+  - RUNTIME_DOCKER
+  type: PACKAGE_TYPE_GO

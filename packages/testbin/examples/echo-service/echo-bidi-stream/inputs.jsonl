@@ -1,0 +1,3 @@
+{"payload": "alpha", "count": 2}
+{"payload": "beta", "count": 3, "delay": "0.2s"}
+{"payload": "gamma", "count": 1, "error": {"code": 5, "message": "simulated failure"}}

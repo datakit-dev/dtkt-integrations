@@ -1,0 +1,71 @@
+syntax = "proto3";
+
+package integration.testbin.v1beta;
+
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/testbin/pkg/integration/testbin/v1beta";
+
+// InspectService reflects what the server saw, both per-RPC (method,
+// headers, deadline, peer, payload) and per-instance (Config). Use
+// it to debug whether request metadata and connection-level config
+// reach the integration as expected.
+service InspectService {
+  // Returns the incoming RPC's fully-qualified method, headers,
+  // deadline, peer address, and request payload as received.
+  rpc Anything(AnythingRequest) returns (AnythingResponse);
+
+  // Returns the Config the instance was constructed with. Use it to
+  // verify that connection-level config round-trips into the
+  // integration unchanged.
+  rpc GetConfig(GetConfigRequest) returns (GetConfigResponse);
+}
+
+// AnythingRequest -- input to Anything.
+message AnythingRequest {
+  // Free-form payload echoed back unchanged in AnythingResponse.payload.
+  google.protobuf.Value payload = 1;
+}
+
+// AnythingResponse describes the incoming RPC from the server's
+// perspective.
+message AnythingResponse {
+  // Fully-qualified gRPC method, e.g.
+  // "/integration.testbin.v1beta.InspectService/Anything".
+  string method = 1;
+
+  // Incoming request metadata as received. gRPC normalizes keys to
+  // lowercase. Values for binary metadata (keys ending in `-bin`)
+  // are base64-encoded so they fit in a string field.
+  map<string, StringValues> metadata = 2;
+
+  // Wall-clock deadline derived from the incoming context. Unset if
+  // the caller did not propagate one.
+  google.protobuf.Timestamp deadline = 3;
+
+  // Network peer's address as reported by gRPC.
+  string peer = 4;
+
+  // Verbatim copy of the request payload.
+  google.protobuf.Value payload = 5;
+}
+
+// StringValues holds an ordered list of values for a single
+// metadata key. Wrapper exists because proto3 forbids
+// `map<K, repeated V>` directly.
+message StringValues {
+  // Values for the key, in receipt order. Multi-valued metadata is
+  // preserved; binary (`-bin`) values are base64-encoded.
+  repeated string values = 1;
+}
+
+// GetConfigRequest -- input to GetConfig. Takes no parameters.
+message GetConfigRequest {}
+
+// GetConfigResponse holds the instance's current Config payload.
+message GetConfigResponse {
+  // Snapshot of Config.payload at instance construction. testbin
+  // does not mutate or interpret this value.
+  google.protobuf.Value payload = 1;
+}

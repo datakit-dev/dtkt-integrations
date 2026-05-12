@@ -21,6 +21,7 @@ vars:
     - metabusiness
     - openai
     - postmark
+    - testbin
 
 includes:
   sops:

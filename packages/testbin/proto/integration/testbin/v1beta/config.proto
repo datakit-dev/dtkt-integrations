@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package integration.testbin.v1beta;
+
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/testbin/pkg/integration/testbin/v1beta";
+
+// Config -- per-instance configuration for testbin.
+//
+// testbin's RPC behavior is fully driven by request fields, so the
+// only knob is a free-form payload that round-trips through
+// InspectService.GetConfig. Use it to verify connection-level config
+// plumbing without designing a dedicated config schema.
+message Config {
+  // Free-form payload returned verbatim by InspectService.GetConfig.
+  // testbin does not interpret this value.
+  google.protobuf.Value payload = 1;
+}
