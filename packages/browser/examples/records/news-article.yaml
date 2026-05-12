@@ -1,0 +1,16 @@
+record:
+  values:
+    headline: Shield AI Raises $500M Series F at $5.3B Valuation
+    author: Jane Doe
+    publish_date: "2026-04-09"
+    body_text: Shield AI, the defense technology company building AI pilots for aircraft, announced today...
+  captures:
+    headline:
+      css_selector: "h1.article-headline"
+      xpath: //h1[contains(@class,"article-headline")]
+    author:
+      css_selector: ".byline-author"
+      xpath: //*[contains(@class,"byline-author")]
+    publish_date:
+      css_selector: "time[datetime]"
+      xpath: //time[@datetime]

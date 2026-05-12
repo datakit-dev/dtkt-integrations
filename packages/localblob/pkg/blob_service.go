@@ -126,13 +126,24 @@ func (s *BlobService) GetBlob(ctx context.Context, req *blobv1beta1.GetBlobReque
 }
 
 func (s *BlobService) WriteBlobLines(stream grpc.ClientStreamingServer[blobv1beta1.WriteBlobLinesRequest, blobv1beta1.WriteBlobLinesResponse]) error {
-	ctx := stream.Context()
-	inst, err := s.mux.GetInstance(ctx)
+	inst, err := s.mux.GetInstance(stream.Context())
 	if err != nil {
 		return status.Error(codes.FailedPrecondition, err.Error())
 	}
 
-	var writers util.SyncMap[string, *BlobLineWriter]
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	writers := map[string]*BlobLineWriter{}
+	defer func() {
+		for _, writer := range writers {
+			err := writer.Close()
+			if err != nil {
+				log.Debug(ctx, "close blob writer", log.Err(err))
+			}
+		}
+	}()
+
 	for {
 		req, err := stream.Recv()
 		if err != nil {
@@ -148,17 +159,12 @@ func (s *BlobService) WriteBlobLines(stream grpc.ClientStreamingServer[blobv1bet
 		}
 
 		key := path.Join(req.Bucket, req.Key)
-		lineWriter, ok := writers.Load(key)
+		lineWriter, ok := writers[key]
 		if !ok {
 			writer, err := bucket.NewWriter(ctx, req.Key, &blob.WriterOptions{})
 			if err != nil {
 				return err
 			}
-			defer func() {
-				if err := writer.Close(); err != nil {
-					log.Error(ctx, "failed to close blob writer", log.Err(err))
-				}
-			}()
 
 			lineWriter = &BlobLineWriter{
 				Writer: writer,
@@ -166,7 +172,7 @@ func (s *BlobService) WriteBlobLines(stream grpc.ClientStreamingServer[blobv1bet
 				key:    req.Key,
 			}
 
-			writers.Store(key, lineWriter)
+			writers[key] = lineWriter
 		}
 
 		_, err = fmt.Fprintln(lineWriter, string(req.Data))
@@ -178,12 +184,7 @@ func (s *BlobService) WriteBlobLines(stream grpc.ClientStreamingServer[blobv1bet
 	}
 
 	var results []*blobv1beta1.WriteBlobLinesResponse_KeyResult
-	for _, writer := range writers.Values() {
-		err := writer.Close()
-		if err != nil {
-			return err
-		}
-
+	for _, writer := range writers {
 		result, err := writer.Result(ctx)
 		if err != nil {
 			return err

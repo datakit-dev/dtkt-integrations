@@ -1,0 +1,4 @@
+action:
+  tabs:
+    remove:
+      tabIds: [42, 43]

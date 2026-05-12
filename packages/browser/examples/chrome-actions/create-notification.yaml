@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/users/jordan/deployments/browser-default/types/integration.browser.v1beta.SendChromeActionRequest.jsonschema.json
+action:
+  notifications:
+    create:
+      notificationId: workflow-complete
+      title: DataKit — Workflow complete
+      message: Profile capture finished for 12 contacts.
+      priority: 1
+      buttons:
+        - title: View results
+        - title: Dismiss

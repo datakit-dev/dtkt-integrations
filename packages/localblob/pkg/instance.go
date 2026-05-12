@@ -40,6 +40,7 @@ func NewInstance(ctx context.Context, config *localblobv1beta1.Config) (*Instanc
 
 		bucket, err := fileblob.OpenBucket(root, &fileblob.Options{
 			CreateDir: config.CreateDir,
+			NoTempDir: true,
 		})
 		if err != nil {
 			return nil, err

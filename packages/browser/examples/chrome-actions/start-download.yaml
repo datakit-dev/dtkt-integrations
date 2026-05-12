@@ -1,0 +1,7 @@
+action:
+  downloads:
+    start:
+      url: https://example.com/exports/contacts.csv
+      filename: contacts.csv
+      conflictAction: overwrite
+      saveAs: false

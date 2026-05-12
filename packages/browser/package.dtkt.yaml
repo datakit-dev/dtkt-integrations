@@ -1,0 +1,15 @@
+apiVersion: v1beta1
+kind: Package
+spec:
+  identity:
+    name: Browser
+    version: 0.1.0
+  description: Browser integration for Datakit, enabling users to interact with web content and automate browsing tasks.
+  type: PACKAGE_TYPE_GO
+  icon: https://address.to/icon.png
+  platforms:
+    - os: OS_LINUX
+    - os: OS_DARWIN
+    - os: OS_WINDOWS
+  runtimes:
+    - RUNTIME_NATIVE

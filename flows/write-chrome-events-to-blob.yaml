@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+kind: Flow
+apiVersion: v1beta1
+spec:
+  name: Write Chrome Events to Blob
+  description: |
+    This flow listens to Chrome events and writes them to a blob in JSON Lines
+    format. The blob bucket and key can be configured through the flow inputs.
+
+  inputs:
+    - id: blobBucket
+      cache: true
+      string:
+        default: browser-data
+    - id: blobKey
+      cache: true
+      string:
+        default: chrome-events.jsonl
+
+  connections:
+    - id: chrome
+      package:
+        name: Browser
+        version: 0.1.0
+    - id: blob
+      services:
+        - dtkt.blob.v1beta1.BlobService
+
+  streams:
+    - id: readChromeEvents
+      call:
+        connection: chrome
+        method: integration.browser.v1beta.ChromeService.StreamChromeEvents
+    - id: writeChromeEvents
+      call:
+        connection: blob
+        method: dtkt.blob.v1beta1.BlobService.WriteBlobLines
+        request:
+          key: = inputs.blobKey.value
+          bucket: = inputs.blobBucket.value
+          data: = bytes(json.marshal(streams.readChromeEvents.value.event.tabs))

@@ -1,0 +1,37 @@
+version: v2
+
+clean: true
+
+managed:
+  enabled: true
+  override:
+    - file_option: go_package_prefix
+      value: github.com/datakit-dev/dtkt-integrations/browser/pkg/proto
+  disable:
+    - file_option: go_package
+      module: buf.build/bufbuild/protovalidate
+    - file_option: go_package
+      module: buf.build/googleapis/googleapis
+    - file_option: go_package
+      module: buf.build/datakit-dev/dtkt-sdk
+
+inputs:
+  - directory: proto
+
+plugins:
+  - remote: buf.build/protocolbuffers/go
+    out: ./pkg/proto
+    opt: paths=source_relative
+  - remote: buf.build/grpc/go
+    out: ./pkg/proto
+    opt: paths=source_relative
+  - local: protoc-gen-gosrcinfo
+    out: ./pkg/proto
+    opt: paths=source_relative
+  - remote: buf.build/bufbuild/es:v2.10.1
+    opt:
+      - target=ts
+      - valid_types=protovalidate_required
+    out: ./pkg/chrome/extension/src/proto
+    include_imports: true
+    include_wkt: true

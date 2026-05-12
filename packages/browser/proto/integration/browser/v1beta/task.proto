@@ -1,0 +1,178 @@
+syntax = "proto3";
+
+package integration.browser.v1beta;
+
+import "buf/validate/validate.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/timestamp.proto";
+import "integration/browser/v1beta/extraction.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/browser/pkg/integration/browser/v1beta";
+
+// TaskService manages browser automation tasks assigned to the extension queue.
+//
+// Tasks represent user-facing assignments (e.g. "capture this LinkedIn profile")
+// that are distinct from the low-level browser actions (e.g. ChromeActions)
+// used to fulfill them.
+service TaskService {
+  // Create a new task and push it to the extension queue.
+  rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse);
+
+  // Get a single task by ID.
+  rpc GetTask(GetTaskRequest) returns (GetTaskResponse);
+
+  // List tasks, optionally filtered by state.
+  rpc ListTasks(ListTasksRequest) returns (ListTasksResponse);
+
+  // Update a task (e.g. change state, set record_id on completion).
+  rpc UpdateTask(UpdateTaskRequest) returns (UpdateTaskResponse);
+
+  // Delete (hard-remove) a task.
+  rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse);
+
+  // Server-streaming real-time updates pushed to the extension background SW.
+  // The stream emits an event whenever a task is created, mutated, or deleted.
+  rpc StreamTaskUpdates(StreamTaskUpdatesRequest) returns (stream StreamTaskUpdatesResponse);
+}
+
+enum TaskState {
+  TASK_STATE_UNSPECIFIED = 0;
+  // Task is queued; no browser tab has been opened yet.
+  TASK_STATE_PENDING = 1;
+  // A browser tab has been opened and the user is actively working on the task.
+  TASK_STATE_ACTIVE = 2;
+  // All required fields have been captured and the task is complete.
+  TASK_STATE_COMPLETED = 3;
+  // The task was intentionally dismissed without completion.
+  TASK_STATE_DISMISSED = 4;
+}
+
+message Task {
+  // Server-assigned UUID.
+  string id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // Display title shown in the popup queue and overlay header.
+  string title = 2 [(buf.validate.field).required = true];
+
+  // URL to navigate to when the user starts the task.
+  string url = 3 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uri = true
+  ];
+
+  // Current lifecycle state of the task.
+  TaskState state = 4 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).enum.defined_only = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // Task-type-specific payload.
+  oneof payload {
+    option (buf.validate.oneof).required = true;
+    ExtractionTask extraction = 10;
+
+    // FormFillConfig form_fill = 11;  // future
+    // MonitorConfig  monitor   = 12;  // future
+  }
+
+  // Task creation time (server-assigned).
+  google.protobuf.Timestamp create_time = 20 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // Last update time (server-assigned).
+  google.protobuf.Timestamp update_time = 21 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // Time at which the task reached COMPLETED or DISMISSED state.
+  google.protobuf.Timestamp complete_time = 22 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+}
+
+message CreateTaskRequest {
+  Task task = 1 [(buf.validate.field).required = true];
+}
+
+message CreateTaskResponse {
+  Task task = 1 [(buf.validate.field).required = true];
+}
+
+message GetTaskRequest {
+  string id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true
+  ];
+}
+
+message GetTaskResponse {
+  Task task = 1 [(buf.validate.field).required = true];
+}
+
+message ListTasksRequest {
+  // Maximum number of tasks to return (0 = server default).
+  int32 page_size = 1 [(buf.validate.field).int32.gte = 0];
+
+  // Opaque token from a previous ListTasksResponse.next_page_token.
+  string page_token = 2;
+
+  // Restrict results to these states. Empty means return all.
+  repeated TaskState state_filter = 3;
+}
+
+message ListTasksResponse {
+  repeated Task tasks = 1;
+
+  // Present when further pages are available.
+  string next_page_token = 2;
+}
+
+message UpdateTaskRequest {
+  Task task = 1 [(buf.validate.field).required = true];
+
+  // Fields to update. Omit for a full replacement (not recommended).
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateTaskResponse {
+  Task task = 1 [(buf.validate.field).required = true];
+}
+
+message DeleteTaskRequest {
+  string id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true
+  ];
+}
+
+message DeleteTaskResponse {}
+
+message StreamTaskUpdatesRequest {}
+
+message StreamTaskUpdatesResponse {
+  // The full task state after the update was applied.
+  Task task = 1 [(buf.validate.field).required = true];
+
+  // The type of change that triggered this update.
+  UpdateType update_type = 2 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).enum.defined_only = true
+  ];
+
+  enum UpdateType {
+    UPDATE_TYPE_UNSPECIFIED = 0;
+    UPDATE_TYPE_CREATED = 1;
+    UPDATE_TYPE_UPDATED = 2;
+    UPDATE_TYPE_DELETED = 3;
+  }
+}

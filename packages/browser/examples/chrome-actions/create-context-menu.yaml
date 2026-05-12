@@ -1,0 +1,6 @@
+action:
+  contextMenus:
+    create:
+      id: send-to-datakit
+      title: Send to DataKit
+      contexts: [selection, link, page]

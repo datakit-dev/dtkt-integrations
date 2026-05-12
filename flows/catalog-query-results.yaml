@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+apiVersion: v1beta1
+kind: Flow
+spec:
+  name: Catalog Query Results
+  description: >
+    Query results from a given CatalogService.
+
+  connections:
+    - id: catalog
+      services:
+        - dtkt.catalog.v1beta1.CatalogService
+
+  inputs:
+    - id: pageSize
+      int32:
+        default: 10
+    - id: page
+      string:
+        nullable: true
+
+  actions:
+    - id: query
+      user:
+        inputs:
+          - id: value
+            title: Enter a query
+    - id: resultsPage
+      call:
+        connection: catalog
+        method: dtkt.catalog.v1beta1.QueryService.GetQueryResults
+        request:
+          query: = actions.query.getValue()
+          pageSize: = inputs.pageSize.getValue()
+          page: = inputs.page.getValue()
+
+  outputs:
+    - id: resultsPage
+      value: = actions.resultsPage.getValue()

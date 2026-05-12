@@ -1,0 +1,4 @@
+task:
+  title: News Article
+  url: https://example.com/news/article-123
+  state: TASK_STATE_COMPLETED

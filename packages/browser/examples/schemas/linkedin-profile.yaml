@@ -1,0 +1,19 @@
+schema:
+  name: LinkedIn Profile
+  description: Structured fields extracted from a LinkedIn person profile page.
+  fields:
+    - name: name
+      description: Full name as shown on the profile.
+      type: string
+    - name: company
+      description: Current employer.
+      type: string
+    - name: title
+      description: Current job title.
+      type: string
+    - name: email
+      description: Contact email address.
+      type: string
+    - name: linkedin
+      description: LinkedIn profile URL.
+      type: string

@@ -36,87 +36,87 @@ spec:
         request:
           eventSource:
             name: RealtimeEvents
-            config: = inputs.realtimeConfig.getValue()
+            config: = inputs.realtimeConfig.value
 
   vars:
     - id: event
-      value: = streams.realtimeEvents.getValue().event
+      value: = streams.realtimeEvents.value.event
     - id: eventType
-      value: = vars.event.getValue().type
+      value: = vars.event.value.type
     - id: eventPayload
-      value: = vars.event.getValue().payload
+      value: = vars.event.value.payload
     - id: assistantMessage
       switch:
-        value: = vars.eventType.getValue()
+        value: = vars.eventType.value
         case:
           - value: = "response.text.done"
-            return: = vars.eventPayload.getValue().text
+            return: = vars.eventPayload.value.text
         default: = null
     - id: userMessage
       switch:
-        value: = vars.eventType.getValue()
+        value: = vars.eventType.value
         case:
           - value: = "conversation.item.created"
-            return: = vars.eventPayload.getValue().item
+            return: = vars.eventPayload.value.item
         default: = null
 
   actions:
     - id: updateSession
-      runIf: = vars.eventType.getValue() == "session.created"
       call:
         connection: openai
         method: dtkt.action.v1beta1.ActionService.ExecuteAction
+        invokeWhen: = vars.eventType.value == "session.created"
         request:
           action:
             name: SessionUpdate
           input:
-            config: = inputs.realtimeConfig.getValue()
+            config: = inputs.realtimeConfig.value
             event:
               type: session.update
-              session: = inputs.sessionConfig.getValue()
+              session: = inputs.sessionConfig.value
 
-    - id: userMessage
-      user:
-        inputs:
-          - id: text
-            title: Enter a message
-            input:
-              multilineText: true
+    # - id: userMessage
+    #   user:
+    #     inputs:
+    #       - id: text
+    #         title: Enter a message
+    #         input:
+    #           multilineText: true
 
     - id: sendMessage
-      runIf: = vars.eventType.getValue() == "response.done"
       call:
         connection: openai
         method: dtkt.action.v1beta1.ActionService.ExecuteAction
+        invokeWhen: = vars.eventType.value == "response.done"
         request:
           action:
             name: ConversationItemCreate
           input:
-            config: = inputs.realtimeConfig.getValue()
+            config: = inputs.realtimeConfig.value
             event:
               type: conversation.item.create
               item:
                 type: message
                 role: user
-                content:
-                  - type: input_text
-                    text: = actions.userMessage.getValue().text
+                # content:
+                #   - type: input_text
+                #     text: = actions.userMessage.value.text
 
     - id: createResponse
-      runIf: = vars.eventType.getValue() == "session.updated" || actions.sendMessage.getValue() != null
       call:
         connection: openai
         method: dtkt.action.v1beta1.ActionService.ExecuteAction
+        invokeWhen: = vars.eventType.value == "session.updated" || actions.sendMessage.value != null
         request:
           action:
             name: ResponseCreate
           input:
-            config: = inputs.realtimeConfig.getValue()
+            config: = inputs.realtimeConfig.value
             event:
               type: response.create
 
   outputs:
     - id: assistant
-      value: = vars.assistantMessage.getValue()
-    - id: user
-      value: = vars.userMessage.getValue()
+      value: = vars.assistantMessage.value
+    # - id: user
+    #   value: = vars.userMessage.value

@@ -1,0 +1,4 @@
+action:
+  downloads:
+    cancel:
+      downloadId: 7

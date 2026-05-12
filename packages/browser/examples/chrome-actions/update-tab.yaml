@@ -1,0 +1,6 @@
+action:
+  tabs:
+    update:
+      tabId: 42
+      url: https://linkedin.com/in/jordanfowler
+      active: true

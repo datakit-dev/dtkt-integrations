@@ -1,0 +1,13 @@
+schema:
+  name: LinkedIn Company
+  description: Structured fields extracted from a LinkedIn company profile page.
+  fields:
+    - name: Name
+      description: Company display name.
+      type: string
+    - name: Website
+      description: External website URL.
+      type: string
+    - name: LinkedIn
+      description: Canonical LinkedIn company page URL.
+      type: string

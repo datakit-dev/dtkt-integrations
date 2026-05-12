@@ -1,0 +1,4 @@
+action:
+  downloads:
+    pause:
+      downloadId: 7

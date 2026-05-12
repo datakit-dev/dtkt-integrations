@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package integration.browser.v1beta;
+
+import "buf/validate/validate.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/browser/pkg/integration/browser/v1beta";
+
+message Context {
+  string address = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uri = true
+  ];
+  string connection = 2 [(buf.validate.field).required = true];
+}

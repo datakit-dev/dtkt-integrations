@@ -1,0 +1,6 @@
+task:
+  title: LinkedIn Company
+  url: https://www.linkedin.com/company/shield-ai/
+  state: TASK_STATE_PENDING
+  extraction:
+    schema_id: b2a7c030-3a09-4b76-a782-7af26132d3f9

@@ -30,13 +30,13 @@ spec:
         connection: blob
         method: dtkt.blob.v1beta1.BlobService.ReadBlobLines
         request:
-          bucket: "= inputs.bucket.getValue()"
-          key: "= inputs.key.getValue()"
+          bucket: "= inputs.bucket.value"
+          key: "= inputs.key.value"
           lineFormat: LINE_FORMAT_JSON
           jsonArrayMode: true
 
   outputs:
     - id: line
-      value: "= isEOF(streams.read.getValue()) ? Done{reason: 'Read stream closed.'} : streams.read.getValue()"
+      value: "= isEOF(streams.read.value) ? Done{reason: 'Read stream closed.'} : streams.read.value"
     # - id: json
-    #   value: "= has(vars.line.getValue().json) ? vars.line.getValue().json : null"
+    #   value: "= has(vars.line.value.json) ? vars.line.value.json : null"

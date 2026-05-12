@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../../dtkt-sdk/schemas/dtkt.flowsdk.v1beta1.Flow.schema.json
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
 
 apiVersion: v1beta1
 kind: Flow
@@ -7,22 +7,22 @@ spec:
   description: >
     Stream Fivetran Destination webhook events.
 
-  packages:
+  connections:
     - id: destination
       services:
-        - replication.v1beta1.DestinationService
+        - dtkt.replication.v1beta1.DestinationService
 
-  sources:
+  streams:
     - id: webhook
       call:
-        package: destination
-        method: event.v1beta1.EventService.StreamPushEvents
+        connection: destination
+        method: dtkt.event.v1beta1.EventService.StreamPushEvents
         request:
           eventSource:
             name: FivetranWebhook
 
   outputs:
     - id: eventType
-      value: = sources.webhook.Event?.Type
-    - id: payload
-      value: = sources.webhook.Event?.Payload
+      value: = streams.webhook.value.event.type
+    - id: eventPayload
+      value: = streams.webhook.value.event.paylaod

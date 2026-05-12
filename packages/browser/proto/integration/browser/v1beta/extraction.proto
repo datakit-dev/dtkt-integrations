@@ -1,0 +1,292 @@
+syntax = "proto3";
+
+package integration.browser.v1beta;
+
+import "buf/validate/validate.proto";
+import "dtkt/protoform/v1beta1/protoform.proto";
+import "google/api/field_behavior.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/browser/pkg/integration/browser/v1beta";
+
+// ExtractionSchemaService manages reusable field-definition sets used to
+// configure Data Extraction tasks. Schemas are created once and referenced by
+// many tasks rather than embedding field definitions per-task.
+service ExtractionSchemaService {
+  // Create a new extraction schema.
+  rpc CreateExtractionSchema(CreateExtractionSchemaRequest) returns (CreateExtractionSchemaResponse);
+
+  // Get a single schema by ID.
+  rpc GetExtractionSchema(GetExtractionSchemaRequest) returns (GetExtractionSchemaResponse);
+
+  // List schemas, with optional name filter.
+  rpc ListExtractionSchemas(ListExtractionSchemasRequest) returns (ListExtractionSchemasResponse);
+
+  // Update a schema (e.g. add/rename fields).
+  rpc UpdateExtractionSchema(UpdateExtractionSchemaRequest) returns (UpdateExtractionSchemaResponse);
+
+  // Delete a schema. Tasks referencing it are not affected.
+  rpc DeleteExtractionSchema(DeleteExtractionSchemaRequest) returns (DeleteExtractionSchemaResponse);
+}
+
+// ExtractionRecordService manages the captured value sets produced when
+// extraction tasks run. One record is created per task run.
+service ExtractionRecordService {
+  // Get a single record by ID.
+  rpc GetExtractionRecord(GetExtractionRecordRequest) returns (GetExtractionRecordResponse);
+
+  // List all records, optionally filtered by schema or task.
+  rpc ListExtractionRecords(ListExtractionRecordsRequest) returns (ListExtractionRecordsResponse);
+
+  // Create a new record. Called by the extension background on first field save.
+  rpc CreateExtractionRecord(CreateExtractionRecordRequest) returns (CreateExtractionRecordResponse);
+
+  // Update a record (incremental field saves or final submission).
+  rpc UpdateExtractionRecord(UpdateExtractionRecordRequest) returns (UpdateExtractionRecordResponse);
+
+  // Delete a record.
+  rpc DeleteExtractionRecord(DeleteExtractionRecordRequest) returns (DeleteExtractionRecordResponse);
+}
+
+// A named field to be captured during task execution.
+message FieldDef {
+  // Field identifier, unique within the schema.
+  string name = 1 [(buf.validate.field).required = true];
+
+  // Human-readable field description.
+  string description = 2;
+
+  // Field value type.
+  string type = 3 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.in = "string",
+    (buf.validate.field).string.in = "number",
+    (buf.validate.field).string.in = "boolean"
+  ];
+
+  // Field value optionality.
+  bool optional = 4;
+
+  // Field default value.
+  google.protobuf.Value default = 5;
+}
+
+// DOM location metadata captured at pick-time. Stored alongside values to
+// enable auto-location on future runs with the same schema on the same domain.
+message ElementCapture {
+  // CSS selector path, preferring stable attributes (id, aria-label, data-*).
+  string css_selector = 1;
+
+  // Absolute XPath to the source element.
+  string xpath = 2;
+}
+
+// A named, reusable set of FieldDefs. Multiple tasks can share a schema,
+// eliminating repeated field definition at task-creation time.
+message ExtractionSchema {
+  // Server-assigned UUID.
+  string id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // Display name, e.g. "LinkedIn Profile", "Product Page".
+  string name = 2 [(buf.validate.field).required = true];
+
+  // Optional description explaining the schema's purpose.
+  string description = 3;
+
+  // Ordered list of fields to capture. At least one is required.
+  repeated FieldDef fields = 4 [(buf.validate.field).repeated.min_items = 1];
+
+  // Schema creation time (server-assigned).
+  google.protobuf.Timestamp create_time = 20 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // Last update time (server-assigned).
+  google.protobuf.Timestamp update_time = 21 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+}
+
+// A single instance of captured data conforming to an ExtractionSchema.
+// One record is produced per task run; values are populated incrementally
+// as the user picks fields in the overlay, then finalized on submission.
+message ExtractionRecord {
+  // Server-assigned UUID.
+  string id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // The schema this record conforms to.
+  string schema_id = 2 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true
+  ];
+
+  // The task that produced this record.
+  string task_id = 3 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true
+  ];
+
+  // Captured values keyed by FieldDef.name. Populated incrementally.
+  map<string, google.protobuf.Value> values = 4;
+
+  // DOM selector metadata keyed by FieldDef.name. Stored for replay on future runs.
+  map<string, ElementCapture> captures = 5;
+
+  // Record creation time (server-assigned).
+  google.protobuf.Timestamp create_time = 20 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+
+  // Last update time (server-assigned).
+  google.protobuf.Timestamp update_time = 21 [
+    (buf.validate.field).required = true,
+    (google.api.field_behavior) = OUTPUT_ONLY
+  ];
+}
+
+// Extraction-specific payload embedded in a Task. Thin reference — the full
+// field definitions live in ExtractionSchema and captured values in ExtractionRecord.
+message ExtractionTask {
+  // The schema defining which fields to capture.
+  string schema_id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true,
+    (dtkt.protoform.v1beta1.field).select.method_name = "integration.browser.v1beta.ExtractionSchemaService.ListExtractionSchemas",
+    (dtkt.protoform.v1beta1.field).select.key_expr = "this.schemas.map(i, i.name)",
+    (dtkt.protoform.v1beta1.field).select.val_expr = "this.schemas.map(i, i.id)"
+  ];
+
+  // Set once the extension creates an ExtractionRecord for this task run.
+  // Empty until the first field value is saved.
+  string record_id = 2 [
+    (buf.validate.field).ignore = IGNORE_IF_ZERO_VALUE,
+    (buf.validate.field).string.uuid = true
+  ];
+}
+
+message CreateExtractionSchemaRequest {
+  ExtractionSchema schema = 1 [(buf.validate.field).required = true];
+}
+
+message CreateExtractionSchemaResponse {
+  ExtractionSchema schema = 1 [(buf.validate.field).required = true];
+}
+
+message GetExtractionSchemaRequest {
+  string id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true
+  ];
+}
+
+message GetExtractionSchemaResponse {
+  ExtractionSchema schema = 1 [(buf.validate.field).required = true];
+}
+
+message ListExtractionSchemasRequest {
+  // Maximum number of schemas to return (0 = server default).
+  int32 page_size = 1 [(buf.validate.field).int32.gte = 0];
+
+  // Opaque token from a previous ListExtractionSchemasResponse.next_page_token.
+  string page_token = 2;
+}
+
+message ListExtractionSchemasResponse {
+  repeated ExtractionSchema schemas = 1;
+
+  // Present when further pages are available.
+  string next_page_token = 2;
+}
+
+message UpdateExtractionSchemaRequest {
+  ExtractionSchema schema = 1 [(buf.validate.field).required = true];
+
+  // Fields to update. Omit for a full replacement (not recommended).
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateExtractionSchemaResponse {
+  ExtractionSchema schema = 1 [(buf.validate.field).required = true];
+}
+
+message DeleteExtractionSchemaRequest {
+  string id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true
+  ];
+}
+
+message DeleteExtractionSchemaResponse {}
+
+message GetExtractionRecordRequest {
+  string id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true
+  ];
+}
+
+message GetExtractionRecordResponse {
+  ExtractionRecord record = 1 [(buf.validate.field).required = true];
+}
+
+message ListExtractionRecordsRequest {
+  // Maximum number of records to return (0 = server default).
+  int32 page_size = 1 [(buf.validate.field).int32.gte = 0];
+
+  // Opaque token from a previous ListExtractionRecordsResponse.next_page_token.
+  string page_token = 2;
+
+  // Filter by schema ID.
+  string schema_id = 3;
+
+  // Filter by task ID. At most one record per task exists.
+  string task_id = 4;
+}
+
+message ListExtractionRecordsResponse {
+  repeated ExtractionRecord records = 1;
+
+  // Present when further pages are available.
+  string next_page_token = 2;
+}
+
+message CreateExtractionRecordRequest {
+  ExtractionRecord record = 1 [(buf.validate.field).required = true];
+}
+
+message CreateExtractionRecordResponse {
+  ExtractionRecord record = 1 [(buf.validate.field).required = true];
+}
+
+message UpdateExtractionRecordRequest {
+  ExtractionRecord record = 1 [(buf.validate.field).required = true];
+
+  // Fields to update. Omit for a full replacement (not recommended).
+  google.protobuf.FieldMask update_mask = 2;
+}
+
+message UpdateExtractionRecordResponse {
+  ExtractionRecord record = 1 [(buf.validate.field).required = true];
+}
+
+message DeleteExtractionRecordRequest {
+  string id = 1 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.uuid = true
+  ];
+}
+
+message DeleteExtractionRecordResponse {}

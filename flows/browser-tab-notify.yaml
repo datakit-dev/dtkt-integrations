@@ -1,0 +1,94 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+kind: Flow
+apiVersion: v1beta1
+spec:
+  name: Browser Tab Notify
+
+  connections:
+    - id: browser
+      package:
+        name: Browser
+        version: 0.1.0
+
+  inputs:
+    - id: taskUrlPattern
+      cache: true
+      string:
+        nullable: false
+    - id: taskFields
+      cache: true
+      list:
+        items: string
+        nullable: false
+
+  vars:
+    - id: tabUrl
+      value: '= has(streams.chromeEvents.value.event.tabs.on_updated.url) ? streams.chromeEvents.value.event.tabs.on_updated.url : ""'
+    - id: tabUrlMatches
+      value: = vars.tabUrl.value.matches(inputs.taskUrlPattern.value)
+    - id: shouldCreateTask
+      value: '= has(streams.chromeEvents.value.event.notifications.on_button_clicked) && streams.chromeEvents.value.event.notifications.on_button_clicked.notification_id == "tabUrlMatches" && streams.chromeEvents.value.event.notifications.on_button_clicked.button_index == 0'
+
+  streams:
+    - id: chromeEvents
+      call:
+        connection: browser
+        method: integration.browser.v1beta.ChromeService.StreamChromeEvents
+
+  actions:
+    - id: sendNotification
+      call:
+        connection: browser
+        method: integration.browser.v1beta.ChromeService.SendChromeAction
+        invokeWhen: = vars.tabUrlMatches.value
+        request:
+          action:
+            notifications:
+              create:
+                notification_id: tabUrlMatches
+                title: = vars.tabUrl.value
+                message: Create new extraction task?
+                buttons:
+                  - title: "Yes"
+                  - title: "No"
+    - id: createTask
+      call:
+        connection: browser
+        method: integration.browser.v1beta.TaskService.CreateTask
+        invokeWhen: = vars.shouldCreateTask.value
+        request:
+          task:
+            id: = uuid.new()
+            title: New Task
+            url: = vars.tabUrl.getPrev()
+            extraction:
+              fields: '= inputs.taskFields.value.map(f, { "name": f })'
+    - id: sendNotification
+      call:
+        connection: browser
+        method: integration.browser.v1beta.ChromeService.SendChromeAction
+        invokeWhen: = vars.tabUrlMatches.value
+        request:
+          action:
+            notifications:
+              create:
+                notification_id: tabUrlMatches
+                title: = vars.tabUrl.value
+                message: Create new extraction task?
+                buttons:
+                  - title: "Yes"
+                  - title: "No"
+    - id: createTask
+      call:
+        connection: browser
+        method: integration.browser.v1beta.TaskService.CreateTask
+        invokeWhen: = vars.notificationConfirmed.value
+        request:
+          task:
+            id: = uuid.new()
+            title: New Task
+            url: = vars.tabUrl.getPrev()
+            extraction:
+              fields:
+                - name: Foobar

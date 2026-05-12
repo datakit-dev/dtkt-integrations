@@ -1,0 +1,22 @@
+schema:
+  name: Product Page
+  description: E-commerce product page fields.
+  fields:
+    - name: product_name
+      description: Full product name.
+      type: string
+    - name: price
+      description: Displayed price including currency symbol.
+      type: string
+    - name: sku
+      description: Product SKU or model number.
+      type: string
+      optional: true
+    - name: description
+      description: Short product description or summary.
+      type: string
+      optional: true
+    - name: in_stock
+      description: Whether the product is currently in stock.
+      type: boolean
+      optional: true

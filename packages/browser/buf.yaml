@@ -1,0 +1,17 @@
+version: v2
+
+modules:
+  - path: proto
+
+deps:
+  - buf.build/bufbuild/protovalidate
+  - buf.build/googleapis/googleapis:72c8614f3bd0466ea67931ef2c43d608
+  - buf.build/datakit-dev/dtkt-sdk
+
+lint:
+  use:
+    - STANDARD
+
+breaking:
+  use:
+    - FILE

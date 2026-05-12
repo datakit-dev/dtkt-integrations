@@ -25,10 +25,10 @@ spec:
   vars:
     - cache: true
       id: bucket
-      value: = inputs.bucket.getValue()
+      value: = inputs.bucket.value
     - cache: true
       id: key
-      value: = inputs.key.getValue()
+      value: = inputs.key.value
 
   streams:
     - id: tick
@@ -40,11 +40,11 @@ spec:
         connection: blob
         method: dtkt.blob.v1beta1.BlobService.WriteBlobLines
         request: "= dtkt.blob.v1beta1.WriteBlobLinesRequest{
-          bucket: vars.bucket.getValue(),
-          key: vars.key.getValue(),
+          bucket: vars.bucket.value,
+          key: vars.key.value,
           data: bytes('foobar')
           }"
 
   outputs:
     - id: tick
-      value: = streams.tick.getValue()
+      value: = streams.tick.value

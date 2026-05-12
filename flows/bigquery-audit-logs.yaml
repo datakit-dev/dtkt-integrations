@@ -9,18 +9,20 @@ spec:
 
   connections:
     - id: catalog
-      services:
-        - dtkt.catalog.v1beta1.CatalogService
+      package:
+        name: BigQuery
+        version: 0.1.0
 
-  sources:
+  streams:
     - id: auditLogs
       call:
         connection: catalog
         method: dtkt.event.v1beta1.EventService.StreamPullEvents
-        request: '= dtkt.event.v1beta1.StreamPullEventsRequest{event_source: dtkt.event.v1beta1.EventSource{name: "AuditLogs"}}'
+        request:
+          name: "AuditLogs"
 
   outputs:
     - id: type
-      value: = sources.auditLogs.getValue().event.type
+      value: = streams.auditLogs.value.event.type
     - id: payload
-      value: = sources.auditLogs.getValue().event.payload
+      value: = streams.auditLogs.value.event.payload

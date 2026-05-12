@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package integration.browser.v1beta;
+
+import "buf/validate/validate.proto";
+import "integration/browser/v1beta/chrome.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/browser/pkg/integration/browser/v1beta";
+
+message Config {
+  oneof browser {
+    option (buf.validate.oneof).required = true;
+    ChromeConfig chrome = 1;
+  }
+}

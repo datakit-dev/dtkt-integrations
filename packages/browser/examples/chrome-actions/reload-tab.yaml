@@ -1,0 +1,5 @@
+action:
+  tabs:
+    reload:
+      # omit tab_id to reload the active tab
+      bypassCache: true

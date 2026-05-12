@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package integration.sheets.v1beta;
+
+import "dtkt/shared/v1beta1/messages.proto";
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/sheets/pkg/integration/sheets/v1beta";
+
+message Config {
+  // If auth not provided, will attempt to use application default credentials.
+  oneof auth {
+    // Credentials JSON for a service account with permissions to read/write
+    // Sheets data.
+    google.protobuf.Struct credentials_json = 1;
+
+    // OAuth config.
+    dtkt.shared.v1beta1.OAuthConfig oauth_config = 2;
+  }
+}

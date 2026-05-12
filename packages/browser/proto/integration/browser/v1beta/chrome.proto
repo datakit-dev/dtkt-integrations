@@ -1,0 +1,424 @@
+syntax = "proto3";
+
+package integration.browser.v1beta;
+
+import "buf/validate/validate.proto";
+import "integration/browser/v1beta/context.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/browser/pkg/integration/browser/v1beta";
+
+service ChromeService {
+  rpc StreamChromeEvents(StreamChromeEventsRequest) returns (stream StreamChromeEventsResponse);
+  rpc SendChromeAction(SendChromeActionRequest) returns (SendChromeActionResponse);
+}
+
+message ChromeConfig {
+  string extension_id = 1 [(buf.validate.field).required = true];
+  string bridge_address = 2 [
+    (buf.validate.field).required = true,
+    (buf.validate.field).string.host_and_port = true
+  ];
+  Context context = 3;
+}
+
+message ChromeBridge {
+  string name = 1;
+  string description = 2;
+  string path = 3;
+  string type = 4;
+  repeated string allowed_origins = 5;
+}
+
+message SendChromeActionRequest {
+  ChromeAction action = 1 [(buf.validate.field).required = true];
+}
+
+message SendChromeActionResponse {}
+
+message StreamChromeEventsRequest {}
+
+message StreamChromeEventsResponse {
+  ChromeEvent event = 1 [(buf.validate.field).required = true];
+}
+
+// Mirrors chrome.tabs.Tab. Fields that Chrome may omit are marked optional.
+message Tab {
+  optional int32 id = 1;
+  optional int32 window_id = 2;
+  optional int32 index = 3;
+  optional string url = 4;
+  optional string title = 5;
+  string status = 6; // "loading" | "complete" | "unloaded"
+  bool active = 7;
+  bool pinned = 8;
+  bool audible = 9;
+  bool muted = 10;
+  bool discarded = 11;
+  bool incognito = 12;
+  optional string favicon_url = 13;
+  int32 group_id = 14;
+}
+
+// Each namespace mirrors the chrome.* API namespace. Add new namespaces here
+// as coverage expands; existing field numbers must never be reused.
+
+message ChromeAction {
+  oneof type {
+    TabsAction tabs = 1;
+    NotificationsAction notifications = 2;
+    ScriptingAction scripting = 3;
+    DownloadsAction downloads = 4;
+    ContextMenusAction context_menus = 5;
+  }
+}
+
+// chrome.tabs.*
+message TabsAction {
+  oneof type {
+    Create create = 1;
+    Update update = 2;
+    Remove remove = 3;
+    Reload reload = 4;
+  }
+
+  // chrome.tabs.create
+  message Create {
+    optional string url = 1;
+    optional bool active = 2;
+    optional bool pinned = 3;
+    optional int32 index = 4;
+    optional int32 window_id = 5;
+  }
+
+  // chrome.tabs.update
+  message Update {
+    int32 tab_id = 1 [(buf.validate.field).int32.gt = 0];
+    optional string url = 2;
+    optional bool active = 3;
+    optional bool pinned = 4;
+    optional bool muted = 5;
+    optional bool highlighted = 6;
+  }
+
+  // chrome.tabs.remove
+  message Remove {
+    repeated int32 tab_ids = 1 [(buf.validate.field).repeated.min_items = 1];
+  }
+
+  // chrome.tabs.reload
+  message Reload {
+    optional int32 tab_id = 1; // omit to reload active tab
+    bool bypass_cache = 2;
+  }
+}
+
+// chrome.notifications.*
+message NotificationsAction {
+  oneof type {
+    Create create = 1;
+    Update update = 2;
+    Clear clear = 3;
+  }
+
+  message Button {
+    string title = 1 [(buf.validate.field).required = true];
+    optional string icon_url = 2;
+  }
+
+  // chrome.notifications.create
+  message Create {
+    optional string notification_id = 1; // omit to auto-generate
+    string title = 2 [(buf.validate.field).required = true];
+    string message = 3 [(buf.validate.field).required = true];
+    optional string icon_url = 4;
+    int32 priority = 5; // -2 to 2, default 0
+    repeated Button buttons = 6;
+  }
+
+  // chrome.notifications.update
+  message Update {
+    string notification_id = 1 [(buf.validate.field).required = true];
+    optional string title = 2;
+    optional string message = 3;
+    optional string icon_url = 4;
+    optional int32 priority = 5;
+  }
+
+  // chrome.notifications.clear
+  message Clear {
+    string notification_id = 1 [(buf.validate.field).required = true];
+  }
+}
+
+// chrome.scripting.*
+message ScriptingAction {
+  oneof type {
+    ExecuteScript execute_script = 1;
+    InsertCSS insert_css = 2;
+    RemoveCSS remove_css = 3;
+  }
+
+  message InjectionTarget {
+    int32 tab_id = 1 [(buf.validate.field).int32.gt = 0];
+    repeated int32 frame_ids = 2; // omit for main frame
+    bool all_frames = 3;
+  }
+
+  // chrome.scripting.executeScript
+  message ExecuteScript {
+    InjectionTarget target = 1 [(buf.validate.field).required = true];
+    oneof source {
+      string code = 2;
+      string file = 3;
+    }
+  }
+
+  // chrome.scripting.insertCSS
+  message InsertCSS {
+    InjectionTarget target = 1 [(buf.validate.field).required = true];
+    oneof source {
+      string code = 2;
+      string file = 3;
+    }
+  }
+
+  // chrome.scripting.removeCSS
+  message RemoveCSS {
+    InjectionTarget target = 1 [(buf.validate.field).required = true];
+    oneof source {
+      string code = 2;
+      string file = 3;
+    }
+  }
+}
+
+// chrome.downloads.*
+message DownloadsAction {
+  oneof type {
+    Start start = 1;
+    Cancel cancel = 2;
+    Pause pause = 3;
+    Resume resume = 4;
+  }
+
+  // chrome.downloads.download
+  message Start {
+    string url = 1 [(buf.validate.field).required = true];
+    optional string filename = 2;
+    optional string conflict_action = 3; // "uniquify" | "overwrite" | "prompt"
+    bool save_as = 4;
+  }
+
+  message Cancel {
+    int32 download_id = 1 [(buf.validate.field).int32.gte = 0];
+  }
+  message Pause {
+    int32 download_id = 1 [(buf.validate.field).int32.gte = 0];
+  }
+  message Resume {
+    int32 download_id = 1 [(buf.validate.field).int32.gte = 0];
+  }
+}
+
+// chrome.contextMenus.*
+message ContextMenusAction {
+  oneof type {
+    Create create = 1;
+    Remove remove = 2;
+    RemoveAll remove_all = 3;
+  }
+
+  // chrome.contextMenus.create
+  message Create {
+    string id = 1 [(buf.validate.field).required = true];
+    string title = 2 [(buf.validate.field).required = true];
+    // "page" | "selection" | "link" | "image" | "video" | "audio" | "editable" | "frame"
+    repeated string contexts = 3;
+    optional string parent_id = 4;
+  }
+
+  // chrome.contextMenus.remove
+  message Remove {
+    string menu_item_id = 1 [(buf.validate.field).required = true];
+  }
+
+  // chrome.contextMenus.removeAll
+  message RemoveAll {}
+}
+
+// Each namespace mirrors the chrome.*.on* listener naming (snake_case).
+// Add new event variants as new listeners are wired up in the extension.
+
+message ChromeEvent {
+  oneof type {
+    TabsEvent tabs = 1;
+    NotificationsEvent notifications = 2;
+    DownloadsEvent downloads = 3;
+    ContextMenusEvent context_menus = 4;
+    RuntimeEvent runtime = 5;
+    WebNavigationEvent navigation = 6;
+  }
+}
+
+// chrome.tabs.on*
+message TabsEvent {
+  oneof type {
+    Created on_created = 1;
+    Updated on_updated = 2;
+    Activated on_activated = 3;
+    Removed on_removed = 4;
+  }
+
+  message Created {
+    Tab tab = 1;
+  }
+
+  message Updated {
+    int32 tab_id = 1;
+    optional string url = 2;
+    optional string title = 3;
+    optional string status = 4; // "loading" | "complete"
+    optional bool pinned = 5;
+    optional bool audible = 6;
+    optional bool muted = 7;
+    optional string favicon_url = 8;
+    Tab tab = 9; // full tab snapshot at time of event
+  }
+
+  message Activated {
+    int32 tab_id = 1;
+    int32 window_id = 2;
+  }
+
+  message Removed {
+    int32 tab_id = 1;
+    int32 window_id = 2;
+    bool is_window_closing = 3;
+  }
+}
+
+// chrome.notifications.on*
+message NotificationsEvent {
+  oneof type {
+    Clicked on_clicked = 1;
+    Closed on_closed = 2;
+    ButtonClicked on_button_clicked = 3;
+  }
+
+  message Clicked {
+    string notification_id = 1;
+  }
+  message Closed {
+    string notification_id = 1;
+    bool by_user = 2;
+  }
+  message ButtonClicked {
+    string notification_id = 1;
+    int32 button_index = 2;
+  }
+}
+
+// chrome.downloads.on*
+message DownloadsEvent {
+  oneof type {
+    Created on_created = 1;
+    Changed on_changed = 2;
+    Erased on_erased = 3;
+  }
+
+  message DownloadItem {
+    int32 id = 1;
+    string url = 2;
+    string filename = 3;
+    string state = 4; // "in_progress" | "interrupted" | "complete"
+    int64 total_bytes = 5;
+    int64 bytes_received = 6;
+    bool paused = 7;
+    bool can_resume = 8;
+    string mime = 9;
+    string start_time = 10; // RFC 3339
+  }
+
+  message Created {
+    DownloadItem download = 1;
+  }
+
+  message Changed {
+    int32 download_id = 1;
+    optional string state = 2;
+    optional string filename = 3;
+    optional bool paused = 4;
+    optional bool can_resume = 5;
+    optional int64 total_bytes = 6;
+  }
+
+  message Erased {
+    int32 download_id = 1;
+  }
+}
+
+// chrome.contextMenus.on*
+message ContextMenusEvent {
+  oneof type {
+    Clicked on_clicked = 1;
+  }
+
+  message Clicked {
+    string menu_item_id = 1;
+    optional string page_url = 2;
+    optional string selection_text = 3;
+    optional string link_url = 4;
+    optional string src_url = 5;
+    optional string frame_url = 6;
+    optional bool editable = 7;
+    optional int32 tab_id = 8;
+  }
+}
+
+// chrome.runtime.on*
+message RuntimeEvent {
+  oneof type {
+    Installed on_installed = 1;
+    Startup on_startup = 2;
+    MessageReceived on_message = 3;
+  }
+
+  message Installed {
+    // "install" | "update" | "browser_update" | "shared_module_update"
+    string reason = 1;
+    optional string previous_version = 2;
+  }
+
+  message Startup {}
+
+  // Messages forwarded from content scripts via chrome.runtime.sendMessage
+  message MessageReceived {
+    string message = 1; // JSON-encoded payload
+    optional string sender_url = 2;
+    optional int32 sender_tab_id = 3;
+    optional string sender_ext_id = 4;
+  }
+}
+
+// chrome.webNavigation.on*
+message WebNavigationEvent {
+  oneof type {
+    Completed on_completed = 1;
+    ErrorOccurred on_error_occurred = 2;
+  }
+
+  message Completed {
+    int32 tab_id = 1;
+    string url = 2;
+    int32 frame_id = 3;
+    double time_stamp = 4;
+  }
+
+  message ErrorOccurred {
+    int32 tab_id = 1;
+    string url = 2;
+    int32 frame_id = 3;
+    string error = 4;
+    double time_stamp = 5;
+  }
+}

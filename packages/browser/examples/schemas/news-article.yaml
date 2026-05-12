@@ -1,0 +1,19 @@
+schema:
+  name: News Article
+  description: Key metadata and content from a news article page.
+  fields:
+    - name: headline
+      description: Article headline or title.
+      type: string
+    - name: author
+      description: Byline author name.
+      type: string
+      optional: true
+    - name: publish_date
+      description: Publication date in ISO 8601 format.
+      type: string
+      optional: true
+    - name: body_text
+      description: Article body content.
+      type: string
+      optional: true

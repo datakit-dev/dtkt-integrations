@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.integrationsdk.v1beta1.Package.jsonschema.json
+
+apiVersion: v1beta1
+kind: Package
+spec:
+  identity:
+    name: Sheets
+    version: 0.1.0
+  description: Google Sheets integration for Datakit, allowing users to interact
+    with their spreadsheets and automate tasks.
+  icon: https://storage.googleapis.com/pe-portal-consumer-prod-wagtail-static/images/logo_sheets_2020q4_color_1x_web_512dp.width-1440.png?X-Goog-Algorithm=GOOG4-RSA-SHA256&X-Goog-Credential=wagtail%40pe-portal-consumer-prod.iam.gserviceaccount.com%2F20260501%2Fauto%2Fstorage%2Fgoog4_request&X-Goog-Date=20260501T053704Z&X-Goog-Expires=86400&X-Goog-SignedHeaders=host&X-Goog-Signature=463277f6a45d1f1131e6642977b22a34054e131f7a44d6f98535d6fe1a3b3d7f388fdcd19852244c3e0a27a161c65b678d08d7f891a4c05fc93e1e8515d68e82db618c02a18b6ce55a224cc2793222588ee065f784c27f00accc84dd18a0b08af524aabcf11789f1f1c4f952460ccd93e206c3c766074545de320f8744149bab11b6dfcf16a1d74b3301c582cdba21a086c4f52c890222c9a1a9b13f2a2ab46b530a3cb00fbf1eb52ca8fd4d4f94dae32fd561db668ff8ec6396f54a72535313afd6cfe88b0a4a0862c1e069f9c1df89514aac06134f8b44041ba5ed6cb4dde5792ef6e9916c6d6a2df3677d20aafdce60052755632c104346263c0914bfa94a
+  type: PACKAGE_TYPE_GO

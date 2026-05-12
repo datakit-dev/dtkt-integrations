@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+kind: Flow
+apiVersion: v1beta1
+spec:
+  name: Append Spreadsheet
+
+  inputs:
+    - id: spreadsheetId
+      string:
+        nullable: false
+      cache: true
+    - id: spreadsheetRange
+      string:
+        nullable: false
+      cache: true
+    - id: appendValues
+      list:
+        items: string
+        nullable: false
+
+  connections:
+    - id: sheets
+      package:
+        name: Sheets
+        version: 0.1.0
+
+  actions:
+    - id: appendSpreadsheet
+      call:
+        connection: sheets
+        method: integration.sheets.v1beta.SpreadsheetService.AppendSpreadsheetValues
+        request:
+          spreadsheetId: = inputs.spreadsheetId.value
+          range: = inputs.spreadsheetRange.value
+          values:
+            - = inputs.appendValues.value
+
+  outputs:
+    - id: appendResponse
+      value: = actions.appendSpreadsheet.value

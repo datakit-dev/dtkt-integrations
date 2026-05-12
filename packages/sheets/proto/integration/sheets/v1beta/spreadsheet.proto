@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package integration.sheets.v1beta;
+
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/datakit-dev/dtkt-integrations/sheets/pkg/integration/sheets/v1beta";
+
+// SpreadsheetService provides a gRPC interface for interacting with Google Sheets spreadsheets.
+service SpreadsheetService {
+  // AppendSpreadsheetValues appends rows of data to a specified range in a spreadsheet.
+  rpc AppendSpreadsheetValues(AppendSpreadsheetValuesRequest) returns (AppendSpreadsheetValuesResponse);
+  // GetSpreadsheetValues retrieves values from a specified range in a spreadsheet.
+  rpc GetSpreadsheetValues(GetSpreadsheetValuesRequest) returns (GetSpreadsheetValuesResponse);
+  // ListSpreadsheets returns a list of all accessible spreadsheets.
+  rpc ListSpreadsheets(ListSpreadsheetsRequest) returns (ListSpreadsheetsResponse);
+}
+
+// GetSpreadsheetValuesRequest specifies which spreadsheet and range to retrieve values from.
+message GetSpreadsheetValuesRequest {
+  string spreadsheet_id = 1;
+  string range = 2;
+}
+
+// GetSpreadsheetValuesResponse contains the retrieved values as a list of rows.
+message GetSpreadsheetValuesResponse {
+  repeated google.protobuf.ListValue values = 1;
+}
+
+// AppendSpreadsheetValuesRequest specifies the spreadsheet, range, and values to append.
+message AppendSpreadsheetValuesRequest {
+  string spreadsheet_id = 1;
+  string range = 2;
+  repeated google.protobuf.ListValue values = 3;
+}
+
+// AppendSpreadsheetValuesResponse indicates how many rows were successfully appended.
+message AppendSpreadsheetValuesResponse {
+  int64 updated_rows = 1;
+}
+
+// ListSpreadsheetsRequest is an empty request for listing spreadsheets.
+message ListSpreadsheetsRequest {}
+
+// ListSpreadsheetsResponse contains a list of accessible spreadsheets.
+message ListSpreadsheetsResponse {
+  repeated Spreadsheet spreadsheets = 1;
+}
+
+// Spreadsheet represents basic metadata about a Google Sheets spreadsheet.
+message Spreadsheet {
+  string id = 1;
+  string name = 2;
+}

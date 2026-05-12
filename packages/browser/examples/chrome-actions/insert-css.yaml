@@ -1,0 +1,8 @@
+action:
+  scripting:
+    insertCss:
+      target:
+        tabId: 42
+        allFrames: false
+      code: |
+        .scaffold-layout__aside { display: none !important; }

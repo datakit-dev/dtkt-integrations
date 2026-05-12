@@ -1,0 +1,32 @@
+action:
+  scraping:
+    extractFields:
+      captureId: linkedin-profile-001
+      tabId: 175494074
+      fields:
+        name:
+          cssSelector: h1.text-heading-xlarge
+          extract: text
+        headline:
+          cssSelector: div.text-body-medium.break-words
+          extract: text
+        location:
+          cssSelector: span.text-body-small.inline.t-black--light.break-words
+          extract: text
+        about:
+          cssSelector: div.display-flex.ph5.pv3 span[aria-hidden=true]
+          extract: text
+        currentCompany:
+          xpath: //section[contains(@class,'experience')]//li[1]//span[@aria-hidden='true']
+          extract: text
+        email:
+          metaName: profile:email
+          extract: text
+        schemaName:
+          jsonLd:
+            type: Person
+            key: name
+        skills:
+          cssSelector: span.pvs-navigation__text
+          extract: text
+          all: true

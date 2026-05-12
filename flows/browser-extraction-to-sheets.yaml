@@ -1,0 +1,108 @@
+# yaml-language-server: $schema=http://localhost:9900/schemas/dtkt.flowsdk.v1beta1.Flow.jsonschema.json
+
+kind: Flow
+apiVersion: v1beta1
+spec:
+  name: Browser Extraction to Sheets
+  description: >
+    When a browser extraction task with the configured schema completes,
+    append the captured record values as a new row in a Google Sheet.
+    Column order follows the sheet's existing header row.
+
+  connections:
+    - id: browser
+      package:
+        name: Browser
+        version: 0.1.0
+    - id: sheets
+      package:
+        name: Sheets
+        version: 0.1.0
+
+  inputs:
+    - id: schemaId
+      cache: true
+      string:
+        nullable: false
+    - id: sheetId
+      cache: true
+      string:
+        nullable: false
+    - id: sheetHeaderRange
+      cache: true
+      string:
+        nullable: false
+    - id: sheetAppendRange
+      cache: true
+      string:
+        nullable: false
+
+  vars:
+    - id: task
+      value: = streams.taskUpdates.value.task
+    - id: taskState
+      value: = enumName(vars.task.value.state, true)
+    - id: taskSchemaId
+      value: = vars.task.value.extraction.schema_id
+    - id: taskRecordId
+      value: = vars.task.value.extraction.record_id
+    - id: isTargetSchema
+      value: = vars.taskSchemaId.value == inputs.schemaId.value
+    - id: isCompleted
+      value: = vars.taskState.value == "COMPLETED" && vars.isTargetSchema.value
+    - id: sheetHeaders
+      # The first row of the header range, as a repeated google.protobuf.Value.
+      value: '= size(actions.getSheetHeaders.value.values) >= 1 ? actions.getSheetHeaders.value.values[0] : []'
+    - id: schemaFieldNames
+      value: = actions.getSchema.value.schema.fields.map(f, f.name)
+    - id: headersMatchSchema
+      # Every sheet column header must correspond to a field in the schema.
+      value: = size(vars.sheetHeaders.value) >= 1 && vars.schemaFieldNames.value.all(h, h.lowerAscii() in vars.sheetHeaders.value.map(h, h.lowerAscii()))
+
+  streams:
+    - id: taskUpdates
+      call:
+        connection: browser
+        method: integration.browser.v1beta.TaskService.StreamTaskUpdates
+
+  actions:
+    - id: getSheetHeaders
+      # Fetch the header row once; column order drives append ordering.
+      cache: true
+      call:
+        connection: sheets
+        method: integration.sheets.v1beta.SpreadsheetService.GetSpreadsheetValues
+        request:
+          spreadsheetId: = inputs.sheetId.value
+          range: = inputs.sheetHeaderRange.value
+
+    - id: getSchema
+      # Fetch the schema once to validate headers and resolve field names.
+      cache: true
+      call:
+        connection: browser
+        method: integration.browser.v1beta.ExtractionSchemaService.GetExtractionSchema
+        invokeWhen: = vars.isTargetSchema.value
+        request:
+          id: = inputs.schemaId.value
+
+    - id: getRecord
+      # Fetch the completed record to read captured values.
+      call:
+        connection: browser
+        method: integration.browser.v1beta.ExtractionRecordService.GetExtractionRecord
+        invokeWhen: = vars.isCompleted.value && vars.taskRecordId.value != ""
+        request:
+          id: = vars.taskRecordId.value
+
+    - id: appendRow
+      call:
+        connection: sheets
+        method: integration.sheets.v1beta.SpreadsheetService.AppendSpreadsheetValues
+        # Only append once the record is present and headers are validated.
+        invokeWhen: = vars.isCompleted.value && vars.headersMatchSchema.value && has(actions.getRecord.value.record)
+        request:
+          spreadsheetId: = inputs.sheetId.value
+          range: = inputs.sheetAppendRange.value
+          # Map each header string to its corresponding record value (preserves column order).
+          values: = [vars.schemaFieldNames.value.map(h, actions.getRecord.value.record.values[h])]

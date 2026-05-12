@@ -1,0 +1,4 @@
+task:
+  title: Product Page Extract
+  url: https://example.com/products/widget-pro
+  state: TASK_STATE_PENDING

@@ -1,0 +1,6 @@
+# Go / goreleaser
+dist/
+bin/
+cover.out
+test.log
+config/

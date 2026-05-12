@@ -1,0 +1,7 @@
+action:
+  scripting:
+    executeScript:
+      target:
+        tabId: 42
+      code: |
+        document.querySelectorAll('.msg-overlay-bubble-header').forEach(el => el.remove());

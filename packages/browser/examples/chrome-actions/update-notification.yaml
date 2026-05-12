@@ -1,0 +1,6 @@
+action:
+  notifications:
+    update:
+      notificationId: workflow-complete
+      message: Profile capture finished for 24 contacts.
+      priority: 2

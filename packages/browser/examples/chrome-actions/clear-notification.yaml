@@ -1,0 +1,4 @@
+action:
+  notifications:
+    clear:
+      notificationId: workflow-complete

@@ -1,0 +1,17 @@
+record:
+  values:
+    name: Jordan Fowler
+    title: Founder
+    company: DataKit
+    email: jordan@datakit.dev
+    linkedin: https://www.linkedin.com/in/jordanfowler
+  captures:
+    name:
+      css_selector: "#main h1"
+      xpath: //*[@id="main"]//h1
+    title:
+      css_selector: ".text-body-medium"
+      xpath: //*[contains(@class,"text-body-medium")][1]
+    company:
+      css_selector: ".inline-show-more-text"
+      xpath: //*[contains(@class,"inline-show-more-text")][1]
