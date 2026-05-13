@@ -31,6 +31,7 @@
     "vite-plugin-static-copy": "^3.1.4"
   },
   "dependencies": {
+    "@bufbuild/protobuf": "^2.12.0",
     "@connectrpc/connect": "^2.1.1",
     "@connectrpc/connect-web": "^2.1.1",
     "@mantine/core": "^8.3.5",

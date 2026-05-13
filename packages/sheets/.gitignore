@@ -1,3 +1,5 @@
+examples/configs/sheets.json
+
 # Go / goreleaser
 dist/
 bin/
