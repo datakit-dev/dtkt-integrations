@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json.schemastore.org/chrome-manifest.json",
+  "name": "DataKit Browser – Chrome Extension",
+  "description": "DataKit Browser extension connects your browser to the DataKit platform via secure native messaging.",
+  "version": "0.1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "tabs",
+    "nativeMessaging",
+    "notifications",
+    "storage",
+    "webNavigation",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "assets/background.js",
+    "type": "module"
+  },
+  "icons": {
+    "16": "assets/icon-color-on-blue.png",
+    "32": "assets/icon-color-on-blue.png",
+    "48": "assets/icon-color-on-blue.png",
+    "128": "assets/icon-color-on-blue.png"
+  },
+  "action": {
+    "default_title": "DataKit",
+    "default_popup": "popup/index.html",
+    "default_icon": {
+      "16": "assets/icon-color-on-blue.png",
+      "32": "assets/icon-color-on-blue.png",
+      "48": "assets/icon-color-on-blue.png",
+      "128": "assets/icon-color-on-blue.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "assets/content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ]
+}

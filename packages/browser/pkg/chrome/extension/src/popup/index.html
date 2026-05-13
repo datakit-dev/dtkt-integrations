@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Popup</title>
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      /* Chrome sizes the popup to the document body. Setting an explicit
+         width here (up to 800px max) overrides the default narrow popup. */
+      width: 420px;
+      min-height: 200px;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/popup/popup.tsx"></script>
+</body>
+
+</html>
